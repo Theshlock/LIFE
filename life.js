@@ -626,7 +626,7 @@ function gameloop() {
 					contextM.fillText("____________________",300,220);
 					contextM.fillText("total time: " + totalTime/1000 + "s",300,260);
 					contextM.fillText("bonus: -" + bonus,300,320);
-					contextM.fillText("final time: " + totalTime/1000 - Math.round(bonus*10000)/10000,300,380);
+					contextM.fillText("final time: " + totalTime/1000 - Math.round(bonus*1000)/1000,300,380);
 					console.log('you win!')
 					victory()
 
@@ -702,3 +702,38 @@ function victory() {
 	gamestate = victory
 }
 menu()
+
+
+
+
+$('.ok').click(function() {
+	$('.progress').animate({
+	  width: "152px"
+	}, 500, function() {
+	  $('.target-lvl').addClass('lvl-animate');
+	  $('#initial-lvl').fadeOut('500');
+	  $('.line').fadeOut('500');
+	});
+	$('.cur-xp').each(function() {
+	  $(this).prop('Counter', 56).animate({
+		Counter: 108
+	  }, {
+		duration: 300,
+		easing: 'swing',
+		step: function(now) {
+		  $(this).text(Math.ceil(now));
+		}
+	  });
+	});
+  });
+  
+  $('.reset').click(function() {
+	$('.progress').animate({
+	  width: "114px"
+	}, 500, function() {
+	  $('.target-lvl').removeClass('lvl-animate');
+	  $('#initial-lvl').fadeIn('500');
+	  $('.line').fadeIn('500');
+	  $('.cur-xp').html("1500");
+	});
+  });
