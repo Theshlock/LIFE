@@ -1,0 +1,52 @@
+{
+  "background_color": "#001cff",
+  "description": "Explore the famous Mandelbrot Set fractal\nFast and natural real-time spaceship interface.\nSeek the Portal.",
+  "dir": "ltr",
+  "display_override": "window-controls-overlay",
+  "display": "fullscreen",
+  "name": "LIFE",
+  "orientation": "landscape",
+  "scope": "/",
+  "short_name": "LIFE",
+  "start_url": "/",
+  "theme_color": "#d0d0d0",
+  "categories": [
+    "education",
+    "entertainment",
+    "games",
+    "lifestyle",
+    "navigation",
+    "photo",
+    "social",
+    "travel"
+  ],
+  "screenshots": [],
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "icon.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [],
+  "lang": "en",
+  "prefer_related_applications": false,
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=com.workSPACE.Fraksl",
+      "id": "com.workSPACE.Fraksl"
+    }
+  ]
+}

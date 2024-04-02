@@ -1,0 +1,51 @@
+
+img {
+  height: 50vh;
+  width: 50vw;
+  text-align: center;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#container {
+  position: relative;
+}
+#container canvas, #overlay, #overlay2 {
+  position: absolute;
+  touch-action: none;
+}
+div {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100vw;
+  height: 100vh;
+}
+.button {
+  background-color: #999;
+  margin: auto;
+  top: 50%;
+  display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  align-items: center;
+  font-size: 36px;
+  width: 50%;
+}
+.btn-group {
+  margin-top: 80px;
+}
+img.vert-move {
+  -webkit-animation: mover 1s infinite  alternate;
+  animation: mover 1s infinite  alternate;
+}
+@-webkit-keyframes mover {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-10px); }
+}
+@keyframes mover {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-10px); }
+}
