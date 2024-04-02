@@ -705,3 +705,4 @@ menu()
 
 
 function level(xp) {return xp**0.2}
+localStorage.setItem("greeting", "Hello World!");
