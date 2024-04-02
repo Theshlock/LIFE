@@ -71,6 +71,7 @@ p{
   color:#757575;
 }
 .container{
+  position: relative;
   width:280px;
   background:#fff;
   margin:0 auto;
