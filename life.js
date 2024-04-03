@@ -702,7 +702,6 @@ function resume() {
 	document.getElementById("play").style.display = "flex";
 }
 function victory() {
-	window.localStorage.xp += 300+(Date.now()-startTime-timePaused)/-1000 + bonus
-	if  
+
 }
 menu()
