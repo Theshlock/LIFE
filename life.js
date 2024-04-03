@@ -590,7 +590,8 @@ var time = Date.now();
 bonus = 0;
 gamestate = "menu";
 console.log("0");
-while (1){
+function gameloop() {
+
 	if (gamestate == "menu"){
 		document.getElementById("pause").style.display = "none";
 		document.getElementById("play").style.display = "none";
@@ -605,6 +606,7 @@ while (1){
 		screenX = canvasWidth/2;
 		screenY = canvasHeight/2;
 		startRender(1,1);
+		window.requestAnimationFrame(gameloop)
 	}
 	if (gamestate == "playing"){
 		timer = Date.now()
@@ -651,8 +653,8 @@ while (1){
 					contextM.fillText("final time: " + totalTime/1000 - Math.round(bonus*1000)/1000,300,380);
 					console.log('you win!')
 					contextM.fillText("You win!/n---------/ntotal time:" + totalTime,300,500);
-
-
+					
+					
 				}
 				zoom = 10;
 				portalX = portalLocations[2*level];
@@ -677,6 +679,7 @@ while (1){
 		startRender(1,1);
 	}
 }
+
 function pause() {
 	gamestate = "paused"
 	document.getElementById("play").style.display = "none";
