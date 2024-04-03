@@ -607,7 +607,7 @@ function gameloop() {
 		multiplier = -0.5 - Math.log2(((((xnorm - portalX)*zoom)/1600)**2 + ((ynorm-portalY)*zoom/1200)**2)**0.5);
 		contextM.fillText("level: " + level + "/7",500,550);
 		contextM.fillText("zoom mult.: " + Math.round(multiplier) ,300,550);
-		contextM.fillText((Date.now()-startTime-timePaused)/1000 + "s",100,550);
+		contextM.fillText(300+(Date.now()-startTime-timePaused)/-1000,100,550);
 		contextM.fillText("-" + Math.round(bonus*10000)/10000,100,500);
 		zoom *= 1 + 0.01 * multiplier;
 		time = Date.now();
@@ -655,6 +655,7 @@ var timePaused = 0
 var time = Date.now();
 bonus = 0
 window.requestAnimationFrame(gameloop);
+
 
 //State Control
 function menu() {
