@@ -610,8 +610,6 @@ function gameloop() {
 	if (gamestate == "playing"){
 		timer = Date.now()
 		gamestate = "playing";
-		document.getElementById("menu").style.display = "none";
-		document.getElementById("play").style.display = "flex";
 		zoom = 10;
 		startTime = Date.now()
 		var timePaused = 0
