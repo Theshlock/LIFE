@@ -592,6 +592,7 @@ function gameloop() {
 		screenX = Math.round(-xnorm * zoom + canvasWidth/2);
 		screenY = Math.round(-ynorm * zoom + canvasHeight/2);
 		startRender(1,1);
+		contextM.fillRect(100,100,100,100)
 	} else if (gamestate == "playing") {
 		contextM.fillStyle = 'green';
 		contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ) - (20 + zoom/portalDepth*1000) / 2, (((portalY-ynorm) * zoom + 600) / 2 ) - (20 + zoom/portalDepth*1000) / 2, 20 + zoom/portalDepth*1000, 20 + zoom/portalDepth*1000 );
