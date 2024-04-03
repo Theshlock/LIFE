@@ -588,7 +588,7 @@ document.ontouchend = function(e) {
 //State
 function gameloop() {
 	if (gamestate == "menu") {
-		zoom *= 1.01;
+		zoom *= 1.02;
 		xnorm = -0.5615337270936567;
 		ynorm = -0.641923504258619;
 		screenX = Math.round(-xnorm * zoom + canvasWidth/2);
