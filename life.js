@@ -665,8 +665,6 @@ function gameloop() {
 
 	}
 	if (gamestate == "paused"){
-		document.getElementById("play").style.display = "none";
-		document.getElementById("pause").style.display = "flex";
 		contextM.fillStyle = 'green';
 		contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ) - (20 + zoom/portalDepth*1000) / 2, (((portalY-ynorm) * zoom + 600) / 2 ) - (20 + zoom/portalDepth*1000) / 2, 20 + zoom/portalDepth*1000, 20 + zoom/portalDepth*1000 );
 		contextM.fillStyle = 'black';
