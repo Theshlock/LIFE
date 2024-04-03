@@ -666,7 +666,7 @@ function gameloop() {
 		gamestate = "victory"
 	}
 	window.requestAnimationFrame(gameloop);
-
+}
 
 var timePaused = 0
 var time = Date.now();
