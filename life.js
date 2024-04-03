@@ -585,14 +585,39 @@ document.ontouchend = function(e) {
 	up = 0;
 }
 
-//State
-function gameloop() {
-	if (gamestate == "menu") {
+var timePaused = 0
+var time = Date.now();
+bonus = 0
+gamestate = menu;
+
+//State Control
+while (1){
+	if (gamestate == "menu"){
+		document.getElementById("pause").style.display = "none";
+		document.getElementById("play").style.display = "none";
+		document.getElementById("menu").style.display = "flex";
+		xRate = 0;
+		yRate - 0;
+		xnorm = -1.76877851023801;
+		ynorm = -0.00173889944794;
+		zoom = 10;
+		screenY = canvasHeight/2;
+		window.requestAnimationFrame(gameloop);		
 		zoom *= 1.01;
 		screenX = canvasWidth/2;
 		screenY = canvasHeight/2;
 		startRender(1,1);
-	} else if (gamestate == "playing") {
+	}
+	if (gamestate == "playing"){
+		timer = Date.now()
+		gamestate = "playing";
+		document.getElementById("menu").style.display = "none";
+		document.getElementById("play").style.display = "flex";
+		zoom = 10;
+		startTime = Date.now()
+		var timePaused = 0
+		var time = Date.now();
+		bonus = 0
 		contextM.fillStyle = 'green';
 		contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ) - (20 + zoom/portalDepth*1000) / 2, (((portalY-ynorm) * zoom + 600) / 2 ) - (20 + zoom/portalDepth*1000) / 2, 20 + zoom/portalDepth*1000, 20 + zoom/portalDepth*1000 );
 		contextM.fillStyle = 'white';
@@ -613,7 +638,6 @@ function gameloop() {
 		time = Date.now();
 		screenX = Math.round(-xnorm * zoom + canvasWidth/2);
 		screenY = Math.round(-ynorm * zoom + canvasHeight/2);
-		startRender(1,1);
 		if( zoom > portalDepth ) {
 			if ( -800 < (((portalX-xnorm) * zoom + 800) / 2) && (((portalX-xnorm) * zoom + 800) / 2) < 800 && -1200 < (((portalY-ynorm) * zoom + 600) / 2) && (((portalX-xnorm) * zoom + 800) / 2) < 1200) {
 				level++;
@@ -628,7 +652,8 @@ function gameloop() {
 					contextM.fillText("bonus: -" + bonus,300,320);
 					contextM.fillText("final time: " + totalTime/1000 - Math.round(bonus*1000)/1000,300,380);
 					console.log('you win!')
-					victory()
+					contextM.fillText("You win!/n---------/ntotal time:" + totalTime,300,500);
+
 
 				}
 				zoom = 10;
@@ -642,49 +667,17 @@ function gameloop() {
 				changePalette();
 			}
 		}
-	} else if (gamestate == "paused") {
+		startRender(1,1);
+	}
+	if (gamestate == "paused"){
+		document.getElementById("play").style.display = "none";
+		document.getElementById("pause").style.display = "flex";
 		contextM.fillStyle = 'green';
 		contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ) - (20 + zoom/portalDepth*1000) / 2, (((portalY-ynorm) * zoom + 600) / 2 ) - (20 + zoom/portalDepth*1000) / 2, 20 + zoom/portalDepth*1000, 20 + zoom/portalDepth*1000 );
 		contextM.fillStyle = 'black';
 		contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ), (((portalY-ynorm) * zoom + 600) / 2 ) , 10, 10);
-		
-	} else if (gamestate == "victory") {
-		contextM.fillText("You win!/n---------/ntotal time:" + totalTime,300,500);
-		console.log('you win');
+		startRender(1,1);
 	}
-	window.requestAnimationFrame(gameloop);
-}
-
-var timePaused = 0
-var time = Date.now();
-bonus = 0
-window.requestAnimationFrame(gameloop);
-
-//State Control
-function menu() {
-	document.getElementById("pause").style.display = "none";
-	gamestate="menu";
-	xRate = 0;
-	yRate - 0;
-	xnorm = -1.76877851023801;
-	ynorm = -0.00173889944794;
-	zoom = 10;
-	screenX = canvasWidth/2;
-	screenY = canvasHeight/2;
-	document.getElementById("play").style.display = "none";
-	document.getElementById("menu").style.display = "flex";
-	
-}
-function play() {
-	timer = Date.now()
-	gamestate = "playing";
-	document.getElementById("menu").style.display = "none";
-	document.getElementById("play").style.display = "flex";
-	zoom = 10;
-	startTime = Date.now()
-	var timePaused = 0
-	var time = Date.now();
-	bonus = 0
 }
 function pause() {
 	gamestate = "paused"
@@ -698,11 +691,13 @@ function resume() {
 	document.getElementById("pause").style.display = "none";
 	document.getElementById("play").style.display = "flex";
 }
+function reset() {
+	
+}
 function victory() {
 	gamestate = victory
 }
-menu()
 
 
-function level(xp) {return xp**0.2}
-localStorage.setItem("greeting", "Hello World!");
+function levelfunc(xp) {return xp**0.2}
+localStorage.setItem("xp", 0);
