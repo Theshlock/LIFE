@@ -601,8 +601,7 @@ while (1){
 		xnorm = -1.76877851023801;
 		ynorm = -0.00173889944794;
 		zoom = 10;
-		screenY = canvasHeight/2;
-		window.requestAnimationFrame(gameloop);		
+		screenY = canvasHeight/2;	
 		zoom *= 1.01;
 		screenX = canvasWidth/2;
 		screenY = canvasHeight/2;
