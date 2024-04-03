@@ -596,6 +596,7 @@ function gameloop() {
 	if (gamestate == "menu") {
 		if (tutorial == 1) {
 			contextM.fillText("Line up the white squares",100,300);
+			tutorial = 0
 		}
 		zoom *= 1.04;
 		screenX = Math.round(-xnorm * zoom + canvasWidth/2);
