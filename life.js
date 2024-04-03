@@ -599,7 +599,7 @@ function gameloop() {
 		contextM.fillText("level: " + levelToXp(animationXp),200,200);
 		contextM.fillRect(0,100,levelToXp(animationXp)%1*window.innerWidth,20)
 		if (animationXp < Number(window.localStorage.xp)) {
-			animationXp += Number(window.localStorage.xp)/100
+			animationXp += Number(window.localStorage.xp)/200
 		}
 	} else if (gamestate == "playing") {
 		contextM.fillStyle = 'green';
