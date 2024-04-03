@@ -592,7 +592,6 @@ gamestate = "menu";
 console.log("0");
 while (1){
 	if (gamestate == "menu"){
-		console.log('1');
 		document.getElementById("pause").style.display = "none";
 		document.getElementById("play").style.display = "none";
 		document.getElementById("menu").style.display = "flex";
@@ -606,7 +605,6 @@ while (1){
 		screenX = canvasWidth/2;
 		screenY = canvasHeight/2;
 		startRender(1,1);
-		console.log('2');
 	}
 	if (gamestate == "playing"){
 		timer = Date.now()
