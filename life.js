@@ -585,17 +585,6 @@ document.ontouchend = function(e) {
 	up = 0;
 }
 
-//State
-function gameloop() {
-	} else if (gamestate == "paused") {
-
-		
-	} else if (gamestate == "victory") {
-		contextM.fillText("You win!/n---------/ntotal time:" + totalTime,300,500);
-		console.log('you win');
-	}
-}
-
 var timePaused = 0
 var time = Date.now();
 bonus = 0
@@ -662,7 +651,8 @@ while (1){
 					contextM.fillText("bonus: -" + bonus,300,320);
 					contextM.fillText("final time: " + totalTime/1000 - Math.round(bonus*1000)/1000,300,380);
 					console.log('you win!')
-					victory()
+					contextM.fillText("You win!/n---------/ntotal time:" + totalTime,300,500);
+
 
 				}
 				zoom = 10;

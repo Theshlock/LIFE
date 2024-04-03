@@ -58,14 +58,11 @@
 			</div>
 		</div>
 		<div id="play" style="display:none">
-			<button onclick="pause()">Pause</button> 
+			<button onclick="gamestate='paused'">Pause</button> 
 		</div>
 		<div id="pause" style="display:none">
-			<button onclick="resume()">Resume</button>
-			<button onclick="menu()">Menu</button>
-		</div>
-		<div id="victory" style="display:none">
-			<button onclick="menu()">Menu</button>
+			<button onclick="gamestate='playing'">Resume</button>
+			<button onclick="gamestate='menu'">Menu</button>
 		</div>
 </div>
 	</div>
