@@ -591,8 +591,8 @@ function gameloop() {
 		zoom *= 1.01;
 		xnorm = -0.5615337270936567;
 		ynorm = -0.641923504258619;
-		screenX = canvasWidth/2;
-		screenY = canvasHeight/2;
+		screenX = Math.round(-xnorm * zoom + canvasWidth/2);
+		screenY = Math.round(-ynorm * zoom + canvasHeight/2);
 		startRender(1,1);
 	} else if (gamestate == "playing") {
 		contextM.fillStyle = 'green';
@@ -672,7 +672,6 @@ function menu() {
 	screenY = canvasHeight/2;
 	document.getElementById("play").style.display = "none";
 	document.getElementById("menu").style.display = "flex";
-	
 }
 function play() {
 	timer = Date.now()
