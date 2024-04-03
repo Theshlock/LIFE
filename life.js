@@ -611,7 +611,6 @@ function gameloop() {
 		startTime = Date.now()
 		var timePaused = 0
 		var time = Date.now();
-		bonus = 0
 		contextM.fillStyle = 'green';
 		contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ) - (20 + zoom/portalDepth*1000) / 2, (((portalY-ynorm) * zoom + 600) / 2 ) - (20 + zoom/portalDepth*1000) / 2, 20 + zoom/portalDepth*1000, 20 + zoom/portalDepth*1000 );
 		contextM.fillStyle = 'white';
@@ -662,6 +661,8 @@ function gameloop() {
 			}
 		}
 		startRender(1,1);
+		window.requestAnimationFrame(gameloop)
+
 	}
 	if (gamestate == "paused"){
 		document.getElementById("play").style.display = "none";
@@ -671,6 +672,8 @@ function gameloop() {
 		contextM.fillStyle = 'black';
 		contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ), (((portalY-ynorm) * zoom + 600) / 2 ) , 10, 10);
 		startRender(1,1);
+		window.requestAnimationFrame(gameloop)
+
 	}
 }
 function pause() {
