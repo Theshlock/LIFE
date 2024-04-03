@@ -588,11 +588,11 @@ document.ontouchend = function(e) {
 //State
 function gameloop() {
 	if (gamestate == "menu") {
-		zoom *= 1.02;
+		zoom *= 1.01;
 		xnorm = -0.5615337270936567;
 		ynorm = -0.641923504258619;
-		screenX = Math.round(-xnorm * zoom + canvasWidth/2);
-		screenY = Math.round(-ynorm * zoom + canvasHeight/2);
+		screenX = canvasWidth/2;
+		screenY = canvasHeight/2;
 		startRender(1,1);
 	} else if (gamestate == "playing") {
 		contextM.fillStyle = 'green';
