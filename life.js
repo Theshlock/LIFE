@@ -1,4 +1,4 @@
-/* mandel-workers.js
+/* life.js
    Copyright (c) 2019 - 2021 Greg Trounson greg@gart.nz
    LIFE.
    Copyright (c) 2022 - 2024 Samuel Lockton lockton.sam@gmail.com
@@ -589,10 +589,8 @@ document.ontouchend = function(e) {
 function gameloop() {
 	if (gamestate == "menu") {
 		zoom *= 1.04;
-		xnorm = -0.5615337270936567;
-		ynorm = -0.641923504258619;
-		screenX = canvasWidth/2;
-		screenY = canvasHeight/2;
+		screenX = Math.round(-xnorm * zoom + canvasWidth/2);
+		screenY = Math.round(-ynorm * zoom + canvasHeight/2);
 		startRender(1,1);
 	} else if (gamestate == "playing") {
 		contextM.fillStyle = 'green';
