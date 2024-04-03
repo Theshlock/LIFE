@@ -592,6 +592,9 @@ function gameloop() {
 		screenX = Math.round(-xnorm * zoom + canvasWidth/2);
 		screenY = Math.round(-ynorm * zoom + canvasHeight/2);
 		startRender(1,1);
+		while(animationXp < windown.localStorage.xp) {
+			contextM.fillText(animationXp,200,200);
+			animationXp += xp/100
 		contextM.fillRect(100,100,100,100)
 	} else if (gamestate == "playing") {
 		contextM.fillStyle = 'green';
@@ -678,6 +681,7 @@ function menu() {
 	screenY = canvasHeight/2;
 	document.getElementById("play").style.display = "none";
 	document.getElementById("menu").style.display = "flex";
+	animationXp = 0
 }
 function play() {
 	timer = Date.now()
