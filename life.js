@@ -697,6 +697,6 @@ function resume() {
 	document.getElementById("play").style.display = "flex";
 }
 function victory() {
-	score = 
+
 }
 menu()
