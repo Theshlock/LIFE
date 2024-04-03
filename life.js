@@ -640,7 +640,7 @@ function gameloop() {
 				contextM.fillText("You win",300,200);
 				contextM.fillText("____________________",300,210);
 				contextM.fillText("final score: " + score ,300,260);
-				window.localStorage.xp = score + Number(window.localStorage)
+				localStorage.setItem("xp", Number(window.localStorage.xp) + score + Number(window.localStorage));
 				if (Number(window.localStorage.highscore) < score) {
 					window.localStorage.highscore = score
 					contextM.fillText("new high score!" + score ,450,260);
@@ -683,6 +683,8 @@ window.requestAnimationFrame(gameloop);
 
 //State Control
 function menu() {
+	localStorage.setItem("xp", Number(window.localStorage.xp)+bonus);
+	bonus = 0;
 	document.getElementById("pause").style.display = "none";
 	gamestate="menu";
 	xRate = 0;
