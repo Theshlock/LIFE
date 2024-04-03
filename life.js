@@ -592,9 +592,9 @@ function gameloop() {
 		screenX = Math.round(-xnorm * zoom + canvasWidth/2);
 		screenY = Math.round(-ynorm * zoom + canvasHeight/2);
 		startRender(1,1);
-		while(animationXp =< Number(window.localStorage.xp)) {
+		if (animationXp <= Number(window.localStorage.xp)) {
 			contextM.fillText(animationXp,200,200);
-			animationXp += Number(window.localStorage.xp)/1000
+			animationXp += Number(window.localStorage.xp)/100
 		}
 	} else if (gamestate == "playing") {
 		contextM.fillStyle = 'green';
