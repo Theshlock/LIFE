@@ -37,7 +37,8 @@
 				<p id="demo" onclick="myFunction()">Click me to change my textual content.</p>
 				<script>
 					function myFunction() {
-					  document.getElementById("demo").textContent = "I have changed!";
+						
+						document.getElementById("demo").textContent = "You have "+window.localStorage.xp+" xp";
 					}
 				</script>
 				<button onclick="play()">Play!</button>
