@@ -6,6 +6,7 @@
 */
 if (typeof window.localStorage.xp == 'undefined') {
 	tutorial = 1
+	highscore = 0
 } else {
 	tutorial = 0
 }
@@ -593,6 +594,9 @@ document.ontouchend = function(e) {
 //State
 function gameloop() {
 	if (gamestate == "menu") {
+		if (tutorial == 1) {
+			contextM.fillText("Line up the white squares",400,300);
+		}
 		zoom *= 1.04;
 		screenX = Math.round(-xnorm * zoom + canvasWidth/2);
 		screenY = Math.round(-ynorm * zoom + canvasHeight/2);
