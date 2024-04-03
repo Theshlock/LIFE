@@ -591,7 +591,6 @@ bonus = 0;
 gamestate = "menu";
 console.log("0");
 function gameloop() {
-
 	if (gamestate == "menu"){
 		document.getElementById("pause").style.display = "none";
 		document.getElementById("play").style.display = "none";
@@ -679,7 +678,6 @@ function gameloop() {
 		startRender(1,1);
 	}
 }
-
 function pause() {
 	gamestate = "paused"
 	document.getElementById("play").style.display = "none";
@@ -702,3 +700,5 @@ function victory() {
 
 function levelfunc(xp) {return xp**0.2}
 localStorage.setItem("xp", 0);
+
+window.requestAnimationFrame(gameloop);
