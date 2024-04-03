@@ -615,40 +615,41 @@ function gameloop() {
 		screenY = Math.round(-ynorm * zoom + canvasHeight/2);
 		startRender(1,1);
 		if( zoom > portalDepth ) {
-			if ( -800 < (((portalX-xnorm) * zoom + 800) / 2) && (((portalX-xnorm) * zoom + 800) / 2) < 800 && -1200 < (((portalY-ynorm) * zoom + 600) / 2) && (((portalX-xnorm) * zoom + 800) / 2) < 1200) {
-				level++;
-				bonus += multiplier
-				contextM.fillText("-" + multiplier,500,500);
-				if (level >= 8) {
-					startRender(1,1);
-					totalTime = Date.now()-startTime-timePaused;
-					contextM.fillText("You win",300,200);
-					contextM.fillText("____________________",300,220);
-					contextM.fillText("total time: " + totalTime/1000 + "s",300,260);
-					contextM.fillText("bonus: -" + bonus,300,320);
-					contextM.fillText("final time: " + totalTime/1000 - Math.round(bonus*1000)/1000,300,380);
-					console.log('you win!');
-					victory()
+			level++;
+			bonus += multiplier
+			contextM.fillText("-" + multiplier,500,500);
+			if (level >= 8) {
+				startRender(1,1);
+				totalTime = Date.now()-startTime-timePaused;
+				contextM.fillText("You win",300,200);
+				contextM.fillText("____________________",300,220);
+				contextM.fillText("total time: " + totalTime/1000 + "s",300,260);
+				contextM.fillText("bonus: -" + bonus,300,320);
+				contextM.fillText("final time: " + totalTime/1000 - Math.round(bonus*1000)/1000,300,380);
+				console.log("you win!");
+				gamestate = "victory"
+				victory()
 
-				}
-				zoom = 10;
-				portalX = portalLocations[2*level];
-				portalY = portalLocations[2*level + 1];
-				xnorm = 0;
-				ynorm = 0;
-				xRate = 0;
-				yRate = 0;
-				currentPalette++;
-				changePalette();
 			}
+			zoom = 10;
+			portalX = portalLocations[2*level];
+			portalY = portalLocations[2*level + 1];
+			xnorm = 0;
+			ynorm = 0;
+			xRate = 0;
+			yRate = 0;
+			currentPalette++;
+			changePalette();
 		}
 	} else if (gamestate == "paused") {
 		contextM.fillStyle = 'green';
 		contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ) - (20 + zoom/portalDepth*1000) / 2, (((portalY-ynorm) * zoom + 600) / 2 ) - (20 + zoom/portalDepth*1000) / 2, 20 + zoom/portalDepth*1000, 20 + zoom/portalDepth*1000 );
 		contextM.fillStyle = 'black';
 		contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ), (((portalY-ynorm) * zoom + 600) / 2 ) , 10, 10);
-		
+	} else if (gamestate == "victory") {
+
 	}
+	
 	window.requestAnimationFrame(gameloop);
 }
 
