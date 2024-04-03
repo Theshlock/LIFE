@@ -608,9 +608,6 @@ function gameloop() {
 		window.requestAnimationFrame(gameloop)
 	}
 	if (gamestate == "playing"){
-		timer = Date.now()
-		gamestate = "playing";
-		zoom = 10;
 		startTime = Date.now()
 		var timePaused = 0
 		var time = Date.now();
