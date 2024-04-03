@@ -31,23 +31,18 @@
 		<canvas id="mandelCanvas" width="800px" height="600px"></canvas>
 					
 		<div id="menu">
-			<img src="https://i.imgur.com/5JHEFBY.png" style="height:100%; width:100%" >
-			<div id="menu2">
-				<img src="https://i.imgur.com/7EXB5nL.png" class="vert-move">
-				<rect width="200" height="100" x="10" y="10" fill="blue" />
-				<p id="demo" onclick="myFunction()">Click me to see your xp.</p>
-				<script>
-					function myFunction() {
-						document.getElementById("demo").textContent = "You have "+window.localStorage.xp+" xp. Just add the xp up yourself. ";
-					}
-				</script>
-				<button onclick="play()">Play!</button>
-				<button onclick="location.href = 'https://x.com/lockton_samuel'">Twitter</button>
-				<button onclick="location.href = 'https://www.reddit.com/r/lockedonlife/'">Reddit</button>
-				<button onclick="location.href = 'https://github.com/Theshlock/life.github.io'">Github</button>
-				<button onclick="location.href = 'https://raw.githubusercontent.com/Theshlock/life.github.io/master/privacy'">Privacy Policy</button>
-				
-			</div>
+			<p id="demo" onclick="myFunction()">Click me to see your xp.</p>
+			<script>
+				function myFunction() {
+					document.getElementById("demo").textContent = "You have "+window.localStorage.xp+" xp. Just add the xp up yourself. ";
+				}
+			</script>
+			<button onclick="play()">Play!</button>
+			<button onclick="location.href = 'https://x.com/lockton_samuel'">Twitter</button>
+			<button onclick="location.href = 'https://www.reddit.com/r/lockedonlife/'">Reddit</button>
+			<button onclick="location.href = 'https://github.com/Theshlock/life.github.io'">Github</button>
+			<button onclick="location.href = 'https://raw.githubusercontent.com/Theshlock/life.github.io/master/privacy'">Privacy Policy</button>
+			
 		</div>
 		<div id="play" style="display:none">
 			<button onclick="pause()">Pause</button>
