@@ -588,6 +588,7 @@ document.ontouchend = function(e) {
 var timePaused = 0
 var time = Date.now();
 bonus = 0
+gamestate = menu;
 
 //State Control
 while (1){
@@ -696,7 +697,6 @@ function reset() {
 function victory() {
 	gamestate = victory
 }
-menu()
 
 
 function levelfunc(xp) {return xp**0.2}
