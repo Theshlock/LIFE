@@ -607,7 +607,7 @@ function gameloop() {
 		contextM.fillText(Math.floor(levelToXp(animationXp)+1),740,550);
 		contextM.fillRect(0,550,levelToXp(animationXp)%1*800,20)
 		if (animationXp < Number(window.localStorage.xp)) {
-			animationXp += Number(window.localStorage.xp)/200
+			animationXp += Number(window.localStorage.xp)/400
 		}
 	} else if (gamestate == "playing") {
 		contextM.fillStyle = 'green';
@@ -668,7 +668,7 @@ function gameloop() {
 		contextM.fillStyle = 'black';
 		contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ), (((portalY-ynorm) * zoom + 600) / 2 ) , 10, 10);
 	} else if (gamestate == "victory") {
-
+		
 	}
 	
 	window.requestAnimationFrame(gameloop);
