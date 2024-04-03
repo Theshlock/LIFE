@@ -594,10 +594,11 @@ function gameloop() {
 		screenY = Math.round(-ynorm * zoom + canvasHeight/2);
 		startRender(1,1);
 		contextM.fillStyle = 'white';
-		contextM.fillRect(0,90,window.innerWidth,40)
+		contextM.fillRect(0,90,800,40)
 		contextM.fillStyle = 'black';
-		contextM.fillText("level: " + levelToXp(animationXp),200,200);
-		contextM.fillRect(0,100,levelToXp(animationXp)%1*window.innerWidth,20)
+		contextM.fillText("level: " + Math.floor(levelToXp(animationXp)),0,550);
+		contextM.fillText("level: " + Math.floor(levelToXp(animationXp)+1),550,550);
+		contextM.fillRect(0,550,levelToXp(animationXp)%1*800,20)
 		if (animationXp < Number(window.localStorage.xp)) {
 			animationXp += Number(window.localStorage.xp)/200
 		}

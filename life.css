@@ -16,12 +16,13 @@ img {
   touch-action: none;
 }
 div {
-  position: absolute;
-  display: flex;
+  position: sticky;
+  display: contents;
   flex-direction: column;
   justify-content: space-between;
-  width: 100vw;
-  height: 100vh;
+  width: 50vw;
+  height: 29vh;
+  margin: 0px;
 }
 .button {
   background-color: #999;
