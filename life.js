@@ -595,7 +595,7 @@ document.ontouchend = function(e) {
 function gameloop() {
 	if (gamestate == "menu") {
 		if (tutorial == 1) {
-			contextM.fillText("Line up the white squares",400,300);
+			contextM.fillText("Line up the white squares",100,300);
 		}
 		zoom *= 1.04;
 		screenX = Math.round(-xnorm * zoom + canvasWidth/2);
@@ -633,7 +633,7 @@ function gameloop() {
 		if( zoom > portalDepth ) {
 			bonus += Math.round(multiplier*1000)/1000
 			contextM.fillText("+" + Math.round(multiplier*1000)/1000,500,500);
-			if (level >= 8) {
+			if (level >= 7) {
 				totalTime = Date.now()-startTime-timePaused;
 				score = 300+(Date.now()-startTime-timePaused)/-1000 + bonus
 				contextM.fillText("You win",300,200);
