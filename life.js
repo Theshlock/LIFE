@@ -608,7 +608,7 @@ function gameloop() {
 		contextM.fillText("level: " + level + "/7",500,550);
 		contextM.fillText("zoom mult.: " + Math.round(multiplier) ,300,550);
 		contextM.fillText(300+(Date.now()-startTime-timePaused)/-1000,100,550);
-		contextM.fillText("-" + Math.round(bonus*10000)/10000,100,500);
+		contextM.fillText("+" + Math.round(bonus*10000)/10000,100,500);
 		zoom *= 1 + 0.01 * multiplier;
 		time = Date.now();
 		screenX = Math.round(-xnorm * zoom + canvasWidth/2);
@@ -619,15 +619,16 @@ function gameloop() {
 				level++;
 				bonus += multiplier
 				contextM.fillText("-" + multiplier,500,500);
-				if (level >= 7) {
+				if (level >= 8) {
 					startRender(1,1);
 					totalTime = Date.now()-startTime-timePaused;
 					contextM.fillText("You win",300,200);
 					contextM.fillText("____________________",300,220);
 					contextM.fillText("total time: " + totalTime/1000 + "s",300,260);
 					contextM.fillText("bonus: -" + bonus,300,320);
-					contextM.fillText("final time: " + totalTime/1000 - Math.round(bonus*10000)/10000,300,380);
+					contextM.fillText("final time: " + totalTime/1000 - Math.round(bonus*1000)/1000,300,380);
 					console.log('you win!');
+					victory()
 
 				}
 				zoom = 10;
@@ -653,6 +654,7 @@ function gameloop() {
 
 var timePaused = 0
 var time = Date.now();
+
 bonus = 0
 window.requestAnimationFrame(gameloop);
 
@@ -693,5 +695,8 @@ function resume() {
 	gamestate = "playing";
 	document.getElementById("pause").style.display = "none";
 	document.getElementById("play").style.display = "flex";
+}
+function victory() {
+	score = 
 }
 menu()
