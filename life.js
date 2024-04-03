@@ -605,7 +605,7 @@ function gameloop() {
 		xnorm += ( xRate / zoom ) * ( Date.now() - time)  / 10;
 		ynorm += ( yRate / zoom ) * ( Date.now() - time ) / 10;
 		multiplier = -0.5 - Math.log2(((((xnorm - portalX)*zoom)/1600)**2 + ((ynorm-portalY)*zoom/1200)**2)**0.5);
-		contextM.fillText("level: " + level + "/8",500,550);
+		contextM.fillText("level: " + level + "/7",500,550);
 		contextM.fillText("zoom mult.: " + Math.round(multiplier) ,300,550);
 		contextM.fillText((Date.now()-startTime-timePaused)/1000 + "s",100,550);
 		contextM.fillText("-" + Math.round(bonus*10000)/10000,100,500);
@@ -619,7 +619,7 @@ function gameloop() {
 				level++;
 				bonus += multiplier
 				contextM.fillText("-" + multiplier,500,500);
-				if (level >= 8) {
+				if (level >= 7) {
 					startRender(1,1);
 					totalTime = Date.now()-startTime-timePaused;
 					contextM.fillText("You win",300,200);
@@ -627,8 +627,7 @@ function gameloop() {
 					contextM.fillText("total time: " + totalTime/1000 + "s",300,260);
 					contextM.fillText("bonus: -" + bonus,300,320);
 					contextM.fillText("final time: " + totalTime/1000 - Math.round(bonus*10000)/10000,300,380);
-					console.log('you win!')
-					victory()
+					console.log('you win!');
 
 				}
 				zoom = 10;
@@ -648,9 +647,6 @@ function gameloop() {
 		contextM.fillStyle = 'black';
 		contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ), (((portalY-ynorm) * zoom + 600) / 2 ) , 10, 10);
 		
-	} else if (gamestate == "victory") {
-		contextM.fillText("You win!/n---------/ntotal time:" + totalTime,300,500);
-		console.log('you win');
 	}
 	window.requestAnimationFrame(gameloop);
 }
@@ -697,8 +693,5 @@ function resume() {
 	gamestate = "playing";
 	document.getElementById("pause").style.display = "none";
 	document.getElementById("play").style.display = "flex";
-}
-function victory() {
-	gamestate = victory
 }
 menu()
