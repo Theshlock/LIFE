@@ -4,7 +4,7 @@
    Copyright (c) 2022 - 2024 Samuel Lockton lockton.sam@gmail.com
    Modification and distribution permitted under terms of the Affero GPL version 3
 */
-if (window.localStorage.xp == true) {
+if (typeof window.localStorage.xp == 'undefined') {
 	tutorial = 1
 } else {
 	tutorial = 0
@@ -619,7 +619,7 @@ function gameloop() {
 		multiplier = -0.5 - Math.log2(((((xnorm - portalX)*zoom)/1600)**2 + ((ynorm-portalY)*zoom/1200)**2)**0.5);
 		contextM.fillText(300+(Date.now()-startTime-timePaused)/-1000,100,550);
 		contextM.fillText("△: " + Math.round(multiplier) ,360,550);
-		contextM.fillText(level + "/7",700,550);
+		contextM.fillText(level + "/7",620,550);
 		contextM.fillText("+" + Math.round(bonus*1000)/1000,100,500);
 		zoom *= 1 + 0.01 * multiplier;
 		time = Date.now();
