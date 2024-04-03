@@ -593,8 +593,8 @@ function gameloop() {
 		screenX = Math.round(-xnorm * zoom + canvasWidth/2);
 		screenY = Math.round(-ynorm * zoom + canvasHeight/2);
 		startRender(1,1);
-		contextM.fillText("level: " + level(animationXp),200,200);
-		if (animationXp <= Number(window.localStorage.xp)) {
+		contextM.fillText("level: " + levelToXp(animationXp),200,200);
+		if (animationXp < Number(window.localStorage.xp)) {
 			animationXp += Number(window.localStorage.xp)/100
 		}
 	} else if (gamestate == "playing") {
