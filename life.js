@@ -588,7 +588,7 @@ document.ontouchend = function(e) {
 var timePaused = 0
 var time = Date.now();
 bonus = 0
-gamestate = menu;
+gamestate = "menu";
 
 //State Control
 while (1){
