@@ -595,7 +595,9 @@ function gameloop() {
 		startRender(1,1);
 		contextM.fillStyle = 'green';
 		contextM.fillText(Math.floor(levelToXp(animationXp)),20,550);
+		contextM.fillText(Math.floor(levelToXp(animationXp)),20,600);
 		contextM.fillText(Math.floor(levelToXp(animationXp)+1),740,550);
+		contextM.fillText(Math.floor(levelToXp(animationXp)+1),740,600);
 		contextM.fillRect(0,550,levelToXp(animationXp)%1*800,20)
 		if (animationXp < Number(window.localStorage.xp)) {
 			animationXp += Number(window.localStorage.xp)/200
