@@ -670,7 +670,7 @@ function gameloop() {
 		contextM.fillStyle = 'black';
 		contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ), (((portalY-ynorm) * zoom + 600) / 2 ) , 10, 10);
 		startRender(1,1);
-		window.requestAnimationFrame(gameloop)
+		window.requestAnimationFrame(gameloop);
 
 	}
 }
