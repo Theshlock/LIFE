@@ -608,38 +608,42 @@ function gameloop() {
 		contextM.fillText("level: " + level + "/7",500,550);
 		contextM.fillText("zoom mult.: " + Math.round(multiplier) ,300,550);
 		contextM.fillText(300+(Date.now()-startTime-timePaused)/-1000,100,550);
-		contextM.fillText("+" + Math.round(bonus*10000)/10000,100,500);
+		contextM.fillText("+" + Math.round(bonus*1000)/1000,100,500);
 		zoom *= 1 + 0.01 * multiplier;
 		time = Date.now();
 		screenX = Math.round(-xnorm * zoom + canvasWidth/2);
 		screenY = Math.round(-ynorm * zoom + canvasHeight/2);
 		startRender(1,1);
 		if( zoom > portalDepth ) {
-			level++;
-			bonus += multiplier
-			contextM.fillText("-" + multiplier,500,500);
+			bonus += Math.round(multiplier*1000)/1000
+			contextM.fillText("+" + Math.round(multiplier*1000)/1000,500,500);
 			if (level >= 8) {
-				startRender(1,1);
 				totalTime = Date.now()-startTime-timePaused;
+				score = 300+(Date.now()-startTime-timePaused)/-1000 + bonus
 				contextM.fillText("You win",300,200);
-				contextM.fillText("____________________",300,220);
-				contextM.fillText("total time: " + totalTime/1000 + "s",300,260);
-				contextM.fillText("bonus: -" + bonus,300,320);
-				contextM.fillText("final time: " + totalTime/1000 - Math.round(bonus*1000)/1000,300,380);
+				contextM.fillText("____________________",300,210);
+				contextM.fillText("final score: " + score ,300,260);
+				window.localStorage.xp += score
+				if (window.localStorage.highscore < score) {
+					window.localStorage.highscore = score
+					contextM.fillText("new high score!" + score ,450,260);
+				}
+				contextM.fillText("high score: " + window.localStorage.highscore ,300,320);
 				console.log("you win!");
 				gamestate = "victory"
 				victory()
-
+			} else {
+				level++;
+				zoom = 10;
+				portalX = portalLocations[2*level];
+				portalY = portalLocations[2*level + 1];
+				xnorm = 0;
+				ynorm = 0;
+				xRate = 0;
+				yRate = 0;
+				currentPalette++;
+				changePalette();
 			}
-			zoom = 10;
-			portalX = portalLocations[2*level];
-			portalY = portalLocations[2*level + 1];
-			xnorm = 0;
-			ynorm = 0;
-			xRate = 0;
-			yRate = 0;
-			currentPalette++;
-			changePalette();
 		}
 	} else if (gamestate == "paused") {
 		contextM.fillStyle = 'green';
@@ -698,6 +702,7 @@ function resume() {
 	document.getElementById("play").style.display = "flex";
 }
 function victory() {
-
+	window.localStorage.xp += 300+(Date.now()-startTime-timePaused)/-1000 + bonus
+	if  
 }
 menu()
