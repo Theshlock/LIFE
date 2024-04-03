@@ -55,7 +55,7 @@ var smooth = 0;
 var mc = document.getElementById("mandelCanvas");
 mc.style = "width:" + window.innerWidth + "px; height:" + window.innerHeight + "px;"
 contextM = mc.getContext('2d');
-contextM.font = "24px Arial";
+contextM.font = "40px Arial";
 window.addEventListener("resize", function(){mc.style = "width:" + window.innerWidth + "px; height:" + window.innerHeight + "px;"});
 var viewportTag = document.getElementById("viewport");
 var mctx = mc.getContext("2d", { alpha: false } );
@@ -594,8 +594,8 @@ function gameloop() {
 		screenY = Math.round(-ynorm * zoom + canvasHeight/2);
 		startRender(1,1);
 		contextM.fillStyle = 'black';
-		contextM.fillText(Math.floor(levelToXp(animationXp)),0,550);
-		contextM.fillText("level: " + Math.floor(levelToXp(animationXp)+1),750,550);
+		contextM.fillText(Math.floor(levelToXp(animationXp)),20,550);
+		contextM.fillText(Math.floor(levelToXp(animationXp)+1),760,550);
 		contextM.fillRect(0,550,levelToXp(animationXp)%1*800,20)
 		if (animationXp < Number(window.localStorage.xp)) {
 			animationXp += Number(window.localStorage.xp)/200
