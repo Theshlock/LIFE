@@ -594,7 +594,7 @@ function gameloop() {
 		startRender(1,1);
 		while(animationXp < Number(window.localStorage.xp)) {
 			contextM.fillText(animationXp,200,200);
-			animationXp += xp/100
+			animationXp += Number(window.localStorage.xp)/100
 		}
 	} else if (gamestate == "playing") {
 		contextM.fillStyle = 'green';
