@@ -34,22 +34,7 @@
 			<img src="https://i.imgur.com/5JHEFBY.png" style="height:100%; width:100%" >
 			<div id="menu2">
 				<img src="https://i.imgur.com/7EXB5nL.png" class="vert-move">
-				<button onclick="gamestate = 'play';document.getElementById('menu').style.display = 'none';document.getElementById('play').style.display = 'flex';	timer = Date.now();zoom = 10;">Play!</button>
-				<div class="container">
-					<h3>Level Up!</h3>
-					<p>Congratulations! You’ve earned enough XP to reach a new level.</p>
-					<div id="initial-lvl" class="num-circle">
-					  <span>1</span>
-					</div>
-					<div class="line">
-					  <div class="progress"></div>
-					  <span class="cur-xp">56</span><span class="xp"> XP</span>
-					</div>
-					<div class="num-circle target-lvl">
-					  2
-					</div>
-					<div class="clear"></div>
-				  </div>
+				<button onclick="play()">Play!</button>
 				<button onclick="location.href = 'https://x.com/lockton_samuel'">Twitter</button>
 				<button onclick="location.href = 'https://www.reddit.com/r/lockedonlife/'">Reddit</button>
 				<button onclick="location.href = 'https://github.com/Theshlock/life.github.io'">Github</button>
@@ -58,18 +43,20 @@
 			</div>
 		</div>
 		<div id="play" style="display:none">
-			<button onclick="gamestate='paused';document.getElementById('pause').style.display = 'flex';document.getElementById('play').style.display = 'none';">Pause</button> 
+			<button onclick="pause()">Pause</button>
 		</div>
 		<div id="pause" style="display:none">
-			<button onclick="gamestate='playing';document.getElementById('pause').style.display = 'none';document.getElementById('play').style.display = 'flex'">Resume</button>
-			<button onclick="gamestate='menu';document.getElementById('menu').style.display = 'flex';document.getElementById('pause').style.display = 'none'">Menu</button>
+			<button onclick="resume()">Resume</button>
+			<button onclick="menu()">Menu</button>
 		</div>
-
+		<div id="victory" style="display:none">
+			<button onclick="menu()">Menu</button>
+		</div>
 </div>
 	</div>
 </body>
 
-<script src="life.js"></script>
+<script src="mandel-workers.js"></script>
 
 <script>
   if (typeof navigator.serviceWorker !== 'undefined') {

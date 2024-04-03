@@ -1,7 +1,7 @@
 /* mandel-workers.js
    Copyright (c) 2019 - 2021 Greg Trounson greg@gart.nz
    LIFE.
-   Copyright (c) 2022 - 2024 lol inc. Samuel Lockton lockton.sam@gmail.com
+   Copyright (c) 2022 - 2024 Samuel Lockton lockton.sam@gmail.com
    Modification and distribution permitted under terms of the Affero GPL version 3
 */
 
@@ -404,7 +404,7 @@ var onComputeEnded = function (e)
 	while( renderWorkerRunning[workerID] != 0 ) {
 		console.log("Waiting for worker to end");}
 	if( ! renderWorker[workerID] ) {
-		renderWorker[workerID] = new Worker("mandel-render-worker.js");
+		renderWorker[workerID] = new Worker("mandel-render.js");
 		renderWorker[workerID].onmessage = onRenderEnded;
 	}
 	renderWorkerRunning[workerID] = 1;
@@ -430,7 +430,7 @@ var onRenderEnded = function (e)
 		renderCount = 0;
 		renderWorker[workerID].terminate();
 		renderWorker[workerID] = null;
-		renderWorker[workerID] = new Worker("mandel-render-worker.js");
+		renderWorker[workerID] = new Worker("mandel-render.js");
 		renderWorker[workerID].onmessage = onRenderEnded;
 		// Hack to keep "zoom" variable an Integer after a deep zoom
 		var zoomTmp = Math.floor(zoom);
@@ -461,7 +461,7 @@ var onRenderEnded = function (e)
 
 
 needRedraw = 0;
-oneShotWorker = new Worker("mandel-compute-worker.js");
+oneShotWorker = new Worker("mandel-compute.js");
 
 // Set Alpha channel on the canvas to "solid" (not transparent)
 for( let i=0; i<workers; i++ ) {
@@ -515,7 +515,7 @@ function drawMandel()
 					}
 					if( needRecompute ) {
 						if( ! computeWorker[i] ) {
-							computeWorker[i] = new Worker("mandel-compute-worker.js");
+							computeWorker[i] = new Worker("mandel-compute.js");
 							computeWorker[i].onmessage = onComputeEnded;
 						}
 						// Compute the fractal
@@ -531,7 +531,7 @@ function drawMandel()
 						// Just redraw if we don't need to compute the fractal
 						workersRunning++;
 						if( ! renderWorker[i] ) {
-							renderWorker[i] = new Worker("mandel-render-worker.js");
+							renderWorker[i] = new Worker("mandel-render.js");
 							renderWorker[i].onmessage = onRenderEnded;
 						}
 						renderWorkerRunning[i] = 1;
@@ -585,32 +585,14 @@ document.ontouchend = function(e) {
 	up = 0;
 }
 
-var timePaused = 0
-var time = Date.now();
-bonus = 0;
-gamestate = "menu";
-console.log("0");
+//State
 function gameloop() {
-	if (gamestate == "menu"){
-		document.getElementById("pause").style.display = "none";
-		document.getElementById("play").style.display = "none";
-		document.getElementById("menu").style.display = "flex";
-		xRate = 0;
-		yRate - 0;
-		xnorm = -1.76877851023801;
-		ynorm = -0.00173889944794;
-		zoom = 10;
-		screenY = canvasHeight/2;	
+	if (gamestate == "menu") {
 		zoom *= 1.01;
 		screenX = canvasWidth/2;
 		screenY = canvasHeight/2;
 		startRender(1,1);
-		window.requestAnimationFrame(gameloop)
-	}
-	if (gamestate == "playing"){
-		startTime = Date.now()
-		var timePaused = 0
-		var time = Date.now();
+	} else if (gamestate == "playing") {
 		contextM.fillStyle = 'green';
 		contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ) - (20 + zoom/portalDepth*1000) / 2, (((portalY-ynorm) * zoom + 600) / 2 ) - (20 + zoom/portalDepth*1000) / 2, 20 + zoom/portalDepth*1000, 20 + zoom/portalDepth*1000 );
 		contextM.fillStyle = 'white';
@@ -623,7 +605,7 @@ function gameloop() {
 		xnorm += ( xRate / zoom ) * ( Date.now() - time)  / 10;
 		ynorm += ( yRate / zoom ) * ( Date.now() - time ) / 10;
 		multiplier = -0.5 - Math.log2(((((xnorm - portalX)*zoom)/1600)**2 + ((ynorm-portalY)*zoom/1200)**2)**0.5);
-		contextM.fillText("level: " + level + "/7",500,550);
+		contextM.fillText("level: " + level + "/8",500,550);
 		contextM.fillText("zoom mult.: " + Math.round(multiplier) ,300,550);
 		contextM.fillText((Date.now()-startTime-timePaused)/1000 + "s",100,550);
 		contextM.fillText("-" + Math.round(bonus*10000)/10000,100,500);
@@ -631,6 +613,7 @@ function gameloop() {
 		time = Date.now();
 		screenX = Math.round(-xnorm * zoom + canvasWidth/2);
 		screenY = Math.round(-ynorm * zoom + canvasHeight/2);
+		startRender(1,1);
 		if( zoom > portalDepth ) {
 			if ( -800 < (((portalX-xnorm) * zoom + 800) / 2) && (((portalX-xnorm) * zoom + 800) / 2) < 800 && -1200 < (((portalY-ynorm) * zoom + 600) / 2) && (((portalX-xnorm) * zoom + 800) / 2) < 1200) {
 				level++;
@@ -643,11 +626,10 @@ function gameloop() {
 					contextM.fillText("____________________",300,220);
 					contextM.fillText("total time: " + totalTime/1000 + "s",300,260);
 					contextM.fillText("bonus: -" + bonus,300,320);
-					contextM.fillText("final time: " + totalTime/1000 - Math.round(bonus*1000)/1000,300,380);
+					contextM.fillText("final time: " + totalTime/1000 - Math.round(bonus*10000)/10000,300,380);
 					console.log('you win!')
-					contextM.fillText("You win!/n---------/ntotal time:" + totalTime,300,500);
-					
-					
+					victory()
+
 				}
 				zoom = 10;
 				portalX = portalLocations[2*level];
@@ -660,19 +642,49 @@ function gameloop() {
 				changePalette();
 			}
 		}
-		startRender(1,1);
-		window.requestAnimationFrame(gameloop)
-
-	}
-	if (gamestate == "paused"){
+	} else if (gamestate == "paused") {
 		contextM.fillStyle = 'green';
 		contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ) - (20 + zoom/portalDepth*1000) / 2, (((portalY-ynorm) * zoom + 600) / 2 ) - (20 + zoom/portalDepth*1000) / 2, 20 + zoom/portalDepth*1000, 20 + zoom/portalDepth*1000 );
 		contextM.fillStyle = 'black';
 		contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ), (((portalY-ynorm) * zoom + 600) / 2 ) , 10, 10);
-		startRender(1,1);
-		window.requestAnimationFrame(gameloop);
-
+		
+	} else if (gamestate == "victory") {
+		contextM.fillText("You win!/n---------/ntotal time:" + totalTime,300,500);
+		console.log('you win');
 	}
+	window.requestAnimationFrame(gameloop);
+}
+
+var timePaused = 0
+var time = Date.now();
+bonus = 0
+window.requestAnimationFrame(gameloop);
+
+//State Control
+function menu() {
+	document.getElementById("pause").style.display = "none";
+	gamestate="menu";
+	xRate = 0;
+	yRate - 0;
+	xnorm = -1.76877851023801;
+	ynorm = -0.00173889944794;
+	zoom = 10;
+	screenX = canvasWidth/2;
+	screenY = canvasHeight/2;
+	document.getElementById("play").style.display = "none";
+	document.getElementById("menu").style.display = "flex";
+	
+}
+function play() {
+	timer = Date.now()
+	gamestate = "playing";
+	document.getElementById("menu").style.display = "none";
+	document.getElementById("play").style.display = "flex";
+	zoom = 10;
+	startTime = Date.now()
+	var timePaused = 0
+	var time = Date.now();
+	bonus = 0
 }
 function pause() {
 	gamestate = "paused"
@@ -686,15 +698,7 @@ function resume() {
 	document.getElementById("pause").style.display = "none";
 	document.getElementById("play").style.display = "flex";
 }
-function reset() {
-	
-}
 function victory() {
 	gamestate = victory
 }
-
-
-function levelfunc(xp) {return xp**0.2}
-localStorage.setItem("xp", 0);
-
-window.requestAnimationFrame(gameloop);
+menu()
