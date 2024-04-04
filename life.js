@@ -6,7 +6,7 @@
 */
 if (typeof window.localStorage.xp == 'undefined') {
 	tutorial = 1
-	highscore = 0
+	window.localStorage.highscore
 } else {
 	tutorial = 0
 }
@@ -551,7 +551,7 @@ function drawMandel()
 }
 
 
-// Game Code
+// Input Code
 var xRate = 0;
 var yRate = 0;
 var up = 0;
@@ -660,7 +660,7 @@ function gameloop() {
 			contextM.fillText("final score: " + score ,300,260);
 			localStorage.setItem("xp", Number(window.localStorage.xp) + score);
 			if (Number(window.localStorage.highscore) < score) {
-				window.localStorage.highscore = score
+				localStorage.setItem("highscore", score);
 				contextM.fillText("new high score!" + score ,450,260);
 			}
 			contextM.fillText("high score: " + window.localStorage.highscore ,300,320);
