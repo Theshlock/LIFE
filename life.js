@@ -599,7 +599,7 @@ function gameloop() {
 	if (level >= 2) {
 		if (! winScreenRendered) {
 			totalTime = Date.now()-startTime-timePaused;
-			score = Math.round((300+(Date.now()-startTime-timePaused)/-1000 + bonus)/1000)*1000
+			score = Math.round(300+(Date.now()-startTime-timePaused)/-1000 + bonus)
 			contextM.fillText("You win",300,200);
 			contextM.fillText("____________________",300,210);
 			contextM.fillText("final score: " + score ,300,150);
