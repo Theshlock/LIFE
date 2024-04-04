@@ -5,6 +5,7 @@
    Modification and distribution permitted under terms of the Affero GPL version 3
 */
 if (typeof window.localStorage.xp == 'undefined') {
+	localStorage.setItem("xp", 0);
 	tutorial = 1
 } else {
 	tutorial = 0
@@ -598,10 +599,10 @@ function gameloop() {
 	if (level >= 2) {
 		if (! winScreenRendered) {
 			totalTime = Date.now()-startTime-timePaused;
-			score = 300+(Date.now()-startTime-timePaused)/-1000 + bonus
+			score = Math.round((300+(Date.now()-startTime-timePaused)/-1000 + bonus)/1000)*1000
 			contextM.fillText("You win",300,200);
 			contextM.fillText("____________________",300,210);
-			contextM.fillText("final score: " + score ,300,260);
+			contextM.fillText("final score: " + score ,300,150);
 			localStorage.setItem("xp", Number(window.localStorage.xp) + score);
 			if (Number(window.localStorage.highscore) < score) {
 				localStorage.setItem("highscore", score);
