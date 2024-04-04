@@ -570,8 +570,8 @@ window.onkeydown = function(event) {
 };
 
 window.onkeyup = function(event) {
-    right = 0; 
- 	up = 0; 
+    if (event.keyCode === 39 || event.keyCode === 37) { right = 0; }
+    if (event.keyCode === 38 || event.keyCode === 40) { up = 0; }
 };
 
 document.ontouchstart = function(e){
