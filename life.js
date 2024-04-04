@@ -6,9 +6,11 @@
 */
 if (typeof window.localStorage.xp == 'undefined') {
 	tutorial = 1
-	window.localStorage.highscore
 } else {
 	tutorial = 0
+}
+if (typeof window.localStorage.highscore == 'undefined') {
+	localStorage.setItem("highscore", 0);
 }
 var level = 1;
 function levelToXp (xp) {return xp**0.2}
