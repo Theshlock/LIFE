@@ -605,7 +605,7 @@ function gameloop() {
 			localStorage.setItem("xp", Number(window.localStorage.xp) + score);
 			if (Number(window.localStorage.highscore) < score) {
 				localStorage.setItem("highscore", score);
-				contextM.fillText("new high score!" + score ,500,150);
+				contextM.fillText("new high score!",500,150);
 			}
 			contextM.fillText("high score: " + window.localStorage.highscore ,300,320);
 			console.log("you win!");
@@ -640,7 +640,7 @@ function gameloop() {
 		xnorm += ( xRate / zoom ) * ( Date.now() - time)  / 10;
 		ynorm += ( yRate / zoom ) * ( Date.now() - time ) / 10;
 		multiplier = -0.5 - Math.log2(((((xnorm - portalX)*zoom)/1600)**2 + ((ynorm-portalY)*zoom/1200)**2)**0.5);
-		contextM.fillText(300+(Date.now()-startTime-timePaused)/-1000,100,550);
+		contextM.fillText(Math.round(300+(Date.now()-startTime-timePaused)/-1000),100,550);
 		contextM.fillText("△: " + Math.round(multiplier) ,360,550);
 		contextM.fillText(level + "/7",620,550);
 		contextM.fillText("+" + Math.round(bonus*1000)/1000,100,500);
