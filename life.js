@@ -652,7 +652,7 @@ function gameloop() {
 		contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ), (((portalY-ynorm) * zoom + 600) / 2 ) , 10, 10);
 	}
 	if (level >= 2) {
-		if (gamestate != "victory") {
+		if (! winScreenRendered) {
 			totalTime = Date.now()-startTime-timePaused;
 			score = 300+(Date.now()-startTime-timePaused)/-1000 + bonus
 			contextM.fillText("You win",300,200);
@@ -666,7 +666,7 @@ function gameloop() {
 			contextM.fillText("high score: " + window.localStorage.highscore ,300,320);
 			console.log("you win!");
 		}
-		gamestate = "victory"
+		winScreenRendered = 1
 	}
 	window.requestAnimationFrame(gameloop);
 }
@@ -695,6 +695,7 @@ function menu() {
 	document.getElementById("play").style.display = "none";
 	document.getElementById("menu").style.display = "flex";
 	animationXp = 0
+	winScreenRendered = 0
 }
 function play() {
 	timer = Date.now()
