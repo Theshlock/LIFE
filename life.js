@@ -652,7 +652,6 @@ function gameloop() {
 		contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ), (((portalY-ynorm) * zoom + 600) / 2 ) , 10, 10);
 	}
 	if (level >= 2) {
-		startRender(1,1);
 		if (gamestate != "victory") {
 			totalTime = Date.now()-startTime-timePaused;
 			score = 300+(Date.now()-startTime-timePaused)/-1000 + bonus
