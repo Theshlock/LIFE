@@ -601,12 +601,11 @@ function gameloop() {
 			totalTime = Date.now()-startTime-timePaused;
 			score = Math.round(300+(Date.now()-startTime-timePaused)/-1000 + bonus)
 			contextM.fillText("You win",300,200);
-			contextM.fillText("____________________",300,210);
-			contextM.fillText("final score: " + score ,300,150);
+			contextM.fillText("final score: " + score ,300,260);
 			localStorage.setItem("xp", Number(window.localStorage.xp) + score);
 			if (Number(window.localStorage.highscore) < score) {
 				localStorage.setItem("highscore", score);
-				contextM.fillText("new high score!" + score ,450,260);
+				contextM.fillText("new high score!" + score ,500,150);
 			}
 			contextM.fillText("high score: " + window.localStorage.highscore ,300,320);
 			console.log("you win!");
