@@ -596,7 +596,7 @@ document.ontouchend = function(e) {
 
 //State
 function gameloop() {
-	if (level >= 2) {
+	if (level >= 8) {
 		if (! winScreenRendered) {
 			totalTime = Date.now()-startTime-timePaused;
 			score = Math.round(300+(Date.now()-startTime-timePaused)/-1000 + bonus)
