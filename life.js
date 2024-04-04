@@ -650,7 +650,7 @@ function gameloop() {
 		contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ) - (20 + zoom/portalDepth*1000) / 2, (((portalY-ynorm) * zoom + 600) / 2 ) - (20 + zoom/portalDepth*1000) / 2, 20 + zoom/portalDepth*1000, 20 + zoom/portalDepth*1000 );
 		contextM.fillStyle = 'black';
 		contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ), (((portalY-ynorm) * zoom + 600) / 2 ) , 10, 10);
-	} else if (level >= 7) {
+	} else if (level >= 2) {
 		totalTime = Date.now()-startTime-timePaused;
 		score = 300+(Date.now()-startTime-timePaused)/-1000 + bonus
 		contextM.fillText("You win",300,200);
@@ -679,6 +679,7 @@ window.requestAnimationFrame(gameloop);
 function menu() {
 	localStorage.setItem("xp", Number(window.localStorage.xp)+bonus);
 	bonus = 0;
+	level = 1
 	document.getElementById("pause").style.display = "none";
 	gamestate="menu";
 	xRate = 0;
