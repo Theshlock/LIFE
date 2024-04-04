@@ -652,18 +652,21 @@ function gameloop() {
 		contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ), (((portalY-ynorm) * zoom + 600) / 2 ) , 10, 10);
 	}
 	if (level >= 2) {
-		totalTime = Date.now()-startTime-timePaused;
-		score = 300+(Date.now()-startTime-timePaused)/-1000 + bonus
-		contextM.fillText("You win",300,200);
-		contextM.fillText("____________________",300,210);
-		contextM.fillText("final score: " + score ,300,260);
-		localStorage.setItem("xp", Number(window.localStorage.xp) + score);
-		if (Number(window.localStorage.highscore) < score) {
-			window.localStorage.highscore = score
-			contextM.fillText("new high score!" + score ,450,260);
+		startRender(1,1);
+		if (gamestate != "victory") {
+			totalTime = Date.now()-startTime-timePaused;
+			score = 300+(Date.now()-startTime-timePaused)/-1000 + bonus
+			contextM.fillText("You win",300,200);
+			contextM.fillText("____________________",300,210);
+			contextM.fillText("final score: " + score ,300,260);
+			localStorage.setItem("xp", Number(window.localStorage.xp) + score);
+			if (Number(window.localStorage.highscore) < score) {
+				window.localStorage.highscore = score
+				contextM.fillText("new high score!" + score ,450,260);
+			}
+			contextM.fillText("high score: " + window.localStorage.highscore ,300,320);
+			console.log("you win!");
 		}
-		contextM.fillText("high score: " + window.localStorage.highscore ,300,320);
-		console.log("you win!");
 		gamestate = "victory"
 	}
 	window.requestAnimationFrame(gameloop);
