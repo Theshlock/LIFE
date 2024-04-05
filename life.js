@@ -687,6 +687,7 @@ function menu() {
 	localStorage.setItem("xp", Number(window.localStorage.xp)+bonus);
 	bonus = 0;
 	level = 1;
+	score = 0;
 	document.getElementById("pause").style.display = "none";
 	gamestate="menu";
 	xRate = 0;
