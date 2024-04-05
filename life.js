@@ -597,7 +597,7 @@ document.ontouchend = function(e) {
 //State
 function gameloop() {
 	if (score < 0) {
-		
+		console.log('yo man build the fail screen dawg')
 	}
 	if (level >= 8) {
 		if (! winScreenRendered) {
