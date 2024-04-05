@@ -596,6 +596,9 @@ document.ontouchend = function(e) {
 
 //State
 function gameloop() {
+	if (score < 0) {
+		
+	}
 	if (level >= 8) {
 		if (! winScreenRendered) {
 			totalTime = Date.now()-startTime-timePaused;
@@ -644,7 +647,7 @@ function gameloop() {
 		contextM.fillText("△: " + Math.round(multiplier) ,360,550);
 		contextM.fillText(level + "/7",620,550);
 		contextM.fillText("+" + Math.round(bonus*1000)/1000,100,500);
-		zoom *= 1 + 0.02 * multiplier;
+		zoom *= 1 + 0.005 * multiplier;
 		time = Date.now();
 		screenX = Math.round(-xnorm * zoom + canvasWidth/2);
 		screenY = Math.round(-ynorm * zoom + canvasHeight/2);
@@ -683,7 +686,7 @@ window.requestAnimationFrame(gameloop);
 function menu() {
 	localStorage.setItem("xp", Number(window.localStorage.xp)+bonus);
 	bonus = 0;
-	level = 1
+	level = 1;
 	document.getElementById("pause").style.display = "none";
 	gamestate="menu";
 	xRate = 0;
