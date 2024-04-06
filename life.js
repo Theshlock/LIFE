@@ -634,7 +634,7 @@ function gameloop() {
 		if (animationXp < Number(window.localStorage.xp)) {
 			animationXp += Number(window.localStorage.xp)/400 + 1
 		} else {
-			contextM.fillText("You need " + levelToXp(Math.floor(xpToLevel(Number(window.localStorage.xp)))+1) - Number(window.localStorage.xp)) + " xp to level up",200,550);
+			contextM.fillText("You need " + (levelToXp(Math.floor(xpToLevel(Number(window.localStorage.xp)))+1) - Number(window.localStorage.xp)) + " xp to level up",200,550);
 		}
 	} else if (gamestate == "playing") {
 		contextM.fillStyle = 'green';
