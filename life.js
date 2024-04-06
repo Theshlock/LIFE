@@ -595,8 +595,8 @@ document.ontouchend = function(e) {
 	up = 0;
 }
 
-totalGameTime = 300
-
+totalGameTime = 300;
+startTime = 0;
 //State
 function gameloop() {
 	score = Math.round(totalGameTime+(Date.now()-startTime-timePaused)/-1000 + bonus)
