@@ -556,6 +556,93 @@ function drawMandel()
 }
 
 
+
+
+//
+function chooseCoord() {
+    const maxIterations = 1000;
+    const coordSens = 0.25;
+    const blockSize = 64;
+    const totalZooms = 36;
+    var boundsSize = 2;
+    var chosenCoordX = 0;
+    var chosenCoordY = 0;
+    var chosenCoordX_ = 0;
+    var chosenCoordY_ = 0;
+    var escapeSquared = 4;
+    var eligiblePoints = [];
+    for (i = 0; i < totalZooms; i++) {
+        for (xVal = 1; xVal < blockSize; xVal++) {
+            x = ( ( chosenCoordX - boundsSize ) + ( ( boundsSize / blockSize ) * xVal * 2) )
+            for (yVal = 1; yVal < blockSize; yVal++) {
+                y = ( ( chosenCoordY - boundsSize ) + ( ( boundsSize / blockSize ) * yVal * 2) )
+
+                iteration = 0;
+                // Does f(z) = z^2 + c diverge?
+                let zr = 0.0;
+                let zi = 0.0;
+                // Call it diverging (bailout) if magnitude >= 2
+                var zrSquared = 0.0;
+                var ziSquared = 0.0;
+                 /* Some maths:
+                 * z(next) = z^2 + c
+                 * 	   = (zr+ziI)^2 + (x+y)
+                 *	   = (zr+ziI)(zr+ziI) + (x+y)
+                 *	   = (zr*zr) + 2*(zr*ziI) + (ziI*ziI) + (x+y)
+                 *	   = (zr*zr) + 2*(zr*ziI) - (zi*zi) + (x+y)
+                 */
+                while( (zrSquared + ziSquared < escapeSquared ) && ( iteration < maxIterations ) ) {
+                    zrSquared = zr*zr;
+                    ziSquared = zi*zi;
+                    let zr_prev = zr;
+                    zr = zrSquared - ziSquared + x;
+                    zi = (zr_prev*2)*zi + y;
+                    iteration++;
+                }
+                if ( (iteration > ( maxIterations * coordSens ) ) && (iteration !== maxIterations ) ) {
+                        chosenCoordX_ = x;
+                        chosenCoordY_ = y;
+                        eligiblePoints.push([chosenCoordX_, chosenCoordY_])
+                        // A better idea would be to add to an array 
+                }
+            }
+        }
+        // And pick a random coordinate here
+        pick = Date.now() % eligiblePoints.length;
+        chosenCoordX = eligiblePoints[pick][0];
+        chosenCoordY = eligiblePoints[pick][1];
+        boundsSize = boundsSize / 4;
+    }
+    console.log("completed succesfully")
+    console.log(iteration)
+    console.log("chosenCoordX: " + chosenCoordX)
+    console.log("chosenCoordY: " + chosenCoordY)
+    return([chosenCoordX,chosenCoordY])
+}
+var dimension = 1;
+var dimensions = 14;
+//
+
+
+
+
+var xy = [];
+xy = xy.concat(chooseCoord());
+xy = xy.concat(chooseCoord());
+xy = xy.concat(chooseCoord());
+xy = xy.concat(chooseCoord());
+xy = xy.concat(chooseCoord());
+xy = xy.concat(chooseCoord());
+xy = xy.concat(chooseCoord());
+xy = xy.concat(chooseCoord());
+xy = xy.concat(chooseCoord());
+xy = xy.concat(chooseCoord());
+xy = xy.concat(chooseCoord());
+xy = xy.concat(chooseCoord());
+xy = xy.concat(chooseCoord());
+xy = xy.concat(chooseCoord());
+xy = xy.concat(chooseCoord());
+
 // Input Code
 var xRate = 0;
 var yRate = 0;
