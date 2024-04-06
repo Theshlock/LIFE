@@ -15,7 +15,8 @@ if (typeof window.localStorage.highscore == 'undefined') {
 	localStorage.setItem("highscore", 0);
 }
 var level = 1;
-function levelToXp (xp) {return xp**0.2}
+function xpToLevel (xp) {return xp**0.2}
+function levelToXp (level) {return level**5}
 var portalLocations = [-1.999985881126867,0,-1.76877851023801,-0.00173889944794,-0.7428106660801,-0.126444300101,-0.77659226405,-0.136651039998,-0.17589070597346151,1.0866248318613803,-1.7442271377036995,-0.00004589744356394797,0.3855769028905207,0.1771223560991527,-0.5615337270936567,-0.641923504258619];
 var portalX = portalLocations[0];
 var portalY = portalLocations[1];
@@ -627,13 +628,13 @@ function gameloop() {
 		screenY = Math.round(-ynorm * zoom + canvasHeight/2);
 		startRender(1,1);
 		contextM.fillStyle = 'green';
-		contextM.fillText(Math.floor(levelToXp(animationXp)),20,550);
-		contextM.fillText(Math.floor(levelToXp(animationXp)+1),740,550);
-		contextM.fillRect(0,550,levelToXp(animationXp)%1*800,20)
+		contextM.fillText(Math.floor(xpToLevel(animationXp)),20,550);
+		contextM.fillText(Math.floor(xpToLevel(animationXp)+1),740,550);
+		contextM.fillRect(0,550,xpToLevel(animationXp)%1*800,20)
 		if (animationXp < Number(window.localStorage.xp)) {
 			animationXp += Number(window.localStorage.xp)/400 + 1
 		} else {
-			contextM.fillText("You need " + "x" + " xp to level up",200,550);
+			contextM.fillText("You need " + levelToXp(Math.floor(xpToLevel(Number(window.localStorage.xp)))+1) - Number(window.localStorage.xp)) + " xp to level up",200,550);
 		}
 	} else if (gamestate == "playing") {
 		contextM.fillStyle = 'green';
