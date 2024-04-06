@@ -6,9 +6,10 @@
 */
 if (typeof window.localStorage.xp == 'undefined') {
 	localStorage.setItem("xp", 0);
+}
+tutorial = 0
+if (window.localStorage.xp == "0") {
 	tutorial = 1
-} else {
-	tutorial = 0
 }
 if (typeof window.localStorage.highscore == 'undefined') {
 	localStorage.setItem("highscore", 0);
@@ -594,20 +595,23 @@ document.ontouchend = function(e) {
 	up = 0;
 }
 
+totalGameTime = 300
+
 //State
 function gameloop() {
-	if (score < 0) {
-		console.log('yo man build the fail screen dawg')
+	score = Math.round(totalGameTime+(Date.now()-startTime-timePaused)/-1000 + bonus)
+	if (score <= 0) {
+		console.log('yo man, build the fail screen dawg')
 	}
 	if (level >= 8) {
 		if (! winScreenRendered) {
 			totalTime = Date.now()-startTime-timePaused;
-			score = Math.round(300+(Date.now()-startTime-timePaused)/-1000 + bonus)
+			finalScore = Math.round(totalGameTime+(Date.now()-startTime-timePaused)/-1000 + bonus)
 			contextM.fillText("You win",300,200);
-			contextM.fillText("final score: " + score ,300,260);
-			localStorage.setItem("xp", Number(window.localStorage.xp) + score);
-			if (Number(window.localStorage.highscore) < score) {
-				localStorage.setItem("highscore", score);
+			contextM.fillText("final score: " + finalScore ,300,260);
+			localStorage.setItem("xp", Number(window.localStorage.xp) + finalScore);
+			if (Number(window.localStorage.highscore) < finalScore) {
+				localStorage.setItem("highscore", finalScore);
 				contextM.fillText("new high score!",500,150);
 			}
 			contextM.fillText("high score: " + window.localStorage.highscore ,300,320);
@@ -617,9 +621,8 @@ function gameloop() {
 	} else if (gamestate == "menu") {
 		if (tutorial == 1) {
 			contextM.fillText("Line up the white squares",100,300);
-			tutorial = 0
 		}
-		zoom *= 1.04;
+		zoom *= 1.02;
 		screenX = Math.round(-xnorm * zoom + canvasWidth/2);
 		screenY = Math.round(-ynorm * zoom + canvasHeight/2);
 		startRender(1,1);
@@ -629,6 +632,8 @@ function gameloop() {
 		contextM.fillRect(0,550,levelToXp(animationXp)%1*800,20)
 		if (animationXp < Number(window.localStorage.xp)) {
 			animationXp += Number(window.localStorage.xp)/400 + 1
+		} else {
+			contextM.fillText("You need " + "x" + " xp to level up",200,550);
 		}
 	} else if (gamestate == "playing") {
 		contextM.fillStyle = 'green';
@@ -643,8 +648,8 @@ function gameloop() {
 		xnorm += ( xRate / zoom ) * ( Date.now() - time)  / 10;
 		ynorm += ( yRate / zoom ) * ( Date.now() - time ) / 10;
 		multiplier = -0.5 - Math.log2(((((xnorm - portalX)*zoom)/1600)**2 + ((ynorm-portalY)*zoom/1200)**2)**0.5);
-		contextM.fillText(Math.round(300+(Date.now()-startTime-timePaused)/-1000),100,550);
-		contextM.fillText("△: " + Math.round(multiplier) ,360,550);
+		contextM.fillText(score,100,550);
+		contextM.fillText("△: " + Math.round(multiplier*1000)/1000 ,360,550);
 		contextM.fillText(level + "/7",620,550);
 		contextM.fillText("+" + Math.round(bonus*1000)/1000,100,500);
 		zoom *= 1 + 0.01 * multiplier;
@@ -684,11 +689,14 @@ window.requestAnimationFrame(gameloop);
 
 //State Control
 function menu() {
-	localStorage.setItem("xp", Number(window.localStorage.xp)+bonus);
-	bonus = 0;
-	level = 1;
-	score = 0;
 	document.getElementById("pause").style.display = "none";
+	document.getElementById("play").style.display = "none";
+	document.getElementById("menu").style.display = "flex";
+	tutorial = 0
+	if (window.localStorage.xp == "0") {tutorial = 1}
+	level = 1;
+	bonus = 0;
+	score = 0;
 	gamestate="menu";
 	xRate = 0;
 	yRate - 0;
@@ -697,8 +705,6 @@ function menu() {
 	zoom = 10;
 	screenX = canvasWidth/2;
 	screenY = canvasHeight/2;
-	document.getElementById("play").style.display = "none";
-	document.getElementById("menu").style.display = "flex";
 	animationXp = 0
 	winScreenRendered = 0
 }
