@@ -683,7 +683,7 @@ function gameloop() {
 	if (score <= 0) {
 		console.log('yo man, build the fail screen dawg')
 	}
-	if (level >= 8) {
+	if (level = 8) {
 		if (! winScreenRendered) {
 			totalTime = Date.now()-startTime-timePaused;
 			finalScore = Math.round(totalGameTime+(Date.now()-startTime-timePaused)/-1000 + bonus)
@@ -756,6 +756,11 @@ function gameloop() {
 		contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ) - (20 + zoom/portalDepth*1000) / 2, (((portalY-ynorm) * zoom + 600) / 2 ) - (20 + zoom/portalDepth*1000) / 2, 20 + zoom/portalDepth*1000, 20 + zoom/portalDepth*1000 );
 		contextM.fillStyle = 'black';
 		contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ), (((portalY-ynorm) * zoom + 600) / 2 ) , 10, 10);
+	} else if (gamestate == "infinity") {
+		contextM.fillStyle = 'white';
+		contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ) - (20 + zoom/portalDepth*1000) / 2, (((portalY-ynorm) * zoom + 600) / 2 ) - (20 + zoom/portalDepth*1000) / 2, 20 + zoom/portalDepth*1000, 20 + zoom/portalDepth*1000 );
+		contextM.fillStyle = 'black';
+		contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ), (((portalY-ynorm) * zoom + 600) / 2 ) , 10, 10);
 	}
 	window.requestAnimationFrame(gameloop);
 }
@@ -811,5 +816,7 @@ function resume() {
 	document.getElementById("pause").style.display = "none";
 	document.getElementById("play").style.display = "flex";
 }
-
+function infinity() {
+	gamestate = "infinity"
+}
 menu()
