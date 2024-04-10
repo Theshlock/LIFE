@@ -680,6 +680,7 @@ startTime = 0;
 //State
 function gameloop() {
 	score = Math.round(totalGameTime+(Date.now()-startTime-timePaused)/-1000 + bonus)
+	console.log("help")
 	if (score <= 0) {
 		console.log('yo man, build the fail screen dawg')
 	}
