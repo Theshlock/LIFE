@@ -623,12 +623,12 @@ var dimension = 1;
 var dimensions = 14;
 
 var xy = [];
-xy = xy.concat(chooseCoord());
-xy = xy.concat(chooseCoord());
-xy = xy.concat(chooseCoord());
-xy = xy.concat(chooseCoord());
-xy = xy.concat(chooseCoord());
-xy = xy.concat(chooseCoord());
+// xy = xy.concat(chooseCoord());
+// xy = xy.concat(chooseCoord());
+// xy = xy.concat(chooseCoord());
+// xy = xy.concat(chooseCoord());
+// xy = xy.concat(chooseCoord());
+// xy = xy.concat(chooseCoord());
 //
 
 
