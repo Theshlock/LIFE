@@ -729,11 +729,37 @@ function gameloop() {
 				startRender(1,1);
 			}
 		}
-	} else if (gamestate == "infinity") {
-		contextM.fillStyle = 'white';
-		contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ) - (20 + zoom/portalDepth*1000) / 2, (((portalY-ynorm) * zoom + 600) / 2 ) - (20 + zoom/portalDepth*1000) / 2, 20 + zoom/portalDepth*1000, 20 + zoom/portalDepth*1000 );
-		contextM.fillStyle = 'black';
-		contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ), (((portalY-ynorm) * zoom + 600) / 2 ) , 10, 10);
+	} else if (gamestate == "zen") {
+		if (zoom > portalDepth ) {
+			bonus += Math.round(multiplier*1000)/1000
+			zoom = 10;
+			portalX = portalLocations[2*level];
+			portalY = portalLocations[2*level + 1];
+			xnorm = 0;
+			ynorm = 0;
+			xRate = 0;
+			yRate = 0;
+			currentPalette++;
+			changePalette();
+		} else {
+			contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ) - (20 + zoom/portalDepth*1000) / 2, (((portalY-ynorm) * zoom + 600) / 2 ) - (20 + zoom/portalDepth*1000) / 2, 20 + zoom/portalDepth*1000, 20 + zoom/portalDepth*1000 );
+			xRate += (right) * ( Date.now() - time ) / 100;
+			xRate *= 0.99
+			yRate += (up) * ( Date.now() - time ) / 100;
+			yRate *= 0.99
+			xnorm += ( xRate / zoom ) * ( Date.now() - time)  / 10;
+			ynorm += ( yRate / zoom ) * ( Date.now() - time ) / 10;
+			multiplier = -0.5 - Math.log2(((((xnorm - portalX)*zoom)/1600)**2 + ((ynorm-portalY)*zoom/1200)**2)**0.5);
+			contextM.fillText(Date.now()-startTime,100,550);
+			contextM.fillText("△: " + Math.round(multiplier*1000)/1000 ,360,550);
+			contextM.fillText(level + "/7",620,550);
+			contextM.fillText("+" + Math.round(bonus*1000)/1000,100,500);
+			zoom *= 1 + 0.01 * multiplier;
+			time = Date.now();
+			screenX = Math.round(-xnorm * zoom + canvasWidth/2);
+			screenY = Math.round(-ynorm * zoom + canvasHeight/2);
+			startRender(1,1);
+		}
 	}
 	window.requestAnimationFrame(gameloop);
 }
@@ -775,5 +801,11 @@ function zen() {
 	document.getElementById("zen").style.display = "none";
 	startTime = Date.now()
 	zoom = 10;
+	console.log(chooseCoord())
+	xy = chooseCoord()
+	console.log(xy)
+	portalX = xy[0]
+	portalY = xy[1]
+	
 }
 menu()
