@@ -768,31 +768,15 @@ function menu() {
 	window.requestAnimationFrame(gameloop);
 }
 function timeAttack() {
-	startTime = Date.now()
-	gamestate = "playing";
+	gamestate = "time attack";
 	document.getElementById("menu").style.display = "none";
 	document.getElementById("play").style.display = "flex";
 	zoom = 10;
 	startTime = Date.now()
-	var timePaused = 0
-	var time = Date.now();
-	bonus = 0
-
 }
-function pause() {
-	gamestate = "paused"
-	document.getElementById("play").style.display = "none";
-	document.getElementById("pause").style.display = "flex";
-	pausedAt = Date.now()
-}
-function resume() {
-	timePaused += Date.now() - pausedAt
-	gamestate = "playing";
-	document.getElementById("pause").style.display = "none";
-	document.getElementById("play").style.display = "flex";
-}
-function infinity() {
+function zen() {
 	gamestate = "infinity"
-
+	startTime = Date.now()
+	zoom = 10;
 }
 menu()
