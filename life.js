@@ -748,12 +748,7 @@ function gameloop() {
 	window.requestAnimationFrame(gameloop);
 }
 
-var timePaused = 0
 var time = Date.now();
-
-bonus = 0
-window.requestAnimationFrame(gameloop);
-
 
 //State Control
 function menu() {
@@ -772,6 +767,7 @@ function menu() {
 	zoom = 10;
 	animationXp = 0
 	winScreenRendered = 0
+	window.requestAnimationFrame(gameloop);
 }
 function timeAttack() {
 	startTime = Date.now()
