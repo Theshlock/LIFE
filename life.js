@@ -694,62 +694,51 @@ function gameloop() {
 			contextM.fillText("You need " + Math.round((levelToXp(Math.floor(xpToLevel(Number(window.localStorage.xp)))+1) - Number(window.localStorage.xp))) + " xp to level up",200,550);
 		}
 	} else if (gamestate == "time attack") {
-		score = Math.round(totalGameTime-startTime)/-1000 + bonus
-		if (level = 8) {
-			if (! winScreenRendered) {
-				totalTime = Date.now()-startTime-timePaused;
-				finalScore = Math.round(totalGameTime+(Date.now()-startTime-timePaused)/-1000 + bonus)
-				contextM.fillText("You win",300,200);
-				contextM.fillText("final score: " + finalScore ,300,260);
-				localStorage.setItem("xp", Number(window.localStorage.xp) + finalScore);
-				if (Number(window.localStorage.highscore) < finalScore) {
-					localStorage.setItem("highscore", finalScore);
-					contextM.fillText("new high score!",500,150);
-				}
-				contextM.fillText("high score: " + window.localStorage.highscore ,300,320);
-				console.log("you win!");
+		if (level == 8) {
+			time = Date.now()-startTime+bonus;
+			contextM.fillText("You win",300,200);
+			contextM.fillText("final score: " + finalScore ,300,260);
+			localStorage.setItem("xp", Number(window.localStorage.xp) + finalScore);
+			if (Number(window.localStorage.highscore) < finalScore) {
+				localStorage.setItem("highscore", finalScore);
+				contextM.fillText("new high score!",500,150);
 			}
-			winScreenRendered = 1;
-	
-		contextM.fillStyle = 'green';
-		contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ) - (20 + zoom/portalDepth*1000) / 2, (((portalY-ynorm) * zoom + 600) / 2 ) - (20 + zoom/portalDepth*1000) / 2, 20 + zoom/portalDepth*1000, 20 + zoom/portalDepth*1000 );
-
-		contextM.fillRect( 400, 300 , 10, 10);
-		xRate += (right) * ( Date.now() - time ) / 100;
-		xRate *= 0.99
-		yRate += (up) * ( Date.now() - time ) / 100;
-		yRate *= 0.99
-		xnorm += ( xRate / zoom ) * ( Date.now() - time)  / 10;
-		ynorm += ( yRate / zoom ) * ( Date.now() - time ) / 10;
-		multiplier = -0.5 - Math.log2(((((xnorm - portalX)*zoom)/1600)**2 + ((ynorm-portalY)*zoom/1200)**2)**0.5);
-		contextM.fillText(score,100,550);
-		contextM.fillText("△: " + Math.round(multiplier*1000)/1000 ,360,550);
-		contextM.fillText(level + "/7",620,550);
-		contextM.fillText("+" + Math.round(bonus*1000)/1000,100,500);
-		zoom *= 1 + 0.01 * multiplier;
-		time = Date.now();
-		screenX = Math.round(-xnorm * zoom + canvasWidth/2);
-		screenY = Math.round(-ynorm * zoom + canvasHeight/2);
-		startRender(1,1);
-		if( zoom > portalDepth ) {
-			bonus += Math.round(multiplier*1000)/1000
-			contextM.fillText("+" + Math.round(multiplier*1000)/1000,500,500);
-			level++;
-			zoom = 10;
-			portalX = portalLocations[2*level];
-			portalY = portalLocations[2*level + 1];
-			xnorm = 0;
-			ynorm = 0;
-			xRate = 0;
-			yRate = 0;
-			currentPalette++;
-			changePalette();
+			contextM.fillText("high score: " + window.localStorage.highscore ,300,320);
+			console.log("you win!");
+		} else {
+			if (zoom > portalDepth ) {
+				bonus += Math.round(multiplier*1000)/1000
+				contextM.fillText("+" + Math.round(multiplier*1000)/1000,500,500);
+				level++;
+				zoom = 10;
+				portalX = portalLocations[2*level];
+				portalY = portalLocations[2*level + 1];
+				xnorm = 0;
+				ynorm = 0;
+				xRate = 0;
+				yRate = 0;
+				currentPalette++;
+				changePalette();
+			} else {
+				contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ) - (20 + zoom/portalDepth*1000) / 2, (((portalY-ynorm) * zoom + 600) / 2 ) - (20 + zoom/portalDepth*1000) / 2, 20 + zoom/portalDepth*1000, 20 + zoom/portalDepth*1000 );
+				xRate += (right) * ( Date.now() - time ) / 100;
+				xRate *= 0.99
+				yRate += (up) * ( Date.now() - time ) / 100;
+				yRate *= 0.99
+				xnorm += ( xRate / zoom ) * ( Date.now() - time)  / 10;
+				ynorm += ( yRate / zoom ) * ( Date.now() - time ) / 10;
+				multiplier = -0.5 - Math.log2(((((xnorm - portalX)*zoom)/1600)**2 + ((ynorm-portalY)*zoom/1200)**2)**0.5);
+				contextM.fillText(Date.now()-startTime,100,550);
+				contextM.fillText("△: " + Math.round(multiplier*1000)/1000 ,360,550);
+				contextM.fillText(level + "/7",620,550);
+				contextM.fillText("+" + Math.round(bonus*1000)/1000,100,500);
+				zoom *= 1 + 0.01 * multiplier;
+				time = Date.now();
+				screenX = Math.round(-xnorm * zoom + canvasWidth/2);
+				screenY = Math.round(-ynorm * zoom + canvasHeight/2);
+				startRender(1,1);
+			}
 		}
-	} else if (gamestate == "paused") {
-		contextM.fillStyle = 'green';
-		contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ) - (20 + zoom/portalDepth*1000) / 2, (((portalY-ynorm) * zoom + 600) / 2 ) - (20 + zoom/portalDepth*1000) / 2, 20 + zoom/portalDepth*1000, 20 + zoom/portalDepth*1000 );
-		contextM.fillStyle = 'black';
-		contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ), (((portalY-ynorm) * zoom + 600) / 2 ) , 10, 10);
 	} else if (gamestate == "infinity") {
 		contextM.fillStyle = 'white';
 		contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ) - (20 + zoom/portalDepth*1000) / 2, (((portalY-ynorm) * zoom + 600) / 2 ) - (20 + zoom/portalDepth*1000) / 2, 20 + zoom/portalDepth*1000, 20 + zoom/portalDepth*1000 );
