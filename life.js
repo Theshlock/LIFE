@@ -753,6 +753,9 @@ var time = Date.now();
 //State Control
 function menu() {
 	gamestate="menu";
+	document.getElementById("menu").style.display = "flex";
+	document.getElementById("time attack").style.display = "flex";
+	document.getElementById("zen").style.display = "flex";
 	tutorial = 0
 	if (window.localStorage.xp == "0") {tutorial = 1}
 	level = 1;
@@ -769,12 +772,16 @@ function menu() {
 }
 function timeAttack() {
 	gamestate = "time attack";
-	document.getElementById("menu").style.display = "none";
-	document.getElementById("play").style.display = "flex";
+	document.getElementById("menu").style.display = "flex";
+	document.getElementById("time attack").style.display = "none";
+	document.getElementById("zen").style.display = "none";
 	zoom = 10;
 	startTime = Date.now()
 }
 function zen() {
+	document.getElementById("menu").style.display = "flex";
+	document.getElementById("time attack").style.display = "none";
+	document.getElementById("zen").style.display = "none";
 	gamestate = "infinity"
 	startTime = Date.now()
 	zoom = 10;
