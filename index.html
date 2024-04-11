@@ -1,32 +1,15 @@
 <!DOCTYPE html>
-
 <html lang="en">
-<link rel="manifest" href="manifest.json">
-<link rel="stylesheet" type="text/css" href="./life.css">
-<script src="life.js"></script>
+	<link rel="stylesheet" type="text/css" href="./life.css">
+	<script src="life.js"></script>
 
-<head>
-	<meta name="theme-color" content="#4285f4" />
-	<meta charset="utf-8" />
-	<meta name="viewport" id="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="LIFE, the game. Take a magical ride towards infinity. Are you ready?" />
-    <meta name="keywords" content="mandel, mandelbrot, mandelbrot set, space, spaceship, control, game, time, speedrun, fun, benoit mandelbrot, realtime, real time, real-time, fractal, 4k, javascript, zoom, map, fractint, vga, cga, color palette, color cycling, infinite, zen" />
-	<title>LIFE</title>
-</head>
+	<body>
+		<canvas id="mandelCanvas" width="800px" height="600px"></canvas>
+		<button id="time attack" onclick="timeAttack()">Play!</button>
+		<button id="menu" onclick="menu()">Menu</button>
+		<button id="zen" onclick="zen()">Zen</button>
+	</body>
 
-<body>
-	<canvas id="mandelCanvas" width="800px" height="600px"></canvas>
-	<button name="time attack" onclick="timeAttack()">Play!</button>
-	<button name="menu" onclick="menu()">Menu</button>
-	<button name="zen" onclick="zen()">infinity mode"</button>
-</body>
-
-<script src="life.js"></script>
-
-<script>
-  if (typeof navigator.serviceWorker !== 'undefined') {
-    navigator.serviceWorker.register('sw.js')
-  }
-</script>
+	<script src="life.js"></script>
 
 </html>

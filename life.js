@@ -65,7 +65,6 @@ mc.style = "width:" + window.innerWidth + "px; height:" + window.innerHeight + "
 contextM = mc.getContext('2d');
 contextM.font = "40px Arial";
 window.addEventListener("resize", function(){mc.style = "width:" + window.innerWidth + "px; height:" + window.innerHeight + "px;"});
-var viewportTag = document.getElementById("viewport");
 var mctx = mc.getContext("2d", { alpha: false } );
 var coarse = document.createElement('canvas');
 var coarseCtx = coarse.getContext("2d", { alpha: false } );
@@ -714,8 +713,7 @@ function gameloop() {
 	
 		contextM.fillStyle = 'green';
 		contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ) - (20 + zoom/portalDepth*1000) / 2, (((portalY-ynorm) * zoom + 600) / 2 ) - (20 + zoom/portalDepth*1000) / 2, 20 + zoom/portalDepth*1000, 20 + zoom/portalDepth*1000 );
-		contextM.fillStyle = 'white';
-		contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ), (((portalY-ynorm) * zoom + 600) / 2 ) , 10, 10);
+
 		contextM.fillRect( 400, 300 , 10, 10);
 		xRate += (right) * ( Date.now() - time ) / 100;
 		xRate *= 0.99
@@ -770,21 +768,19 @@ window.requestAnimationFrame(gameloop);
 
 //State Control
 function menu() {
-	document.querySelector("play").style.display = "flex";
-	document.getElementById("menu").style.display = "flex";
+	document.getElementById("timeattack").style.display = "flex";
+	document.getElementById("zen").style.display = "flex";
+	gamestate="menu";
 	tutorial = 0
 	if (window.localStorage.xp == "0") {tutorial = 1}
 	level = 1;
 	bonus = 0;
 	score = 0;
-	gamestate="menu";
 	xRate = 0;
 	yRate - 0;
 	xnorm = -0.5615337270936567;
 	ynorm = -0.641923504258619;
 	zoom = 10;
-	screenX = canvasWidth/2;
-	screenY = canvasHeight/2;
 	animationXp = 0
 	winScreenRendered = 0
 }
