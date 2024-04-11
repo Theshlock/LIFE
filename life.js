@@ -694,7 +694,7 @@ function gameloop() {
 			contextM.fillText("You need " + Math.round((levelToXp(Math.floor(xpToLevel(Number(window.localStorage.xp)))+1) - Number(window.localStorage.xp))) + " xp to level up",200,550);
 		}
 	} else if (gamestate == "time attack") {
-		score = Math.round(totalGameTime-startTime)/-1000 + bonus)
+		score = Math.round(totalGameTime-startTime)/-1000 + bonus
 		if (level = 8) {
 			if (! winScreenRendered) {
 				totalTime = Date.now()-startTime-timePaused;
