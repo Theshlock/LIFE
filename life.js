@@ -4,13 +4,11 @@
    Copyright (c) 2022 - 2024 Samuel Lockton lockton.sam@gmail.com
    Modification and distribution permitted under terms of the Affero GPL version 3
 */
-if (typeof window.localStorage.xp == 'undefined') {
-	localStorage.setItem("xp", 0);
-}
-tutorial = 0
-if (window.localStorage.xp == "0") {
-	tutorial = 1
-}
+if (typeof navigator.serviceWorker !== 'undefined') {
+    navigator.serviceWorker.register('sw.js')
+  }
+if (typeof window.localStorage.xp == 'undefined') {localStorage.setItem("xp", 0);}
+
 if (typeof window.localStorage.highscore == 'undefined') {
 	localStorage.setItem("highscore", 0);
 }
@@ -675,32 +673,12 @@ document.ontouchend = function(e) {
 	up = 0;
 }
 
-totalGameTime = 300;
-startTime = 0;
+
 //State
 function gameloop() {
-	score = Math.round(totalGameTime+(Date.now()-startTime-timePaused)/-1000 + bonus)
-	console.log("help")
-	if (score <= 0) {
-		console.log('yo man, build the fail screen dawg')
-	}
-	if (level = 8) {
-		if (! winScreenRendered) {
-			totalTime = Date.now()-startTime-timePaused;
-			finalScore = Math.round(totalGameTime+(Date.now()-startTime-timePaused)/-1000 + bonus)
-			contextM.fillText("You win",300,200);
-			contextM.fillText("final score: " + finalScore ,300,260);
-			localStorage.setItem("xp", Number(window.localStorage.xp) + finalScore);
-			if (Number(window.localStorage.highscore) < finalScore) {
-				localStorage.setItem("highscore", finalScore);
-				contextM.fillText("new high score!",500,150);
-			}
-			contextM.fillText("high score: " + window.localStorage.highscore ,300,320);
-			console.log("you win!");
-		}
-		winScreenRendered = 1;
-	} else if (gamestate == "menu") {
-		if (tutorial == 1) {
+	if (gamestate == "menu") {
+		if (window.localStorage.xp == 0) {
+			console.log("tutorial?")
 			contextM.fillText("Line up the white squares",100,300);
 		}
 		zoom *= 1.02;
@@ -716,7 +694,24 @@ function gameloop() {
 		} else {
 			contextM.fillText("You need " + Math.round((levelToXp(Math.floor(xpToLevel(Number(window.localStorage.xp)))+1) - Number(window.localStorage.xp))) + " xp to level up",200,550);
 		}
-	} else if (gamestate == "playing") {
+	} else if (gamestate == "time attack") {
+		score = Math.round(totalGameTime-startTime)/-1000 + bonus)
+		if (level = 8) {
+			if (! winScreenRendered) {
+				totalTime = Date.now()-startTime-timePaused;
+				finalScore = Math.round(totalGameTime+(Date.now()-startTime-timePaused)/-1000 + bonus)
+				contextM.fillText("You win",300,200);
+				contextM.fillText("final score: " + finalScore ,300,260);
+				localStorage.setItem("xp", Number(window.localStorage.xp) + finalScore);
+				if (Number(window.localStorage.highscore) < finalScore) {
+					localStorage.setItem("highscore", finalScore);
+					contextM.fillText("new high score!",500,150);
+				}
+				contextM.fillText("high score: " + window.localStorage.highscore ,300,320);
+				console.log("you win!");
+			}
+			winScreenRendered = 1;
+	
 		contextM.fillStyle = 'green';
 		contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ) - (20 + zoom/portalDepth*1000) / 2, (((portalY-ynorm) * zoom + 600) / 2 ) - (20 + zoom/portalDepth*1000) / 2, 20 + zoom/portalDepth*1000, 20 + zoom/portalDepth*1000 );
 		contextM.fillStyle = 'white';
@@ -775,8 +770,7 @@ window.requestAnimationFrame(gameloop);
 
 //State Control
 function menu() {
-	document.getElementById("pause").style.display = "none";
-	document.getElementById("play").style.display = "none";
+	document.querySelector("play").style.display = "flex";
 	document.getElementById("menu").style.display = "flex";
 	tutorial = 0
 	if (window.localStorage.xp == "0") {tutorial = 1}
@@ -794,8 +788,8 @@ function menu() {
 	animationXp = 0
 	winScreenRendered = 0
 }
-function play() {
-	timer = Date.now()
+function timeAttack() {
+	startTime = Date.now()
 	gamestate = "playing";
 	document.getElementById("menu").style.display = "none";
 	document.getElementById("play").style.display = "flex";
@@ -804,6 +798,7 @@ function play() {
 	var timePaused = 0
 	var time = Date.now();
 	bonus = 0
+
 }
 function pause() {
 	gamestate = "paused"
@@ -819,5 +814,6 @@ function resume() {
 }
 function infinity() {
 	gamestate = "infinity"
+
 }
 menu()
