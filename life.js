@@ -616,21 +616,11 @@ function chooseCoord() {
     console.log("chosenCoordY: " + chosenCoordY)
     return([chosenCoordX,chosenCoordY])
 }
-var dimension = 1;
-var dimensions = 14;
 
 var xy = [];
 // xy = xy.concat(chooseCoord());
 // xy = xy.concat(chooseCoord());
 // xy = xy.concat(chooseCoord());
-// xy = xy.concat(chooseCoord());
-// xy = xy.concat(chooseCoord());
-// xy = xy.concat(chooseCoord());
-//
-
-
-
-
 
 // Input Code
 var xRate = 0;
@@ -779,10 +769,10 @@ function timeAttack() {
 	startTime = Date.now()
 }
 function zen() {
+	gamestate = "zen"
 	document.getElementById("menu").style.display = "flex";
 	document.getElementById("time attack").style.display = "none";
 	document.getElementById("zen").style.display = "none";
-	gamestate = "infinity"
 	startTime = Date.now()
 	zoom = 10;
 }
