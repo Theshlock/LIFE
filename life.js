@@ -733,12 +733,14 @@ function gameloop() {
 		if (zoom > portalDepth ) {
 			bonus += Math.round(multiplier*1000)/1000
 			zoom = 10;
-			portalX = portalLocations[2*level];
-			portalY = portalLocations[2*level + 1];
+			xy = chooseCoord()
+			portalX = xy[0]
+			portalY = xy[1]
 			xnorm = 0;
 			ynorm = 0;
 			xRate = 0;
 			yRate = 0;
+			level += 1;
 			currentPalette++;
 			changePalette();
 		} else {
@@ -752,7 +754,7 @@ function gameloop() {
 			multiplier = -0.5 - Math.log2(((((xnorm - portalX)*zoom)/1600)**2 + ((ynorm-portalY)*zoom/1200)**2)**0.5);
 			contextM.fillText(Date.now()-startTime,100,550);
 			contextM.fillText("△: " + Math.round(multiplier*1000)/1000 ,360,550);
-			contextM.fillText(level + "/7",620,550);
+			contextM.fillText(level,620,550);
 			contextM.fillText("+" + Math.round(bonus*1000)/1000,100,500);
 			zoom *= 1 + 0.01 * multiplier;
 			time = Date.now();
@@ -769,7 +771,7 @@ var time = Date.now();
 //State Control
 function menu() {
 	gamestate="menu";
-	document.getElementById("menu").style.display = "flex";
+	document.getElementById("menu").style.display = "none";
 	document.getElementById("time attack").style.display = "flex";
 	document.getElementById("zen").style.display = "flex";
 	tutorial = 0
@@ -806,6 +808,6 @@ function zen() {
 	console.log(xy)
 	portalX = xy[0]
 	portalY = xy[1]
-	
+
 }
 menu()
