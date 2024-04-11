@@ -752,8 +752,6 @@ var time = Date.now();
 
 //State Control
 function menu() {
-	document.getElementById("timeattack").style.display = "flex";
-	document.getElementById("zen").style.display = "flex";
 	gamestate="menu";
 	tutorial = 0
 	if (window.localStorage.xp == "0") {tutorial = 1}
