@@ -4,14 +4,10 @@
    Copyright (c) 2022 - 2024 Samuel Lockton lockton.sam@gmail.com
    Modification and distribution permitted under terms of the Affero GPL version 3
 */
-if (typeof navigator.serviceWorker !== 'undefined') {
-    navigator.serviceWorker.register('sw.js')
-  }
 if (typeof window.localStorage.xp == 'undefined') {localStorage.setItem("xp", 0);}
-
-if (typeof window.localStorage.highscore == 'undefined') {
-	localStorage.setItem("highscore", 0);
-}
+if (typeof window.localStorage.speed == 'undefined') {localStorage.setItem("speed", 1);}
+if (typeof window.localStorage.agility == 'undefined') {localStorage.setItem("agility", 1);}
+if (typeof window.localStorage.highscore == 'undefined') {localStorage.setItem("highscore", 0);}
 var level = 1;
 function xpToLevel (xp) {return xp**0.2}
 function levelToXp (level) {return level**5}
@@ -711,9 +707,9 @@ function gameloop() {
 				changePalette();
 			} else {
 				contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ) - (20 + zoom/portalDepth*1000) / 2, (((portalY-ynorm) * zoom + 600) / 2 ) - (20 + zoom/portalDepth*1000) / 2, 20 + zoom/portalDepth*1000, 20 + zoom/portalDepth*1000 );
-				xRate += (right) * ( Date.now() - time ) / 100;
+				xRate += (right * agility) * ( Date.now() - time ) / 100;
 				xRate *= 0.99
-				yRate += (up) * ( Date.now() - time ) / 100;
+				yRate += (up * agility) * ( Date.now() - time ) / 100;
 				yRate *= 0.99
 				xnorm += ( xRate / zoom ) * ( Date.now() - time)  / 10;
 				ynorm += ( yRate / zoom ) * ( Date.now() - time ) / 10;
@@ -745,9 +741,9 @@ function gameloop() {
 			changePalette();
 		} else {
 			contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ) - (20 + zoom/portalDepth*1000) / 2, (((portalY-ynorm) * zoom + 600) / 2 ) - (20 + zoom/portalDepth*1000) / 2, 20 + zoom/portalDepth*1000, 20 + zoom/portalDepth*1000 );
-			xRate += (right) * ( Date.now() - time ) / 100;
+			xRate += (right * agility) * ( Date.now() - time ) / 100;
 			xRate *= 0.99
-			yRate += (up) * ( Date.now() - time ) / 100;
+			yRate += (up * agility) * ( Date.now() - time ) / 100;
 			yRate *= 0.99
 			xnorm += ( xRate / zoom ) * ( Date.now() - time)  / 10;
 			ynorm += ( yRate / zoom ) * ( Date.now() - time ) / 10;
