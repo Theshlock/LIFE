@@ -548,15 +548,11 @@ function drawMandel()
 			requestAnimationFrame( drawMandel );
 }
 
-
-
-
-//
 function chooseCoord() {
     const maxIterations = 1000;
     const coordSens = 0.25;
     const blockSize = 64;
-    const totalZooms = 36;
+    const totalZooms = 64;
     var boundsSize = 2;
     var chosenCoordX = 0;
     var chosenCoordY = 0;
@@ -613,11 +609,6 @@ function chooseCoord() {
     return([chosenCoordX,chosenCoordY])
 }
 
-var xy = [];
-// xy = xy.concat(chooseCoord());
-// xy = xy.concat(chooseCoord());
-// xy = xy.concat(chooseCoord());
-
 // Input Code
 var xRate = 0;
 var yRate = 0;
@@ -663,8 +654,7 @@ document.ontouchend = function(e) {
 function gameloop() {
 	if (gamestate == "menu") {
 		if (window.localStorage.xp == 0) {
-			console.log("tutorial?")
-			contextM.fillText("Line up the white squares",100,300);
+			contextM.fillText("Seek the portal",100,300);
 		}
 		zoom *= 1.02;
 		screenX = Math.round(-xnorm * zoom + canvasWidth/2);
@@ -694,6 +684,7 @@ function gameloop() {
 		} else {
 			if (zoom > portalDepth ) {
 				bonus += Math.round(multiplier*1000)/1000
+				localStorage.setItem("xp", window.localStorage.xp+bonus)
 				contextM.fillText("+" + Math.round(multiplier*1000)/1000,500,500);
 				level++;
 				zoom = 10;
@@ -728,6 +719,7 @@ function gameloop() {
 	} else if (gamestate == "zen") {
 		if (zoom > portalDepth ) {
 			bonus += Math.round(multiplier*1000)/1000
+			localStorage.setItem("xp", window.localStorage.xp+bonus)
 			zoom = 10;
 			xy = chooseCoord()
 			portalX = xy[0]
