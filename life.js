@@ -659,19 +659,24 @@ function gameloop() {
 		if (window.localStorage.xp == 0) {
 			contextM.fillText("Seek the portal",100,300);
 		}
+
 		zoom *= 1.02;
 		screenX = Math.round(-xnorm * zoom + canvasWidth/2);
 		screenY = Math.round(-ynorm * zoom + canvasHeight/2);
 		startRender(1,1);
-		contextM.fillStyle = 'green';
+
+		contextM.fillText("Speed",20,460);
+		contextM.fillText("Control",20,480);
+		contextM.fillText("Brakes",20,500);
+		contextM.fillText("Xp Gain",20,520);
+
 		contextM.fillText(Math.floor(xpToLevel(animationXp)),20,550);
 		contextM.fillText(Math.floor(xpToLevel(animationXp)+1),740,550);
 		contextM.fillRect(0,550,xpToLevel(animationXp)%1*800,20);
+		
 		if (animationXp < Number(window.localStorage.xp)) {
-			animationXp += Number(window.localStorage.xp)/400 + 1
+			animationXp += Number(window.localStorage.xp)/200 + 1
 		} else {
-			contextM.fillText("You need " + Math.round((levelToXp(Math.floor(xpToLevel(Number(window.localStorage.xp)))+1) - Number(window.localStorage.xp))) + " xp to level up",200,550);
-			contextM.fillRect
 			contextM.fillText("You need " + Math.round((levelToXp(Math.floor(xpToLevel(Number(window.localStorage.xp)))+1) - Number(window.localStorage.xp))) + " xp to level up",200,550);
 		}
 	} else if (gamestate == "time attack") {
@@ -779,6 +784,7 @@ function menu() {
 	zoom = 10;
 	animationXp = 0
 	winScreenRendered = 0
+	contextM.fillStyle = 'green';
 	window.requestAnimationFrame(gameloop);
 }
 function timeAttack() {
