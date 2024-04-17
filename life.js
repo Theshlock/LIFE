@@ -5,9 +5,12 @@
    Modification and distribution permitted under terms of the Affero GPL version 3
 */
 if (typeof window.localStorage.xp == 'undefined') {localStorage.setItem("xp", 0);}
+if (typeof window.localStorage.highscore == 'undefined') {localStorage.setItem("highscore", 0);}
 if (typeof window.localStorage.speed == 'undefined') {localStorage.setItem("speed", 1);}
 if (typeof window.localStorage.agility == 'undefined') {localStorage.setItem("agility", 1);}
-if (typeof window.localStorage.highscore == 'undefined') {localStorage.setItem("highscore", 0);}
+if (typeof window.localStorage.brakes == 'undefined') {localStorage.setItem("brakes", 1);}
+if (typeof window.localStorage.xpGain == 'undefined') {localStorage.setItem("xpGain", 1);}
+
 var level = 1;
 function xpToLevel (xp) {return xp**0.2}
 function levelToXp (level) {return level**5}
@@ -663,7 +666,7 @@ function gameloop() {
 		contextM.fillStyle = 'green';
 		contextM.fillText(Math.floor(xpToLevel(animationXp)),20,550);
 		contextM.fillText(Math.floor(xpToLevel(animationXp)+1),740,550);
-		contextM.fillRect(0,550,xpToLevel(animationXp)%1*800,20)
+		contextM.fillRect(0,550,xpToLevel(animationXp)%1*800,20);
 		if (animationXp < Number(window.localStorage.xp)) {
 			animationXp += Number(window.localStorage.xp)/400 + 1
 		} else {
@@ -700,10 +703,10 @@ function gameloop() {
 				changePalette();
 			} else {
 				contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ) - (20 + zoom/portalDepth*1000) / 2, (((portalY-ynorm) * zoom + 600) / 2 ) - (20 + zoom/portalDepth*1000) / 2, 20 + zoom/portalDepth*1000, 20 + zoom/portalDepth*1000 );
-				xRate += (right * agility) * ( Date.now() - time ) / 100;
-				xRate *= 0.99
-				yRate += (up * agility) * ( Date.now() - time ) / 100;
-				yRate *= 0.99
+				xRate += (right * window.localStorage.agility) * ( Date.now() - time ) / 100;
+				xRate *= window.localStorage.brakes
+				yRate += (up * window.localStorage.agility) * ( Date.now() - time ) / 100;
+				yRate *= window.localStorage.brakes
 				xnorm += ( xRate / zoom ) * ( Date.now() - time)  / 10;
 				ynorm += ( yRate / zoom ) * ( Date.now() - time ) / 10;
 				multiplier = -0.5 - Math.log2(((((xnorm - portalX)*zoom)/1600)**2 + ((ynorm-portalY)*zoom/1200)**2)**0.5);
@@ -711,7 +714,7 @@ function gameloop() {
 				contextM.fillText("△: " + Math.round(multiplier*1000)/1000 ,360,550);
 				contextM.fillText(level + "/7",620,550);
 				contextM.fillText("+" + Math.round(bonus*1000)/1000,100,500);
-				zoom *= 1 + 0.01 * multiplier;
+				zoom *= window.localStorage.speed * multiplier;
 				time = Date.now();
 				screenX = Math.round(-xnorm * zoom + canvasWidth/2);
 				screenY = Math.round(-ynorm * zoom + canvasHeight/2);
@@ -735,10 +738,10 @@ function gameloop() {
 			changePalette();
 		} else {
 			contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ) - (20 + zoom/portalDepth*1000) / 2, (((portalY-ynorm) * zoom + 600) / 2 ) - (20 + zoom/portalDepth*1000) / 2, 20 + zoom/portalDepth*1000, 20 + zoom/portalDepth*1000 );
-			xRate += (right * agility) * ( Date.now() - time ) / 100;
-			xRate *= 0.99
-			yRate += (up * agility) * ( Date.now() - time ) / 100;
-			yRate *= 0.99
+			xRate += (right * window.localStorage.agility) * ( Date.now() - time ) / 100;
+			xRate *= window.localStorage.brakes
+			yRate += (up * window.localStorage.agility) * ( Date.now() - time ) / 100;
+			yRate *= window.localStorage.brakes
 			xnorm += ( xRate / zoom ) * ( Date.now() - time)  / 10;
 			ynorm += ( yRate / zoom ) * ( Date.now() - time ) / 10;
 			multiplier = -0.5 - Math.log2(((((xnorm - portalX)*zoom)/1600)**2 + ((ynorm-portalY)*zoom/1200)**2)**0.5);
@@ -746,7 +749,7 @@ function gameloop() {
 			contextM.fillText("△: " + Math.round(multiplier*1000)/1000 ,360,550);
 			contextM.fillText(level,620,550);
 			contextM.fillText("+" + Math.round(bonus*1000)/1000,100,500);
-			zoom *= 1 + 0.01 * multiplier;
+			zoom *= window.localStorage.speed * multiplier;
 			time = Date.now();
 			screenX = Math.round(-xnorm * zoom + canvasWidth/2);
 			screenY = Math.round(-ynorm * zoom + canvasHeight/2);
@@ -801,3 +804,18 @@ function zen() {
 
 }
 menu()
+
+
+function upgradeSpeed() {
+	localStorage.setItem("speed", window.localStorage.speed * 1.1)
+}
+function upgradeAgility() {
+	localStorage.setItem("agility", window.localStorage.agility * 1.1)
+}
+function upgradeBrakes() {
+	localStorage.setItem("brakes", window.localStorage.brakes - 0.01)
+}
+function upgradeXpGain() {
+	localStorage.setItem("xpGain", window.localStorage.xpGain * 1.1)
+
+}
