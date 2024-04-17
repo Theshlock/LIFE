@@ -668,6 +668,8 @@ function gameloop() {
 			animationXp += Number(window.localStorage.xp)/400 + 1
 		} else {
 			contextM.fillText("You need " + Math.round((levelToXp(Math.floor(xpToLevel(Number(window.localStorage.xp)))+1) - Number(window.localStorage.xp))) + " xp to level up",200,550);
+			contextM.fillRect
+			contextM.fillText("You need " + Math.round((levelToXp(Math.floor(xpToLevel(Number(window.localStorage.xp)))+1) - Number(window.localStorage.xp))) + " xp to level up",200,550);
 		}
 	} else if (gamestate == "time attack") {
 		if (level == 8) {
