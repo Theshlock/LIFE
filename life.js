@@ -824,7 +824,11 @@ function zen() {
 menu()
 
 function ascend() {
-	localStorage.setItem("ascension", window.localStorage.ascension + 1)
+	localStorage.setItem("ascension", Number(window.localStorage.ascension) + 1)
+	localStorage.setItem("speed", 1)
+	localStorage.setItem("agility", 1)
+	localStorage.setItem("brakes", 1)
+	localStorage.setItem("xpGain", 1)
 }
 
 function upgradeSpeed() {
@@ -838,5 +842,4 @@ function upgradeBrakes() {
 }
 function upgradeXpGain() {
 	localStorage.setItem("xpGain", window.localStorage.xpGain * 1.1)
-
 }
