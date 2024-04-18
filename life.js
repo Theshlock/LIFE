@@ -10,6 +10,7 @@ if (typeof window.localStorage.speed == 'undefined') {localStorage.setItem("spee
 if (typeof window.localStorage.agility == 'undefined') {localStorage.setItem("agility", 1);}
 if (typeof window.localStorage.brakes == 'undefined') {localStorage.setItem("brakes", 1);}
 if (typeof window.localStorage.xpGain == 'undefined') {localStorage.setItem("xpGain", 1);}
+if (typeof window.localStorage.upgradePoints == 'undefined') {localStorage.setItem("upgradePoints", 0);}
 if (typeof window.localStorage.ascension == 'undefined') {localStorage.setItem("ascension", 0);}
 
 var level = 1;
@@ -668,23 +669,25 @@ function gameloop() {
 
 		contextM.fillText("Ascension " + window.localStorage.ascension,20,120);
 		contextM.fillText("Speed",20,240);
-		contextM.fillRect(window.localStorage.speed*100 - 100,10,20,240)
+		contextM.fillRect(20,240,window.localStorage.speed*100 - 100,10)
+
 		contextM.fillText("Control",20,300);
-		contextM.fillRect(window.localStorage.control*100 - 100,10,20,300)
+		contextM.fillRect(20,300,window.localStorage.control*100 - 100,10)
+
 		contextM.fillText("Brakes",20,360);
-		contextM.fillRect(window.localStorage.brakes*100 - 100,10,20,360)
+		contextM.fillRect(20,360,window.localStorage.brakes*100 - 100,10)
+
 		contextM.fillText("Xp Gain",20,420);
-		contextM.fillRect(window.localStorage.xpGain*100 - 100,10,20,420)
+		contextM.fillRect(20,240,window.localStorage.xpGain*100 - 100,10)
 
 		contextM.fillText(Math.floor(xpToLevel(animationXp)),20,560);
 		contextM.fillText(Math.floor(xpToLevel(animationXp)+1),740,560);
 		contextM.fillRect(0,560,xpToLevel(animationXp)%1*800,20);
-
 		if (animationXp < Number(window.localStorage.xp)) {
 			animationXp += Number(window.localStorage.xp)/200 + 1
 		} else {
 			contextM.fillText("You need " + Math.round((levelToXp(Math.floor(xpToLevel(Number(window.localStorage.xp)))+1) - Number(window.localStorage.xp))) + " xp to level up",200,550);
-			if (upgradepoints > 0) {
+			if (window.localStorage.upgradePoints > 0) {
 				document.getElementById("upgrade menu").style.display = "flex";
 			}
 		}
