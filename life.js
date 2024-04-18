@@ -678,7 +678,7 @@ function gameloop() {
 		contextM.fillRect(20,360,window.localStorage.brakes*100 - 100,10)
 
 		contextM.fillText("Xp Gain",20,420);
-		contextM.fillRect(20,240,window.localStorage.xpGain*100 - 100,10)
+		contextM.fillRect(20,420,window.localStorage.xpGain*100 - 100,10)
 
 		contextM.fillText(Math.floor(xpToLevel(animationXp)),20,560);
 		contextM.fillText(Math.floor(xpToLevel(animationXp)+1),740,560);
@@ -756,9 +756,9 @@ function gameloop() {
 		} else {
 			contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ) - (20 + zoom/portalDepth*1000) / 2, (((portalY-ynorm) * zoom + 600) / 2 ) - (20 + zoom/portalDepth*1000) / 2, 20 + zoom/portalDepth*1000, 20 + zoom/portalDepth*1000 );
 			xRate += (right * window.localStorage.agility) * ( Date.now() - time ) / 100;
-			xRate /= window.localStorage.brakes
+			xRate /= (window.localStorage.brakes / 10)
 			yRate += (up * window.localStorage.agility) * ( Date.now() - time ) / 100;
-			yRate /= window.localStorage.brakes
+			yRate /= (window.localStorage.brakes / 10)
 			xnorm += ( xRate / zoom ) * ( Date.now() - time)  / 10;
 			ynorm += ( yRate / zoom ) * ( Date.now() - time ) / 10;
 			multiplier = -0.5 - Math.log2(((((xnorm - portalX)*zoom)/1600)**2 + ((ynorm-portalY)*zoom/1200)**2)**0.5);
