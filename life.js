@@ -10,6 +10,7 @@ if (typeof window.localStorage.speed == 'undefined') {localStorage.setItem("spee
 if (typeof window.localStorage.agility == 'undefined') {localStorage.setItem("agility", 1);}
 if (typeof window.localStorage.brakes == 'undefined') {localStorage.setItem("brakes", 1);}
 if (typeof window.localStorage.xpGain == 'undefined') {localStorage.setItem("xpGain", 1);}
+if (typeof window.localStorage.ascension == 'undefined') {localStorage.setItem("ascension", 0);}
 
 var level = 1;
 function xpToLevel (xp) {return xp**0.2}
@@ -657,7 +658,7 @@ document.ontouchend = function(e) {
 function gameloop() {
 	if (gamestate == "menu") {
 		if (window.localStorage.xp == 0) {
-			contextM.fillText("Seek the portal",100,300);
+			contextM.fillText("Seek the portal",20,20);
 		}
 
 		zoom *= 1.02;
@@ -665,19 +666,27 @@ function gameloop() {
 		screenY = Math.round(-ynorm * zoom + canvasHeight/2);
 		startRender(1,1);
 
-		contextM.fillText("Speed",20,460);
-		contextM.fillText("Control",20,480);
-		contextM.fillText("Brakes",20,500);
-		contextM.fillText("Xp Gain",20,520);
+		contextM.fillText("Ascension " + window.localStorage.ascension,20,120);
+		contextM.fillText("Speed",20,240);
+		contextM.fillRect(window.localStorage.speed*100 - 100,10,20,240)
+		contextM.fillText("Control",20,300);
+		contextM.fillRect(window.localStorage.control*100 - 100,10,20,300)
+		contextM.fillText("Brakes",20,360);
+		contextM.fillRect(window.localStorage.brakes*100 - 100,10,20,360)
+		contextM.fillText("Xp Gain",20,420);
+		contextM.fillRect(window.localStorage.xpGain*100 - 100,10,20,420)
 
-		contextM.fillText(Math.floor(xpToLevel(animationXp)),20,550);
-		contextM.fillText(Math.floor(xpToLevel(animationXp)+1),740,550);
-		contextM.fillRect(0,550,xpToLevel(animationXp)%1*800,20);
-		
+		contextM.fillText(Math.floor(xpToLevel(animationXp)),20,560);
+		contextM.fillText(Math.floor(xpToLevel(animationXp)+1),740,560);
+		contextM.fillRect(0,560,xpToLevel(animationXp)%1*800,20);
+
 		if (animationXp < Number(window.localStorage.xp)) {
 			animationXp += Number(window.localStorage.xp)/200 + 1
 		} else {
 			contextM.fillText("You need " + Math.round((levelToXp(Math.floor(xpToLevel(Number(window.localStorage.xp)))+1) - Number(window.localStorage.xp))) + " xp to level up",200,550);
+			if (upgradepoints > 0) {
+				document.getElementById("upgrade menu").style.display = "flex";
+			}
 		}
 	} else if (gamestate == "time attack") {
 		if (level == 8) {
@@ -709,9 +718,9 @@ function gameloop() {
 			} else {
 				contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ) - (20 + zoom/portalDepth*1000) / 2, (((portalY-ynorm) * zoom + 600) / 2 ) - (20 + zoom/portalDepth*1000) / 2, 20 + zoom/portalDepth*1000, 20 + zoom/portalDepth*1000 );
 				xRate += (right * window.localStorage.agility) * ( Date.now() - time ) / 100;
-				xRate *= window.localStorage.brakes
+				xRate /= window.localStorage.brakes
 				yRate += (up * window.localStorage.agility) * ( Date.now() - time ) / 100;
-				yRate *= window.localStorage.brakes
+				yRate /= window.localStorage.brakes
 				xnorm += ( xRate / zoom ) * ( Date.now() - time)  / 10;
 				ynorm += ( yRate / zoom ) * ( Date.now() - time ) / 10;
 				multiplier = -0.5 - Math.log2(((((xnorm - portalX)*zoom)/1600)**2 + ((ynorm-portalY)*zoom/1200)**2)**0.5);
@@ -744,9 +753,9 @@ function gameloop() {
 		} else {
 			contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ) - (20 + zoom/portalDepth*1000) / 2, (((portalY-ynorm) * zoom + 600) / 2 ) - (20 + zoom/portalDepth*1000) / 2, 20 + zoom/portalDepth*1000, 20 + zoom/portalDepth*1000 );
 			xRate += (right * window.localStorage.agility) * ( Date.now() - time ) / 100;
-			xRate *= window.localStorage.brakes
+			xRate /= window.localStorage.brakes
 			yRate += (up * window.localStorage.agility) * ( Date.now() - time ) / 100;
-			yRate *= window.localStorage.brakes
+			yRate /= window.localStorage.brakes
 			xnorm += ( xRate / zoom ) * ( Date.now() - time)  / 10;
 			ynorm += ( yRate / zoom ) * ( Date.now() - time ) / 10;
 			multiplier = -0.5 - Math.log2(((((xnorm - portalX)*zoom)/1600)**2 + ((ynorm-portalY)*zoom/1200)**2)**0.5);
@@ -811,6 +820,9 @@ function zen() {
 }
 menu()
 
+function ascend() {
+	localStorage.setItem("ascension", window.localStorage.ascension + 1)
+}
 
 function upgradeSpeed() {
 	localStorage.setItem("speed", window.localStorage.speed * 1.1)
@@ -819,7 +831,7 @@ function upgradeAgility() {
 	localStorage.setItem("agility", window.localStorage.agility * 1.1)
 }
 function upgradeBrakes() {
-	localStorage.setItem("brakes", window.localStorage.brakes - 0.01)
+	localStorage.setItem("brakes", window.localStorage.brakes * 1.1)
 }
 function upgradeXpGain() {
 	localStorage.setItem("xpGain", window.localStorage.xpGain * 1.1)
