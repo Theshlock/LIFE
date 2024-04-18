@@ -7,7 +7,7 @@
 if (typeof window.localStorage.xp == 'undefined') {localStorage.setItem("xp", 0);}
 if (typeof window.localStorage.highscore == 'undefined') {localStorage.setItem("highscore", 0);}
 if (typeof window.localStorage.speed == 'undefined') {localStorage.setItem("speed", 1);}
-if (typeof window.localStorage.agility == 'undefined') {localStorage.setItem("agility", 1);}
+if (typeof window.localStorage.control == 'undefined') {localStorage.setItem("control", 1);}
 if (typeof window.localStorage.brakes == 'undefined') {localStorage.setItem("brakes", 1);}
 if (typeof window.localStorage.xpGain == 'undefined') {localStorage.setItem("xpGain", 1);}
 if (typeof window.localStorage.upgradePoints == 'undefined') {localStorage.setItem("upgradePoints", 0);}
@@ -826,20 +826,20 @@ menu()
 function ascend() {
 	localStorage.setItem("ascension", Number(window.localStorage.ascension) + 1)
 	localStorage.setItem("speed", 1)
-	localStorage.setItem("agility", 1)
+	localStorage.setItem("control", 1)
 	localStorage.setItem("brakes", 1)
 	localStorage.setItem("xpGain", 1)
 }
 
 function upgradeSpeed() {
-	localStorage.setItem("speed", window.localStorage.speed * 1.1)
+	localStorage.setItem("speed", Number(window.localStorage.speed) + 0.1)
 }
-function upgradeAgility() {
-	localStorage.setItem("agility", window.localStorage.agility * 1.1)
+function upgradeControl() {
+	localStorage.setItem("control", Number(window.localStorage.control) + 0.1)
 }
 function upgradeBrakes() {
-	localStorage.setItem("brakes", window.localStorage.brakes * 1.1)
+	localStorage.setItem("brakes", Number(window.localStorage.brakes) + 0.1)
 }
 function upgradeXpGain() {
-	localStorage.setItem("xpGain", window.localStorage.xpGain * 1.1)
+	localStorage.setItem("xpGain", Number(window.localStorage.xpGain) + 0.1)
 }
