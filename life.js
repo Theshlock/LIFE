@@ -668,6 +668,7 @@ function gameloop() {
 		startRender(1,1);
 
 		contextM.fillText("Ascension " + window.localStorage.ascension,20,120);
+
 		contextM.fillText("Speed",20,240);
 		contextM.fillRect(20,240,window.localStorage.speed*100 - 100,10)
 
@@ -675,7 +676,7 @@ function gameloop() {
 		contextM.fillRect(20,300,window.localStorage.control*100 - 100,10)
 
 		contextM.fillText("Brakes",20,360);
-		contextM.fillRect(20,360,window.localStorage.brakes*100 - 100,10)
+		contextM.fillRect(20,360,window.localStorage.brakes*1000 - 1000,10)
 
 		contextM.fillText("Xp Gain",20,420);
 		contextM.fillRect(20,420,window.localStorage.xpGain*100 - 100,10)
@@ -838,7 +839,7 @@ function upgradeControl() {
 	localStorage.setItem("control", Number(window.localStorage.control) + 0.1)
 }
 function upgradeBrakes() {
-	localStorage.setItem("brakes", Number(window.localStorage.brakes) + 0.1)
+	localStorage.setItem("brakes", Number(window.localStorage.brakes) + 0.01)
 }
 function upgradeXpGain() {
 	localStorage.setItem("xpGain", Number(window.localStorage.xpGain) + 0.1)
