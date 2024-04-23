@@ -569,7 +569,7 @@ function gameloop() {
 		contextM.fillText("Ascension " + window.localStorage.ascension,20,120);
 
 		contextM.fillText("Speed",20,240);
-		contextM.fillRect(20,240,window.localStorage.speed*1000 - 1000,10)
+		contextM.fillRect(20,240,window.localStorage.speed*1000,10)
 
 		contextM.fillText("Control",20,300);
 		contextM.fillRect(20,300,window.localStorage.control*100 - 100,10)
@@ -627,7 +627,7 @@ function gameloop() {
 				xnorm += ( xRate / zoom ) * ( Date.now() - time)  / 10;
 				ynorm += ( yRate / zoom ) * ( Date.now() - time ) / 10;
 				multiplier = -0.5 - Math.log2(((((xnorm - portalX)*zoom)/1600)**2 + ((ynorm-portalY)*zoom/1200)**2)**0.5);
-				zoom *= (1 + 0.01 * multiplier) * window.localStorage.speed;
+				zoom *= (1 + 0.01 * multiplier) + window.localStorage.speed;
 				contextM.fillText(Date.now()-startTime,100,550);
 				contextM.fillText("△: " + Math.round(multiplier*1000)/1000 ,360,550);
 				contextM.fillText(level + "/7",620,550);
@@ -725,7 +725,7 @@ menu()
 
 function ascend() {
 	localStorage.setItem("ascension", Number(window.localStorage.ascension) + 1)
-	localStorage.setItem("speed", 1)
+	localStorage.setItem("speed", 0)
 	localStorage.setItem("control", 1)
 	localStorage.setItem("brakes", 1)
 	localStorage.setItem("xpGain", 1)
