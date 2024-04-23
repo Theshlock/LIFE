@@ -133,8 +133,100 @@ function changePalette()
 	var g;
 	var b;
 	currentRotation = 0;
-	switch( currentPalette ) {
-	case 7: // Purple/Orange/Aqua/Green on black
+	if ( currentPalette % 12 == 0 ) {
+		for( i=0; i<255; i++ ) {
+			if( i < 85 ) {
+				r = 0 + i*3; g = 255 - i*3; b = 255;
+			} else if( i < 170 ) {
+				r = 255; g = 0 + (i-85)*3; b = 255 - (i-85)*3;
+			} else {
+				r = 255 - (i-170)*3; g = 255; b = 0 + (i-170)*3;
+			}
+			colours[i] = (r<<24) + (g<<16) + (b<<8);
+		}
+	} else if ( currentPalette % 12 == 1 ) {
+		for( i=0; i<255; i++ ) {
+			if( i < 32 ) {
+				r = 0; g = 0; b = i*4;
+			} else if( i < 64 ) {
+				r = (i-32)*8; g = (i-32)*8; b = 127+(i-32)*4;
+			} else if( i < 96 ){
+				r = 255-(i-64)*8; g = 255-(i-64)*8; b = 255-(i-64)*4;
+			} else if( i < 128 ){
+				r = 0; g = 0; b = 127-(i-96)*4;
+			} else if( i < 192 ) {
+				r = 0; g = 0; b = (i-128);
+			} else  {
+				r = 0; g = 0; b = 63 - (i-192);
+			}
+			colours[i] = (r<<24) + (g<<16) + (b<<8);
+		}
+	} else if ( currentPalette % 12 == 2 ) {
+		for( i=0; i<255; i++ ) {
+			if( i < 64 ) {
+				r = i*4; g = 0; b = 0;
+			} else if( i < 128 ) {
+				r = 255; g = (i-64)*2; b = 0;
+			} else if( i < 192 ){
+				r = 255; g = 128-((i-128)*2); b = 0;
+			} else {
+				r = 255-(i-192)*4; g = 0; b = 0;
+			}
+			colours[i] = (r<<24) + (g<<16) + (b<<8);
+		}
+	} else if ( currentPalette % 12 == 3 ) {
+		for( i=0; i<255; i++ ) {
+			if( i < 32 ) {
+				r = 54 + Math.floor((i)*(224-54)/32); g = 11 + Math.floor((i)*(115-11)/32); b = 2 + Math.floor((i)*(10-2)/32);
+			}
+			else if( i < 64 ) {
+				r = 224 + Math.floor((i-32)*(255-224)/32); g = 115 + Math.floor((i-32)*(192-115)/32); b = 10 + Math.floor((i-32)*(49-10)/32);
+			}
+			else if( i < 192 ) {
+				r = 255; g = 192 + Math.floor((i-64)*(255-192)/128); b = 49 + Math.floor((i-64)*(166-49)/128);
+			}
+			else if( i < 224 ) {
+				r = 255; g = 255 + Math.floor((i-192)*(192-255)/32); b = 166 + Math.floor((i-192)*(49-166)/32);
+			}
+			else {
+				r = 255 + Math.floor((i-224)*(54-255)/32); g = 192 + Math.floor((i-224)*(11-192)/32); b = 49 + Math.floor((i-224)*(2-49)/32);
+			}
+			colours[i] = (r<<24) + (g<<16) + (b<<8);
+		}
+	} else if ( currentPalette % 12 == 4 ) {
+		for( i=0; i<255; i++ ) {
+			if( i < 85 ) {
+				r = 255 - i*3; g = 0 + i*3; b = 0;
+			} else if( i < 170 ) {
+				r = 0; g = 255 - (i-85)*3; b = 0 + (i-85)*3;
+			} else {
+				r = 0 + (i-170)*3; g = 0; b = 255 - (i-170)*3;
+			}
+			colours[i] = (r<<24) + (g<<16) + (b<<8);
+		}
+	} else if ( currentPalette % 12 == 5 ) {
+		for( i=0; i<255; i++ ) {
+			if( i < 85 ) {
+				r = 255 - i*3/2; g = 127 - i*3/2; b = 0 + i * 3;
+			} else if( i < 170 ) {
+				r = 127 - (i-85)*3/2; g = 0 + (i-85)*3; b = 255 - (i-85)*3/2;
+			} else {
+				r = 0 + (i-170)*3; g = 255 - (i-170)*3/2; b = 127 - (i-170)*3/2;
+			}
+			colours[i] = (r<<24) + (g<<16) + (b<<8);
+		}
+	} else if ( currentPalette % 12 == 6 ) {
+		for( i=0; i<255; i++ ) {
+			if( i < 85 ) {
+				r = 255 - i*3; g = 0 + i*3/2; b = 127 + i * 3/2;
+			} else if( i < 170 ) {
+				r = 0 + (i-85)*3/2; g = 127 + (i-85)*3/2; b = 255 - (i-85)*3;
+			} else {
+				r = 127 + (i-170)*3/2; g = 255 - (i-170)*3; b = 0 + (i-170)*3/2;
+			}
+			colours[i] = (r<<24) + (g<<16) + (b<<8);
+		}
+	} else if ( currentPalette % 12 == 7 ) {
 		for( i=0; i<255; i++ ) {
 			if( i < 32 ) {
 				r = i*4; g = 0; b = i*8;
@@ -155,108 +247,7 @@ function changePalette()
 			}
 			colours[i] = (r<<24) + (g<<16) + (b<<8);
 		}
-		break;
-	case 1: // Electric blue
-		for( i=0; i<255; i++ ) {
-			if( i < 32 ) {
-				r = 0; g = 0; b = i*4;
-			} else if( i < 64 ) {
-				r = (i-32)*8; g = (i-32)*8; b = 127+(i-32)*4;
-			} else if( i < 96 ){
-				r = 255-(i-64)*8; g = 255-(i-64)*8; b = 255-(i-64)*4;
-			} else if( i < 128 ){
-				r = 0; g = 0; b = 127-(i-96)*4;
-			} else if( i < 192 ) {
-				r = 0; g = 0; b = (i-128);
-			} else  {
-				r = 0; g = 0; b = 63 - (i-192);
-			}
-			colours[i] = (r<<24) + (g<<16) + (b<<8);
-		}
-		break;
-	case 2: // Fire
-		for( i=0; i<255; i++ ) {
-			if( i < 64 ) {
-				r = i*4; g = 0; b = 0;
-			} else if( i < 128 ) {
-				r = 255; g = (i-64)*2; b = 0;
-			} else if( i < 192 ){
-				r = 255; g = 128-((i-128)*2); b = 0;
-			} else {
-				r = 255-(i-192)*4; g = 0; b = 0;
-			}
-			colours[i] = (r<<24) + (g<<16) + (b<<8);
-		}
-		break;
-	case 3: // Gold
-		for( i=0; i<255; i++ ) {
-			if( i < 32 ) {
-				r = 54 + Math.floor((i)*(224-54)/32); g = 11 + Math.floor((i)*(115-11)/32); b = 2 + Math.floor((i)*(10-2)/32);
-			}
-			else if( i < 64 ) {
-				r = 224 + Math.floor((i-32)*(255-224)/32); g = 115 + Math.floor((i-32)*(192-115)/32); b = 10 + Math.floor((i-32)*(49-10)/32);
-			}
-			else if( i < 192 ) {
-				r = 255; g = 192 + Math.floor((i-64)*(255-192)/128); b = 49 + Math.floor((i-64)*(166-49)/128);
-			}
-			else if( i < 224 ) {
-				r = 255; g = 255 + Math.floor((i-192)*(192-255)/32); b = 166 + Math.floor((i-192)*(49-166)/32);
-			}
-			else {
-				r = 255 + Math.floor((i-224)*(54-255)/32); g = 192 + Math.floor((i-224)*(11-192)/32); b = 49 + Math.floor((i-224)*(2-49)/32);
-			}
-			colours[i] = (r<<24) + (g<<16) + (b<<8);
-		}
-		break;
-	case 4: // Primary colours (R,G,B)
-		for( i=0; i<255; i++ ) {
-			if( i < 85 ) {
-				r = 255 - i*3; g = 0 + i*3; b = 0;
-			} else if( i < 170 ) {
-				r = 0; g = 255 - (i-85)*3; b = 0 + (i-85)*3;
-			} else {
-				r = 0 + (i-170)*3; g = 0; b = 255 - (i-170)*3;
-			}
-			colours[i] = (r<<24) + (g<<16) + (b<<8);
-		}
-		break;
-	case 5: // Tertiary colours 1 (Orange, Violet, Spring Green)
-		for( i=0; i<255; i++ ) {
-			if( i < 85 ) {
-				r = 255 - i*3/2; g = 127 - i*3/2; b = 0 + i * 3;
-			} else if( i < 170 ) {
-				r = 127 - (i-85)*3/2; g = 0 + (i-85)*3; b = 255 - (i-85)*3/2;
-			} else {
-				r = 0 + (i-170)*3; g = 255 - (i-170)*3/2; b = 127 - (i-170)*3/2;
-			}
-			colours[i] = (r<<24) + (g<<16) + (b<<8);
-		}
-		break;
-	case 6: // Tertiary colours 2 (Rose, Azure, Chartreuse)
-		for( i=0; i<255; i++ ) {
-			if( i < 85 ) {
-				r = 255 - i*3; g = 0 + i*3/2; b = 127 + i * 3/2;
-			} else if( i < 170 ) {
-				r = 0 + (i-85)*3/2; g = 127 + (i-85)*3/2; b = 255 - (i-85)*3;
-			} else {
-				r = 127 + (i-170)*3/2; g = 255 - (i-170)*3; b = 0 + (i-170)*3/2;
-			}
-			colours[i] = (r<<24) + (g<<16) + (b<<8);
-		}
-		break;
-	case 0: // Secondary colours (C,M,Y)
-		for( i=0; i<255; i++ ) {
-			if( i < 85 ) {
-				r = 0 + i*3; g = 255 - i*3; b = 255;
-			} else if( i < 170 ) {
-				r = 255; g = 0 + (i-85)*3; b = 255 - (i-85)*3;
-			} else {
-				r = 255 - (i-170)*3; g = 255; b = 0 + (i-170)*3;
-			}
-			colours[i] = (r<<24) + (g<<16) + (b<<8);
-		}
-		break;
-	case 8: // Original DarkBlue-Yellow-Rose-Green
+	} else if ( currentPalette % 12 == 8 ) {
 		for( i=0; i<255; i++ ) {
 			if( i < 32 ) {
 				r = i*8; g = i*8; b = 127-i*4;
@@ -269,8 +260,7 @@ function changePalette()
 			}
 			colours[i] = (r<<24) + (g<<16) + (b<<8);
 		}
-		break;
-	case 9: // CGA 2
+	} else if ( currentPalette % 12 == 9 ) {
 		for( i=0; i<255; i++ ) {
 			if( i % 4 == 0 )
 				colours[i] = 0;
@@ -281,8 +271,7 @@ function changePalette()
 			else if( i % 4 == 3 )
 				colours[i] = 4294923520;
 		}
-		break;
-	case 10: // Stripes
+	} else if ( currentPalette % 12 == 10 ) {
 		for( i=0; i<255; i++ ) {
 			if( i % 4 == 0 ) {
 				r = 100; g = 20; b = 200;
@@ -298,12 +287,10 @@ function changePalette()
 			}
 			colours[i] = (r<<24) + (g<<16) + (b<<8);
 		}
-		break;
-	case 11: // Classic VGA
+	} else if ( currentPalette % 12 == 11 ) {
 		for( i=0; i<255; i++ ) {
 			colours[i] = vga[i % 256];
 		}
-		break;
 	}
 	startRender( 0,0 );
 }
