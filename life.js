@@ -641,7 +641,7 @@ function gameloop() {
 	} else if (gamestate == "zen") {
 		if (zoom > portalDepth ) {
 			bonus += Math.round(multiplier*1000)/1000
-			localStorage.setItem("xp", window.localStorage.xp+bonus)
+			localStorage.setItem("xp", Number(window.localStorage.xp)+bonus)
 			zoom = 10;
 			xy = chooseCoord()
 			portalX = xy[0]
@@ -666,7 +666,7 @@ function gameloop() {
 			contextM.fillText("△: " + Math.round(multiplier*1000)/1000 ,360,550);
 			contextM.fillText(level,620,550);
 			contextM.fillText("+" + Math.round(bonus*1000)/1000,100,500);
-			zoom *= window.localStorage.speed * multiplier;
+			zoom *= (1 + 0.01 * multiplier) + window.localStorage.speed;
 			time = Date.now();
 			screenX = Math.round(-xnorm * zoom + canvasWidth/2);
 			screenY = Math.round(-ynorm * zoom + canvasHeight/2);
