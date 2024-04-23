@@ -569,7 +569,7 @@ function gameloop() {
 		contextM.fillText("Ascension " + window.localStorage.ascension,20,120);
 
 		contextM.fillText("Speed",20,240);
-		contextM.fillRect(20,240,window.localStorage.speed*100 - 100,10)
+		contextM.fillRect(20,240,window.localStorage.speed*1000 - 1000,10)
 
 		contextM.fillText("Control",20,300);
 		contextM.fillRect(20,300,window.localStorage.control*100 - 100,10)
@@ -732,7 +732,7 @@ function ascend() {
 }
 
 function upgradeSpeed() {
-	localStorage.setItem("speed", Number(window.localStorage.speed) + 0.1)
+	localStorage.setItem("speed", Number(window.localStorage.speed) + 0.01)
 }
 function upgradeControl() {
 	localStorage.setItem("control", Number(window.localStorage.control) + 0.1)
