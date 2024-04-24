@@ -5,7 +5,7 @@
    Modification and distribution permitted under terms of the Affero GPL version 3
 */
 if (typeof window.localStorage.xp == 'undefined') {localStorage.setItem("xp", 0);}
-if (typeof window.localStorage.highscore == 'undefined') {localStorage.setItem("highscore", 0);}
+if (typeof window.localStorage.bestTime == 'undefined') {localStorage.setItem("bestTime", 300000);}
 if (typeof window.localStorage.speed == 'undefined') {localStorage.setItem("speed", 1);}
 if (typeof window.localStorage.control == 'undefined') {localStorage.setItem("control", 1);}
 if (typeof window.localStorage.brakes == 'undefined') {localStorage.setItem("brakes", 1);}
@@ -593,29 +593,24 @@ function gameloop() {
 		}
 	} else if (gamestate == "time attack") {
 		if (level == 8) {
-			time = Date.now()-startTime+bonus;
+			finalGameTime = Date.now()-startTime;
 			contextM.fillText("You win",300,200);
-			contextM.fillText("final score: " + finalScore ,300,260);
-			localStorage.setItem("xp", Number(window.localStorage.xp) + finalScore);
-			if (Number(window.localStorage.highscore) < finalScore) {
-				localStorage.setItem("highscore", finalScore);
-				contextM.fillText("new high score!",500,150);
+			contextM.fillText("final time: " + finalGameTime ,300,260);
+			localStorage.setItem("xp", Number(window.localStorage.xp) + bonus);
+			if (Number(window.localStorage.bestTime) > finalGameTime) {
+				localStorage.setItem("bestTime", finalGameTime);
+				contextM.fillText("new best time!",500,150);
 			}
-			contextM.fillText("high score: " + window.localStorage.highscore ,300,320);
-			console.log("you win!");
+			contextM.fillText("best time: " + window.localStorage.bestTime ,300,320);
 		} else {
 			if (zoom > portalDepth ) {
-				bonus += Math.round(multiplier*1000)/1000
-				localStorage.setItem("xp", window.localStorage.xp+bonus)
-				contextM.fillText("+" + Math.round(multiplier*1000)/1000,500,500);
+				bonus = Math.round(multiplier*1000)/1000
+				localStorage.setItem("xp", Number(window.localStorage.xp)+bonus)
 				level++;
 				zoom = 10;
 				portalX = portalLocations[2*level];
 				portalY = portalLocations[2*level + 1];
-				xnorm = 0;
-				ynorm = 0;
-				xRate = 0;
-				yRate = 0;
+				xnorm = 0; ynorm = 0; xRate = 0; yRate = 0;
 				currentPalette++;
 				changePalette();
 			} else {
@@ -627,7 +622,7 @@ function gameloop() {
 				xnorm += ( xRate / zoom ) * ( Date.now() - time)  / 10;
 				ynorm += ( yRate / zoom ) * ( Date.now() - time ) / 10;
 				multiplier = -0.5 - Math.log2(((((xnorm - portalX)*zoom)/1600)**2 + ((ynorm-portalY)*zoom/1200)**2)**0.5);
-				zoom *= (1 + 0.01 * multiplier) + window.localStorage.speed;
+				zoom *= (1 + 0.01 * multiplier) * window.localStorage.speed;
 				contextM.fillText(Date.now()-startTime,100,550);
 				contextM.fillText("△: " + Math.round(multiplier*1000)/1000 ,360,550);
 				contextM.fillText(level + "/7",620,550);
@@ -640,17 +635,14 @@ function gameloop() {
 		}
 	} else if (gamestate == "zen") {
 		if (zoom > portalDepth ) {
-			bonus += Math.round(multiplier*1000)/1000
+			bonus = Math.round(multiplier*1000)/1000
 			localStorage.setItem("xp", Number(window.localStorage.xp)+bonus)
+			level += 1;
 			zoom = 10;
+			xnorm = 0; ynorm = 0; xRate = 0; yRate = 0;
 			xy = chooseCoord()
 			portalX = xy[0]
 			portalY = xy[1]
-			xnorm = 0;
-			ynorm = 0;
-			xRate = 0;
-			yRate = 0;
-			level += 1;
 			currentPalette++;
 			changePalette();
 		} else {
@@ -662,7 +654,7 @@ function gameloop() {
 			xnorm += ( xRate / zoom ) * ( Date.now() - time)  / 10;
 			ynorm += ( yRate / zoom ) * ( Date.now() - time ) / 10;
 			multiplier = -0.5 - Math.log2(((((xnorm - portalX)*zoom)/1600)**2 + ((ynorm-portalY)*zoom/1200)**2)**0.5);
-			zoom *= (1 + 0.01 * multiplier) + window.localStorage.speed;
+			zoom *= (1 + 0.01 * multiplier) * window.localStorage.speed;
 			contextM.fillText(Date.now()-startTime,100,550);
 			contextM.fillText("△: " + Math.round(multiplier*1000)/1000 ,360,550);
 			contextM.fillText(level,620,550);
@@ -699,6 +691,7 @@ function menu() {
 	contextM.fillStyle = 'green';
 	window.requestAnimationFrame(gameloop);
 }
+menu()
 function timeAttack() {
 	gamestate = "time attack";
 	document.getElementById("menu").style.display = "flex";
@@ -719,9 +712,7 @@ function zen() {
 	console.log(xy)
 	portalX = xy[0]
 	portalY = xy[1]
-
 }
-menu()
 
 function ascend() {
 	localStorage.setItem("ascension", Number(window.localStorage.ascension) + 1)
