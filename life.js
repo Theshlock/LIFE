@@ -569,7 +569,7 @@ function gameloop() {
 		contextM.fillText("Ascension " + window.localStorage.ascension,20,120);
 
 		contextM.fillText("Speed",20,240);
-		contextM.fillRect(20,240,window.localStorage.speed*1000,10)
+		contextM.fillRect(20,240,window.localStorage.speed*1000-1000,10)
 
 		contextM.fillText("Control",20,300);
 		contextM.fillRect(20,300,window.localStorage.control*100 - 100,10)
@@ -712,7 +712,7 @@ function zen() {
 
 function ascend() {
 	localStorage.setItem("ascension", Number(window.localStorage.ascension) + 1)
-	localStorage.setItem("speed", 0)
+	localStorage.setItem("speed", 1)
 	localStorage.setItem("control", 1)
 	localStorage.setItem("brakes", 1)
 	localStorage.setItem("xpGain", 1)
