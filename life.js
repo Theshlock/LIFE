@@ -614,8 +614,10 @@ function gameloop() {
 			changePalette();
 		} else {
 			contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ) - (20 + zoom/portalDepth*1000) / 2, (((portalY-ynorm) * zoom + 600) / 2 ) - (20 + zoom/portalDepth*1000) / 2, 20 + zoom/portalDepth*1000, 20 + zoom/portalDepth*1000 );
-			xRate += ((right * window.localStorage.control) * ( Date.now() - time ) / 100) / window.localStorage.brakes;
-			yRate += ((up * window.localStorage.control) * ( Date.now() - time ) / 100) / window.localStorage.brakes;
+			xRate += (right * window.localStorage.control) * ( Date.now() - time ) / 100;
+			xRate /= window.localStorage.brakes
+			yRate += (up * window.localStorage.control) * ( Date.now() - time ) / 100;
+			yRate /= window.localStorage.brakes
 			xnorm += ( xRate / zoom ) * ( Date.now() - time)  / 10;
 			ynorm += ( yRate / zoom ) * ( Date.now() - time ) / 10;
 			multiplier = -0.5 - Math.log2(((((xnorm - portalX)*zoom)/1600)**2 + ((ynorm-portalY)*zoom/1200)**2)**0.5);
