@@ -792,3 +792,7 @@ function downgrade(x) {
 function cycleSkins() {
 	console.log("this function is under construction")
 }
+
+function help() {
+	console.log("this function is under construction")
+}
