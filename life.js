@@ -678,7 +678,22 @@ function menu() {
 	document.getElementById("menu").style.display = "none";
 	document.getElementById("time attack").style.display = "flex";
 	document.getElementById("zen").style.display = "flex";
+	menuConditionals()
+	level = 1;
+	bonus = 0;
+	score = 0;
+	xRate = 0;
+	yRate - 0;
+	xnorm = -0.5615337270936567;
+	ynorm = -0.641923504258619;
+	zoom = 10;
+	animationXp = 0
+	winScreenRendered = 0
+	contextM.fillStyle = 'green';
+	window.requestAnimationFrame(gameloop);
+}
 
+function menuConditionals() {
 	// Show upgrade menu if conditions level+ascension is greater than number of upgrades already redeemed
 	if (window.localStorage.ascension + Math.floor(xpToLevel(window.localStorage.xp)) - window.localStorage.totalUpgrades > 0)
 		{document.getElementById("upgrade menu").style.display = "flex"}
@@ -697,24 +712,10 @@ function menu() {
 	else
 		{document.getElementById("ascend").style.display = "flex"}
 		
-	
 	// ascension
-
 	if (window.localStorage.ascension + Math.floor(xpToLevel(window.localStorage.xp)) > window.localStorage.totalUpgrades) {
 		document.getElementById("upgrade menu").style.display = "flex"
 	}
-	level = 1;
-	bonus = 0;
-	score = 0;
-	xRate = 0;
-	yRate - 0;
-	xnorm = -0.5615337270936567;
-	ynorm = -0.641923504258619;
-	zoom = 10;
-	animationXp = 0
-	winScreenRendered = 0
-	contextM.fillStyle = 'green';
-	window.requestAnimationFrame(gameloop);
 }
 menu()
 function timeAttack() {
@@ -769,8 +770,8 @@ function upgrade(x) {
 	if (x == "xpGain") {
 		localStorage.setItem("xpGain", Number(window.localStorage.xpGain) + 0.1)
 	}
-
 	localStorage.setItem("totalUpgrades", Number(window.localStorage.totalUpgrades) + 1)
+	menuConditionals()
 }
 
 function downgrade(x) {
@@ -787,6 +788,7 @@ function downgrade(x) {
 		localStorage.setItem("xpGain", Number(window.localStorage.xpGain) - 0.1)
 	}
 	localStorage.setItem("totalUpgrades", Number(window.localStorage.totalUpgrades) - 1)
+	menuConditionals()
 }
 
 function cycleSkins() {
