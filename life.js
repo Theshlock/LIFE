@@ -788,3 +788,7 @@ function downgrade(x) {
 	}
 	localStorage.setItem("totalUpgrades", Number(window.localStorage.totalUpgrades) - 1)
 }
+
+function cycleSkins() {
+	console.log("this function is under construction")
+}
