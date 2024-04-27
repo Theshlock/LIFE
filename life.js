@@ -6,16 +6,16 @@
 */
 if (typeof window.localStorage.xp == 'undefined') {localStorage.setItem("xp", 0);}
 if (typeof window.localStorage.bestTime == 'undefined') {localStorage.setItem("bestTime", 300000);}
-if (typeof window.localStorage.speed == 'undefined') {localStorage.setItem("speed", 1);}
-if (typeof window.localStorage.control == 'undefined') {localStorage.setItem("control", 1);}
-if (typeof window.localStorage.brakes == 'undefined') {localStorage.setItem("brakes", 1);}
-if (typeof window.localStorage.xpGain == 'undefined') {localStorage.setItem("xpGain", 1);}
-if (typeof window.localStorage.totalUpgrades == 'undefined') {localStorage.setItem("totalUpgrades", 0);}
+if (typeof window.localStorage.speedUpgrades == 'undefined') {localStorage.setItem("speed", 0);}
+if (typeof window.localStorage.controlUpgrades == 'undefined') {localStorage.setItem("control", 0);}
+if (typeof window.localStorage.brakeUpgrades == 'undefined') {localStorage.setItem("brakes", 0);}
+if (typeof window.localStorage.xpGainUpgrades == 'undefined') {localStorage.setItem("xpGain", 0);}
 if (typeof window.localStorage.ascension == 'undefined') {localStorage.setItem("ascension", 0);}
 
 var level = 1;
 function xpToLevel (xp) {return xp**0.2}
 function levelToXp (level) {return level**5}
+function totalUpgrades() {return window.localStorage.speedUpgrades + window.localStorage.controlUpgrades + window.localStorage.brakeUpgrades + window.localStorage.xpGainUpgrades}
 var portalLocations = [-1.999985881126867,0,-1.76877851023801,-0.00173889944794,-0.7428106660801,-0.126444300101,-0.77659226405,-0.136651039998,-0.17589070597346151,1.0866248318613803,-1.7442271377036995,-0.00004589744356394797,0.3855769028905207,0.1771223560991527,-0.5615337270936567,-0.641923504258619];
 var portalX = portalLocations[0];
 var portalY = portalLocations[1];
@@ -557,10 +557,6 @@ document.ontouchend = function(e) {
 //State
 function gameloop() {
 	if (gamestate == "menu") {
-		if (window.localStorage.xp == 0) {
-			contextM.fillText("Seek the portal",20,20);
-		}
-
 		zoom *= 1.02;
 		screenX = Math.round(-xnorm * zoom + canvasWidth/2);
 		screenY = Math.round(-ynorm * zoom + canvasHeight/2);
@@ -571,16 +567,18 @@ function gameloop() {
 
 
 		contextM.fillText("Speed",20,240);
-		contextM.fillRect(20,240,window.localStorage.speed*1000-1000,10)
+		for (i = 0 ; i++ ;i < window.localStorage.speedUpgrades) {
+			contextM.fillRect(20 + ( i * 25 ),240,20,10)
+		}
 
 		contextM.fillText("Control",20,300);
-		contextM.fillRect(20,300,window.localStorage.control*100 - 100,10)
+		contextM.fillRect(20,300,window.localStorage.control*100,10)
 
 		contextM.fillText("Brakes",20,360);
-		contextM.fillRect(20,360,window.localStorage.brakes*1000 - 1000,10)
+		contextM.fillRect(20,360,window.localStorage.brakes*1000,10)
 
 		contextM.fillText("Xp Gain",20,420);
-		contextM.fillRect(20,420,window.localStorage.xpGain*100 - 100,10)
+		contextM.fillRect(20,420,window.localStorage.xpGain*100,10)
 
 		contextM.fillText(Math.floor(xpToLevel(animationXp)),20,560);
 		contextM.fillText(Math.floor(xpToLevel(animationXp)+1),740,560);
