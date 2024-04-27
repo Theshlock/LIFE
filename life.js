@@ -10,7 +10,7 @@ if (typeof window.localStorage.speed == 'undefined') {localStorage.setItem("spee
 if (typeof window.localStorage.control == 'undefined') {localStorage.setItem("control", 1);}
 if (typeof window.localStorage.brakes == 'undefined') {localStorage.setItem("brakes", 1);}
 if (typeof window.localStorage.xpGain == 'undefined') {localStorage.setItem("xpGain", 1);}
-if (typeof window.localStorage.upgradePoints == 'undefined') {localStorage.setItem("upgradePoints", 0);}
+if (typeof window.localStorage.totalUpgrades == 'undefined') {localStorage.setItem("totalUpgrades", 0);}
 if (typeof window.localStorage.ascension == 'undefined') {localStorage.setItem("ascension", 0);}
 
 var level = 1;
@@ -567,6 +567,8 @@ function gameloop() {
 		startRender(1,1);
 
 		contextM.fillText("Ascension " + window.localStorage.ascension,20,120);
+		contextM.fillText("Upgrades Available " + (window.localStorage.ascension + Math.floor(xpToLevel(animationXp)) - window.localStorage.totalUpgrades),20,160);
+
 
 		contextM.fillText("Speed",20,240);
 		contextM.fillRect(20,240,window.localStorage.speed*1000-1000,10)
@@ -676,8 +678,19 @@ function menu() {
 	document.getElementById("menu").style.display = "none";
 	document.getElementById("time attack").style.display = "flex";
 	document.getElementById("zen").style.display = "flex";
-	tutorial = 0
-	if (window.localStorage.xp == "0") {tutorial = 1}
+	~~~
+	if (window.localStorage.upgradePoints + window.localStorage.ascension > 0)
+		{document.getElementById("upgrade menu").style.display = "flex"}
+	else
+		{document.getElementById("upgrade menu").style.display = "none"}
+	if (window.localStorage.level + window.localStorage.ascension - window.localStorage.upgradePoints == 0) 
+		{} // show div: "downgrade menu"
+	~~~
+	// ascension
+
+	if (window.localStorage.ascension + Math.floor(xpToLevel(window.localStorage.xp)) > window.localStorage.totalUpgrades) {
+		document.getElementById("upgrade menu").style.display = "flex"
+	}
 	level = 1;
 	bonus = 0;
 	score = 0;
@@ -697,6 +710,9 @@ function timeAttack() {
 	document.getElementById("menu").style.display = "flex";
 	document.getElementById("time attack").style.display = "none";
 	document.getElementById("zen").style.display = "none";
+	document.getElementById("upgrade menu").style.display = "none"
+	document.getElementById("downgrade menu").style.display = "none"
+
 	zoom = 10;
 	startTime = Date.now()
 }
@@ -705,8 +721,11 @@ function zen() {
 	document.getElementById("menu").style.display = "flex";
 	document.getElementById("time attack").style.display = "none";
 	document.getElementById("zen").style.display = "none";
-	startTime = Date.now()
+	document.getElementById("upgrade menu").style.display = "none"
+	document.getElementById("downgrade menu").style.display = "none"
+
 	zoom = 10;
+	startTime = Date.now()
 	console.log(chooseCoord())
 	xy = chooseCoord()
 	console.log(xy)
@@ -715,35 +734,45 @@ function zen() {
 }
 
 function ascend() {
-	localStorage.setItem("ascension", Number(window.localStorage.ascension) + 1)
+	localStorage.setItem("totalUpgrades", 0)
+	localStorage.setItem("ascension", Math.floor(xpToLevel(window.localStorage.xp)))
 	localStorage.setItem("speed", 1)
 	localStorage.setItem("control", 1)
 	localStorage.setItem("brakes", 1)
 	localStorage.setItem("xpGain", 1)
 }
 
-function upgradeSpeed() {
-	localStorage.setItem("speed", Number(window.localStorage.speed) + 0.01)
-}
-function upgradeControl() {
-	localStorage.setItem("control", Number(window.localStorage.control) + 0.1)
-}
-function upgradeBrakes() {
-	localStorage.setItem("brakes", Number(window.localStorage.brakes) + 0.01)
-}
-function upgradeXpGain() {
-	localStorage.setItem("xpGain", Number(window.localStorage.xpGain) + 0.1)
+
+function upgrade(x) {
+	if (x == "speed") {
+		localStorage.setItem("speed", Number(window.localStorage.speed) + 0.01)
+	}
+	if (x == "control") {
+		localStorage.setItem("control", Number(window.localStorage.control) + 0.1)
+	}
+	if (x == "brakes") {
+		localStorage.setItem("brakes", Number(window.localStorage.brakes) + 0.01)
+	}
+	if (x == "xpGain") {
+		localStorage.setItem("xpGain", Number(window.localStorage.xpGain) + 0.1)
+	}
+
+	localStorage.setItem("totalUpgrades", Number(window.localStorage.totalUpgrades) + 1)
+	menu()
 }
 
-function downgradeSpeed() {
-	localStorage.setItem("speed", Number(window.localStorage.speed) - 0.01)
-}
-function downgradeControl() {
-	localStorage.setItem("control", Number(window.localStorage.control) - 0.1)
-}
-function downgradeBrakes() {
-	localStorage.setItem("brakes", Number(window.localStorage.brakes) - 0.01)
-}
-function downgradeXpGain() {
-	localStorage.setItem("xpGain", Number(window.localStorage.xpGain) - 0.1)
+function downgrade(x) {
+	if (x == "speed") {
+		localStorage.setItem("speed", Number(window.localStorage.speed) - 0.01)
+	}
+	if (x == "control") {
+		localStorage.setItem("control", Number(window.localStorage.control) - 0.1)
+	}
+	if (x == "brakes") {
+		localStorage.setItem("brakes", Number(window.localStorage.brakes) - 0.01)
+	}
+	if (x == "xpGain") {
+		localStorage.setItem("xpGain", Number(window.localStorage.xpGain) - 0.1)
+	}
+	// show div: upgrade menu
 }
