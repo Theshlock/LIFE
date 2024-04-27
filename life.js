@@ -734,3 +734,16 @@ function upgradeBrakes() {
 function upgradeXpGain() {
 	localStorage.setItem("xpGain", Number(window.localStorage.xpGain) + 0.1)
 }
+
+function downgradeSpeed() {
+	localStorage.setItem("speed", Number(window.localStorage.speed) - 0.01)
+}
+function downgradeControl() {
+	localStorage.setItem("control", Number(window.localStorage.control) - 0.1)
+}
+function downgradeBrakes() {
+	localStorage.setItem("brakes", Number(window.localStorage.brakes) - 0.01)
+}
+function downgradeXpGain() {
+	localStorage.setItem("xpGain", Number(window.localStorage.xpGain) - 0.1)
+}
