@@ -771,7 +771,6 @@ function upgrade(x) {
 	}
 
 	localStorage.setItem("totalUpgrades", Number(window.localStorage.totalUpgrades) + 1)
-	menu()
 }
 
 function downgrade(x) {
@@ -788,5 +787,4 @@ function downgrade(x) {
 		localStorage.setItem("xpGain", Number(window.localStorage.xpGain) - 0.1)
 	}
 	localStorage.setItem("totalUpgrades", Number(window.localStorage.totalUpgrades) - 1)
-	menu()
 }
