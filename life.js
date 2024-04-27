@@ -710,7 +710,7 @@ function menuConditionals() {
 	if (Math.floor(xpToLevel(window.localStorage.xp)) > window.localStorage.ascension) 
 		{document.getElementById("ascend").style.display = "flex"}
 	else
-		{document.getElementById("ascend").style.display = "flex"}
+		{document.getElementById("ascend").style.display = "none"}
 		
 	// ascension
 	if (window.localStorage.ascension + Math.floor(xpToLevel(window.localStorage.xp)) > window.localStorage.totalUpgrades) {
