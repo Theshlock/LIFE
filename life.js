@@ -614,12 +614,12 @@ function gameloop() {
 			changePalette();
 		} else {
 			contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ) - (20 + zoom/portalDepth*1000) / 2, (((portalY-ynorm) * zoom + 600) / 2 ) - (20 + zoom/portalDepth*1000) / 2, 20 + zoom/portalDepth*1000, 20 + zoom/portalDepth*1000 );
-			xRate += ((right * window.localStorage.agility) * ( Date.now() - time ) / 100) / window.localStorage.brakes;
-			yRate += ((up * window.localStorage.agility) * ( Date.now() - time ) / 100) / window.localStorage.brakes;
+			xRate += ((right * window.localStorage.agility) * ( Date.now() - time ) / 100);
+			yRate += ((up * window.localStorage.agility) * ( Date.now() - time ) / 100);
 			xnorm += ( xRate / zoom ) * ( Date.now() - time)  / 10;
 			ynorm += ( yRate / zoom ) * ( Date.now() - time ) / 10;
 			multiplier = -0.5 - Math.log2(((((xnorm - portalX)*zoom)/1600)**2 + ((ynorm-portalY)*zoom/1200)**2)**0.5);
-			zoom *= (1 + 0.01);
+			zoom *= (1 + 0.01 * multiplier);
 			contextM.fillText(Date.now()-startTime,100,550);
 			contextM.fillText("△: " + Math.round(multiplier*1000)/1000 ,360,550);
 			contextM.fillText(level + "/7",620,550);
