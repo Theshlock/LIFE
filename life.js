@@ -567,7 +567,7 @@ function gameloop() {
 		startRender(1,1);
 
 		contextM.fillText("Ascension " + window.localStorage.ascension,20,120);
-		contextM.fillText("Upgrades Available " + (window.localStorage.ascension + Math.floor(xpToLevel(animationXp)) - window.localStorage.totalUpgrades),20,160);
+		contextM.fillText("Upgrades Available " + (window.localStorage.ascension + Math.floor(xpToLevel(window.localStorage.xp)) - window.localStorage.totalUpgrades),20,160);
 
 
 		contextM.fillText("Speed",20,240);
@@ -678,14 +678,26 @@ function menu() {
 	document.getElementById("menu").style.display = "none";
 	document.getElementById("time attack").style.display = "flex";
 	document.getElementById("zen").style.display = "flex";
-	~~~
-	if (window.localStorage.upgradePoints + window.localStorage.ascension > 0)
+
+	// Show upgrade menu if conditions level+ascension is greater than number of upgrades already redeemed
+	if (window.localStorage.ascension + Math.floor(xpToLevel(window.localStorage.xp)) - window.localStorage.totalUpgrades > 0)
 		{document.getElementById("upgrade menu").style.display = "flex"}
 	else
 		{document.getElementById("upgrade menu").style.display = "none"}
-	if (window.localStorage.level + window.localStorage.ascension - window.localStorage.upgradePoints == 0) 
-		{} // show div: "downgrade menu"
-	~~~
+
+	// Show downgrade menu if level+ascension is greater than 1 and upgrade points
+	if (window.localStorage.totalUpgrades != 0) 
+		{document.getElementById("downgrade menu").style.display = "flex"}
+	else
+		{document.getElementById("downgrade menu").style.display = "none"}
+
+	//show ascension button if conditions are met
+	if (Math.floor(xpToLevel(window.localStorage.xp)) > window.localStorage.ascension) 
+		{document.getElementById("ascend").style.display = "flex"}
+	else
+		{document.getElementById("ascend").style.display = "flex"}
+		
+	
 	// ascension
 
 	if (window.localStorage.ascension + Math.floor(xpToLevel(window.localStorage.xp)) > window.localStorage.totalUpgrades) {
@@ -736,6 +748,7 @@ function zen() {
 function ascend() {
 	localStorage.setItem("totalUpgrades", 0)
 	localStorage.setItem("ascension", Math.floor(xpToLevel(window.localStorage.xp)))
+	localStorage.setItem("xp", 0)
 	localStorage.setItem("speed", 1)
 	localStorage.setItem("control", 1)
 	localStorage.setItem("brakes", 1)
@@ -774,5 +787,6 @@ function downgrade(x) {
 	if (x == "xpGain") {
 		localStorage.setItem("xpGain", Number(window.localStorage.xpGain) - 0.1)
 	}
-	// show div: upgrade menu
+	localStorage.setItem("totalUpgrades", Number(window.localStorage.totalUpgrades) - 1)
+	menu()
 }
