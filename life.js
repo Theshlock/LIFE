@@ -694,24 +694,21 @@ function menu() {
 }
 
 function menuConditionals() {
-	// Show upgrade menu if conditions level+ascension is greater than number of upgrades already redeemed
 	if (window.localStorage.ascension + Math.floor(xpToLevel(window.localStorage.xp)) - window.localStorage.totalUpgrades > 0)
-		{document.getElementById("upgrade menu").style.display = "flex"}
+	{document.getElementById("upgrade menu").style.display = "flex"}
 	else
-		{document.getElementById("upgrade menu").style.display = "none"}
-
-	// Show downgrade menu if level+ascension is greater than 1 and upgrade points
+	{document.getElementById("upgrade menu").style.display = "none"}
+	
 	if (window.localStorage.totalUpgrades != 0) 
-		{document.getElementById("downgrade menu").style.display = "flex"}
+	{document.getElementById("downgrade menu").style.display = "flex"}
 	else
-		{document.getElementById("downgrade menu").style.display = "none"}
-
-	//show ascension button if conditions are met
+	{document.getElementById("downgrade menu").style.display = "none"}
+	
 	if (Math.floor(xpToLevel(window.localStorage.xp)) > window.localStorage.ascension) 
-		{document.getElementById("ascend").style.display = "flex"}
+	{document.getElementById("ascend").style.display = "flex"}
 	else
-		{document.getElementById("ascend").style.display = "flex"}
-		
+	{document.getElementById("ascend").style.display = "flex"}
+	
 	// ascension
 	if (window.localStorage.ascension + Math.floor(xpToLevel(window.localStorage.xp)) > window.localStorage.totalUpgrades) {
 		document.getElementById("upgrade menu").style.display = "flex"
@@ -720,22 +717,28 @@ function menuConditionals() {
 menu()
 function timeAttack() {
 	gamestate = "time attack";
+	document.getElementById("help").style.display = "none";
 	document.getElementById("menu").style.display = "flex";
 	document.getElementById("time attack").style.display = "none";
 	document.getElementById("zen").style.display = "none";
 	document.getElementById("upgrade menu").style.display = "none"
 	document.getElementById("downgrade menu").style.display = "none"
-
+	document.getElementById("ascend").style.display = "none";
+	document.getElementById("cycle skins").style.display = "none";
+	
 	zoom = 10;
 	startTime = Date.now()
 }
 function zen() {
 	gamestate = "zen"
+	document.getElementById("help").style.display = "none";
 	document.getElementById("menu").style.display = "flex";
 	document.getElementById("time attack").style.display = "none";
 	document.getElementById("zen").style.display = "none";
 	document.getElementById("upgrade menu").style.display = "none"
 	document.getElementById("downgrade menu").style.display = "none"
+	document.getElementById("ascend").style.display = "none";
+	document.getElementById("cycle skins").style.display = "none";
 
 	zoom = 10;
 	startTime = Date.now()
