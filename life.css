@@ -2,5 +2,5 @@ button {
   display: inline-block;
   color: blueviolet;
   font-size: 200%;
-  position: fixed;
+  position: absolute;
 }
