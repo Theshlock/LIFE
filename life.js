@@ -797,15 +797,3 @@ function downgrade(x) {
 function cycleSkins() {
 	console.log("this function is under construction")
 }
-
-
-
-const showButton = document.querySelector("dialog + button");
-const closeButton = document.querySelector("dialog button");
-
-// "Show the dialog" button opens the dialog modally
-
-// "Close" button closes the dialog
-closeButton.addEventListener("click", () => {
-	document.querySelector("dialog").close();
-});
