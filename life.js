@@ -697,7 +697,7 @@ function menu() {
 }
 
 function menuConditionals() {
-	upgradesAvailable = Math.floor(xpToLevel(window.localStorage.xp)) + window.localStorage.ascension - window.localStorage.totalUpgrades
+	upgradesAvailable = (Number(window.localStorage.ascension) + Math.floor(xpToLevel(window.localStorage.xp)) - Number(window.localStorage.totalUpgrades))
 	if (upgradesAvailable) {
 		document.getElementById("upgrade menu").style.display = "flex"
 	} else {
