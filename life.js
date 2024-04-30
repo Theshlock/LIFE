@@ -697,25 +697,25 @@ function menu() {
 }
 
 function menuConditionals() {
-	if (window.localStorage.ascension + Math.floor(xpToLevel(window.localStorage.xp)) - window.localStorage.totalUpgrades > 0)
-	{document.getElementById("upgrade menu").style.display = "flex"}
-	else
-	{document.getElementById("upgrade menu").style.display = "none"}
-	
-	if (window.localStorage.totalUpgrades != 0) 
-	{document.getElementById("downgrade menu").style.display = "flex"}
-	else
-	{document.getElementById("downgrade menu").style.display = "none"}
+	upgradesAvailable = Math.floor(xpToLevel(window.localStorage.xp)) + window.localStorage.ascension - window.localStorage.totalUpgrades
+	if (upgradesAvailable) {
+		document.getElementById("upgrade menu").style.display = "flex"
+	} else {
+		document.getElementById("upgrade menu").style.display = "none"
+	}
+
+	downgradesAvailable = window.localStorage.totalUpgrades
+	if (downgradesAvailable) {
+		document.getElementById("downgrade menu").style.display = "flex"
+	} else {
+		document.getElementById("downgrade menu").style.display = "none"
+	}
 	
 	if (Math.floor(xpToLevel(window.localStorage.xp)) > window.localStorage.ascension) 
 	{document.getElementById("ascend").style.display = "flex"}
 	else
-	{document.getElementById("ascend").style.display = "flex"}
+	{document.getElementById("ascend").style.display = "none"}
 	
-	// ascension
-	if (window.localStorage.ascension + Math.floor(xpToLevel(window.localStorage.xp)) > window.localStorage.totalUpgrades) {
-		document.getElementById("upgrade menu").style.display = "flex"
-	}
 }
 menu()
 function timeAttack() {
