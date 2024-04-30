@@ -760,6 +760,7 @@ function ascend() {
 	localStorage.setItem("control", 1)
 	localStorage.setItem("brakes", 1)
 	localStorage.setItem("xpGain", 1)
+	menu()
 }
 
 
