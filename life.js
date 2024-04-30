@@ -810,5 +810,5 @@ showButton.addEventListener("click", () => {
 
 // "Close" button closes the dialog
 closeButton.addEventListener("click", () => {
-  dialog.close();
+	document.querySelector("dialog").close();
 });
