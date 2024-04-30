@@ -805,7 +805,7 @@ const closeButton = document.querySelector("dialog button");
 
 // "Show the dialog" button opens the dialog modally
 showButton.addEventListener("click", () => {
-	document.querySelector("dialog").showModal();
+	document.getElementById("help").showModal();
 });
 
 // "Close" button closes the dialog
