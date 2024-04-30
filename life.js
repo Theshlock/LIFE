@@ -798,13 +798,14 @@ function cycleSkins() {
 	console.log("this function is under construction")
 }
 
-const dialog = document.getElementById("dialog");
+
+
 const showButton = document.querySelector("dialog + button");
 const closeButton = document.querySelector("dialog button");
 
 // "Show the dialog" button opens the dialog modally
 showButton.addEventListener("click", () => {
-  dialog.showModal();
+	document.querySelector("dialog").showModal();
 });
 
 // "Close" button closes the dialog
