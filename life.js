@@ -672,7 +672,7 @@ function gameloop() {
 	}
 	window.requestAnimationFrame(gameloop);
 }
-
+window.requestAnimationFrame(gameloop)
 var time = Date.now();
 
 //State Control
@@ -693,7 +693,7 @@ function menu() {
 	animationXp = 0
 	winScreenRendered = 0
 	contextM.fillStyle = 'green';
-	window.requestAnimationFrame(gameloop);
+	// window.requestAnimationFrame(gameloop);
 }
 
 function menuConditionals() {
