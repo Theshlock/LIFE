@@ -3,8 +3,8 @@
 	<link rel="stylesheet" type="text/css" href="./life.css">
 
 	<body>
-		<dialog id="help">
-			<button autofocus onclick="document.getElementById('help').close()">Close</button>
+		<dialog id="help dialog">
+			<button autofocus onclick="document.getElementById('help dialog').close()">Close</button>
 			<p> </p>
 			<p>LIFE is a game designed to test your accuracy and reflexes</p>
 			<p>Use the arrow keys or touch to steer</p>
@@ -16,7 +16,22 @@
 			<p>Have fun!</p>
 			<p>P.S. If you're having trouble beating the first level try upgrading brakes.</p>
 		</dialog>
-		<button id="help" onclick="document.getElementById('help').showModal()" style="right: 0%;">Help</button>
+		<button onclick="document.getElementById('help dialog').showModal()" style="right: 0%;">Help</button>
+		<dialog id="known bugs dialog">
+			<button autofocus onclick="document.getElementById('known bugs dialog').close()">Close</button>
+			<p> </p>
+			<p>LIFE is a game designed to test your accuracy and reflexes</p>
+			<p>Use the arrow keys or touch to steer</p>
+			<p>Speed is calculated from how close the green portal is to the centre of the screen</p>
+			<p>Time attack consists of 7 levels designed to benchmark your ability</p>
+			<p>Zen mode infinitely generates random portal locations</p>
+			<p>You can ascend as long as your level is greater than your ascension</p>
+			<p>Ascension starts you with upgrade points equal to your ascension</p>
+			<p>Have fun!</p>
+			<p>P.S. If you're having trouble beating the first level try upgrading brakes.</p>
+		</dialog>
+		<button onclick="document.getElementById('known bugs dialog').showModal()" style="right: 20%;">Help</button>
+
 		<button id="time attack" onclick="timeAttack()" style="top: 50%; left: 50%; transform: translateX(-50%);">Time Attack</button>
 		<button id="zen" onclick="zen()" style="top: 58%; left: 50%; transform: translateX(-50%)";>Zen</button>
 		<button id="menu" onclick="menu()" style="top: 8px; left:8px">Menu</button>
