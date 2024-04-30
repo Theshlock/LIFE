@@ -567,7 +567,7 @@ function gameloop() {
 		startRender(1,1);
 
 		contextM.fillText("Ascension " + window.localStorage.ascension,20,120);
-		contextM.fillText("Upgrades Available " + (window.localStorage.ascension + Math.floor(xpToLevel(window.localStorage.xp)) - window.localStorage.totalUpgrades),20,160);
+		contextM.fillText("Upgrades Available " + (Number(window.localStorage.ascension) + Math.floor(xpToLevel(window.localStorage.xp)) - Number(window.localStorage.totalUpgrades)),20,160);
 
 
 		contextM.fillText("Speed",20,240);
