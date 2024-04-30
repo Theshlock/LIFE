@@ -595,10 +595,7 @@ function gameloop() {
 		}
 	} else if (gamestate == "time attack") {
 		if (level == 8) {
-			if (rendered == 0) {
-				finalGameTime = Date.now()-startTime;
-				rendered = 1
-			}
+			finalGameTime = Date.now()-startTime;
 			contextM.fillText("You win",300,200);
 			contextM.fillText("final time: " + finalGameTime ,300,260);
 			localStorage.setItem("xp", Number(window.localStorage.xp) + bonus);
