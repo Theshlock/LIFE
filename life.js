@@ -597,11 +597,11 @@ function gameloop() {
 		if (level == 8) {
 			if (winScreenRendered == 0) {
 				finalGameTime = Date.now()-startTime;
+				localStorage.setItem("xp", Number(window.localStorage.xp) + bonus);
 				winScreenRendered = 1
 			}
 			contextM.fillText("You win",300,200);
 			contextM.fillText("final time: " + finalGameTime ,300,260);
-			localStorage.setItem("xp", Number(window.localStorage.xp) + bonus);
 			if (Number(window.localStorage.bestTime) > finalGameTime) {
 				localStorage.setItem("bestTime", finalGameTime);
 				contextM.fillText("new best time!",500,150);
@@ -609,7 +609,7 @@ function gameloop() {
 			contextM.fillText("best time: " + window.localStorage.bestTime ,300,320);
 		} else if (zoom > portalDepth ) {
 			bonus = Math.round(multiplier*1000)/1000
-			localStorage.setItem("xp", Number(window.localStorage.xp)+bonus)
+			localStorage.setItem("xp", Number(window.localStorage.xp) + bonus)
 			level++;
 			zoom = 10;
 			portalX = portalLocations[2*level];
