@@ -704,7 +704,7 @@ function menuConditionals() {
 		document.getElementById("upgrade menu").style.display = "none"
 	}
 
-	downgradesAvailable = window.localStorage.totalUpgrades
+	downgradesAvailable = Number(window.localStorage.totalUpgrades)
 	if (downgradesAvailable) {
 		document.getElementById("downgrade menu").style.display = "flex"
 	} else {
