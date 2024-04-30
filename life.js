@@ -734,7 +734,7 @@ function timeAttack() {
 }
 function zen() {
 	gamestate = "zen"
-	document.getElementById("help").style.display = "none";
+	document.getElementById("help dialog").style.display = "none";
 	document.getElementById("menu").style.display = "flex";
 	document.getElementById("time attack").style.display = "none";
 	document.getElementById("zen").style.display = "none";
