@@ -798,15 +798,7 @@ function cycleSkins() {
 	console.log("this function is under construction")
 }
 
-function help() {
-	console.log("life is a game designed to test your accuracy and reflexes")
-	console.log("speed is calculated from how close the green portal is to the centre of the screen")
-	console.log("time attack consists of 7 levels designed to benchmark your ability")
-	console.log("zen mode infinitely generates random portal locations")
-	console.log("have fun")
-}
-
-const dialog = document.querySelector("dialog");
+const dialog = document.getElementById("dialog");
 const showButton = document.querySelector("dialog + button");
 const closeButton = document.querySelector("dialog button");
 
