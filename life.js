@@ -686,7 +686,7 @@ function menu() {
 	bonus = 0;
 	score = 0;
 	xRate = 0;
-	yRate - 0;
+	yRate = 0;
 	xnorm = -0.5615337270936567;
 	ynorm = -0.641923504258619;
 	zoom = 10;
