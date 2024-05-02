@@ -597,7 +597,6 @@ function gameloop() {
 		if (level == 8) {
 			if (winScreenRendered == 0) {
 				finalGameTime = Date.now()-startTime;
-				localStorage.setItem("xp", Number(window.localStorage.xp) + bonus);
 				winScreenRendered = 1
 			}
 			contextM.fillText("You win",300,200);
@@ -608,8 +607,7 @@ function gameloop() {
 			}
 			contextM.fillText("best time: " + window.localStorage.bestTime ,300,320);
 		} else if (zoom > portalDepth ) {
-			bonus = Math.round(multiplier*1000)/1000
-			localStorage.setItem("xp", Number(window.localStorage.xp) + bonus)
+			localStorage.setItem("xp", Number(window.localStorage.xp) + (Math.round(multiplier*1000)/1000) * (window.localStorage.xp ** 2))
 			level++;
 			zoom = 10;
 			portalX = portalLocations[2*level];
@@ -633,15 +631,14 @@ function gameloop() {
 			contextM.fillText(Date.now()-startTime,100,550);
 			contextM.fillText("△: " + Math.round(multiplier*1000)/1000 ,360,550);
 			contextM.fillText(level + "/7",620,550);
-			contextM.fillText("+" + Math.round(bonus*1000)/1000,100,500);
 
 			time = Date.now();
 			startRender(1,1);
 		}
 	} else if (gamestate == "zen") {
 		if (zoom > portalDepth ) {
-			bonus = Math.round(multiplier*1000)/1000
-			localStorage.setItem("xp", Number(window.localStorage.xp)+bonus)
+			
+			localStorage.setItem("xp", Number(window.localStorage.xp)+ (Math.round(multiplier*1000)/1000) * window.localStorage.xp ** 2)
 			level += 1;
 			zoom = 10;
 			xnorm = 0; ynorm = 0; xRate = 0; yRate = 0;
@@ -663,7 +660,6 @@ function gameloop() {
 			contextM.fillText(Date.now()-startTime,100,550);
 			contextM.fillText("△: " + Math.round(multiplier*1000)/1000 ,360,550);
 			contextM.fillText(level,620,550);
-			contextM.fillText("+" + Math.round(bonus*1000)/1000,100,500);
 			time = Date.now();
 			screenX = Math.round(-xnorm * zoom + canvasWidth/2);
 			screenY = Math.round(-ynorm * zoom + canvasHeight/2);
@@ -683,7 +679,6 @@ function menu() {
 	document.getElementById("zen").style.display = "flex";
 	menuConditionals()
 	level = 1;
-	bonus = 0;
 	score = 0;
 	xRate = 0;
 	yRate = 0;
