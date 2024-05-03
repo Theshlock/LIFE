@@ -3,7 +3,7 @@
 	<link rel="stylesheet" type="text/css" href="./life.css">
 
 	<body>
-		<button onclick="document.getElementById('help dialog').showModal()" style="right: 0%;">Help</button>
+		<button id="help" onclick="document.getElementById('help dialog').showModal()" style="right: 0%;">Help</button>
 			<dialog id="help dialog">
 				<button autofocus onclick="document.getElementById('help dialog').close()">Close</button>
 				<p>LIFE is a game designed to test your accuracy and reflexes</p>
@@ -16,7 +16,7 @@
 				<p>Have fun!</p>
 				<p>P.S. If you're having trouble beating the first level try upgrading brakes.</p>
 			</dialog>
-		<button onclick="document.getElementById('known bugs dialog').showModal()" style="right: 20%;">Known Bugs</button>
+		<button id="known bugs" onclick="document.getElementById('known bugs dialog').showModal()" style="right: 20%;">Known Bugs</button>
 			<dialog id="known bugs dialog">
 				<button autofocus onclick="document.getElementById('known bugs dialog').close()">Close</button>
 				<p>XP gain does nothing</p>

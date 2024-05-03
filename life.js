@@ -675,8 +675,11 @@ var time = Date.now();
 function menu() {
 	gamestate="menu";
 	document.getElementById("menu").style.display = "none";
+	document.getElementById("help").style.display = "flex";
+	document.getElementById("known bugs").style.display = "flex";
 	document.getElementById("time attack").style.display = "flex";
 	document.getElementById("zen").style.display = "flex";
+	document.getElementById("cycle skins").style.display = "flex";
 	menuConditionals()
 	level = 1;
 	score = 0;
@@ -715,7 +718,8 @@ function menuConditionals() {
 menu()
 function timeAttack() {
 	gamestate = "time attack";
-	document.getElementById("help dialog").style.display = "none";
+	document.getElementById("help").style.display = "none";
+	document.getElementById("known bugs").style.display = "none";
 	document.getElementById("menu").style.display = "flex";
 	document.getElementById("time attack").style.display = "none";
 	document.getElementById("zen").style.display = "none";
@@ -729,7 +733,8 @@ function timeAttack() {
 }
 function zen() {
 	gamestate = "zen"
-	document.getElementById("help dialog").style.display = "none";
+	document.getElementById("help").style.display = "none";
+	document.getElementById("known bugs").style.display = "none";
 	document.getElementById("menu").style.display = "flex";
 	document.getElementById("time attack").style.display = "none";
 	document.getElementById("zen").style.display = "none";
