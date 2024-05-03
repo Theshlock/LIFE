@@ -607,7 +607,7 @@ function gameloop() {
 			}
 			contextM.fillText("best time: " + window.localStorage.bestTime ,300,320);
 		} else if (zoom > portalDepth ) {
-			localStorage.setItem("xp", Number(window.localStorage.xp) + (Math.round(multiplier*1000)/1000) * (window.localStorage.xp ** 2))
+			localStorage.setItem("xp", Number(window.localStorage.xp) + (Math.round(multiplier*1000)/1000) * (window.localStorage.xpGain ** 2))
 			level++;
 			zoom = 10;
 			portalX = portalLocations[2*level];
@@ -638,7 +638,7 @@ function gameloop() {
 	} else if (gamestate == "zen") {
 		if (zoom > portalDepth ) {
 			
-			localStorage.setItem("xp", Number(window.localStorage.xp)+ (Math.round(multiplier*1000)/1000) * window.localStorage.xp ** 2)
+			localStorage.setItem("xp", Number(window.localStorage.xp)+ (Math.round(multiplier*1000)/1000) * window.localStorage.xpGain ** 2)
 			level += 1;
 			zoom = 10;
 			xnorm = 0; ynorm = 0; xRate = 0; yRate = 0;
