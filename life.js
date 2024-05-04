@@ -635,11 +635,11 @@ function gameloop() {
 			changePalette();
 		} else {
 			if (skins % 5 == 0) {
-				contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ) - (20 + zoom/portalDepth*1000) / 2, (((portalY-ynorm) * zoom + 600) / 2 ) - (20 + zoom/portalDepth*1000) / 2, 20 + zoom/portalDepth*1000, 20 + zoom/portalDepth*1000 );
-				contextM.fillRect( 400, 300 , 10, 10);
+				contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ) - (20 + zoom/portalDepth*1000) / 2, (((portalY-ynorm) * zoom + 600) / 2 ) - (20 + zoom/portalDepth*1000) / 2, 40 + zoom/portalDepth*1000, 40 + zoom/portalDepth*1000 );
+				contextM.fillRect( 400, 300 , 40, 40);
 			} else {
-				contextM.drawImage(skinsPortal, (((portalX-xnorm) * zoom + 800) / 2 ) - (20 + zoom/portalDepth*1000) / 2, (((portalY-ynorm) * zoom + 600) / 2 ) - (20 + zoom/portalDepth*1000) / 2, 20 + zoom/portalDepth*1000, 20 + zoom/portalDepth*1000);
-				contextM.drawImage(skinsCursor, 400, 300, 20, 20);
+				contextM.drawImage(skinsPortal, (((portalX-xnorm) * zoom + 800) / 2 ) - (20 + zoom/portalDepth*1000) / 2, (((portalY-ynorm) * zoom + 600) / 2 ) - (20 + zoom/portalDepth*1000) / 2, 40 + zoom/portalDepth*1000, 40 + zoom/portalDepth*1000);
+				contextM.drawImage(skinsCursor, 400, 300, 40, 40);
 			}
 			xRate += (right * window.localStorage.control) * ( Date.now() - time ) / 100;
 			xRate /= window.localStorage.brakes
@@ -823,7 +823,6 @@ function downgrade(x) {
 }
 skins = 0
 function cycleSkins() {
-	console.log("this function is under construction")
 	skins++;
 	if (skins % 5 == 1) {
 		skinsPortal = recycleXPImg
@@ -834,11 +833,11 @@ function cycleSkins() {
 		skinsCursor = text7Img
 	}
 	if (skins % 5 == 3) {
-		skinsPortal = mortyImg
-		skinsCursor = portalImg
+		skinsPortal = portalImg
+		skinsCursor = mortyImg
 	}
 	if (skins % 5 == 4) {
-		skinsPortal = rocketImg
-		skinsCursor = planetImg
+		skinsPortal = planetImg
+		skinsCursor = rocketImg
 	}
 }
