@@ -13,8 +13,8 @@ if (typeof window.localStorage.xpGain == 'undefined') {localStorage.setItem("xpG
 if (typeof window.localStorage.totalUpgrades == 'undefined') {localStorage.setItem("totalUpgrades", 0);}
 if (typeof window.localStorage.ascension == 'undefined') {localStorage.setItem("ascension", 0);}
 
-const folderXP = Image();
-	folderXP.src = "folder xp.png";
+new folderXP = Image();
+folderXP.src = "folder xp.png";
 
 // const recycleXP = Image("")
 // const folderXp = Image("")
