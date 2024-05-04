@@ -640,7 +640,7 @@ function gameloop() {
 				contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ) - (20 + zoom/portalDepth*1000) / 2, (((portalY-ynorm) * zoom + 600) / 2 ) - (20 + zoom/portalDepth*1000) / 2, 20 + zoom/portalDepth*1000, 20 + zoom/portalDepth*1000 );
 				contextM.fillRect( 400, 300 , 10, 10);
 			} else {
-				contextM.drawImage(skinsPortal, (((portalX-xnorm) * zoom + 800) / 2 ) - (20 + zoom/portalDepth*1000) / 2, (((portalY-ynorm) * zoom + 600) / 2 ) - (20 + zoom/portalDepth*1000) / 2);
+				contextM.drawImage(skinsPortal, (((portalX-xnorm) * zoom + 800) / 2 ) - (20 + zoom/portalDepth*1000) / 2, (((portalY-ynorm) * zoom + 600) / 2 ) - (20 + zoom/portalDepth*1000) / 2, 20 + zoom/portalDepth*1000, 20 + zoom/portalDepth*1000);
 				contextM.drawImage(skinsCursor, 400, 300);
 			}
 			xRate += (right * window.localStorage.control) * ( Date.now() - time ) / 100;
