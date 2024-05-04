@@ -641,6 +641,7 @@ function gameloop() {
 				contextM.fillRect( 400, 300 , 10, 10);
 			} else {
 				contextM.drawImage(skinsPortal, 100, 100);
+				contextM.drawImage(skinsCursor, 20, 20);
 			}
 			xRate += (right * window.localStorage.control) * ( Date.now() - time ) / 100;
 			xRate /= window.localStorage.brakes
