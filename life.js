@@ -13,16 +13,23 @@ if (typeof window.localStorage.xpGain == 'undefined') {localStorage.setItem("xpG
 if (typeof window.localStorage.totalUpgrades == 'undefined') {localStorage.setItem("totalUpgrades", 0);}
 if (typeof window.localStorage.ascension == 'undefined') {localStorage.setItem("ascension", 0);}
 
-const folderXP = new Image();
-folderXP.src = "folder xp.png";
+const folderXPImg = new Image();
+folderXPImg.src = "folder xp.png";
+const recycleXPImg = new Image();
+recycleXPImg.src = "recycle xp.png";
+const text7Img = new Image();
+text7Img.src = "text 7.png";
+const recycle7Img = new Image();
+recycle7Img.src = "recycle 7.png";
+const portalImg = new Image();
+portalImg.src = "portal.png";
+const mortyImg = new Image();
+mortyImg.src = "morty.png";
+const planetImg = new Image();
+planetImg.src = "planet.png";
+const rocketImg = new Image();
+rocketImg.src = "rocket.png";
 
-// const recycleXP = Image("")
-// const folderXp = Image("")
-// const folderXp = Image("")
-// const folderXp = Image("")
-// const folderXp = Image("")
-// const folderXp = Image("")
-// const folderXp = Image("")
 
 var level = 1;
 function xpToLevel (xp) {return xp**0.2}
@@ -577,7 +584,7 @@ function gameloop() {
 		screenY = Math.round(-ynorm * zoom + canvasHeight/2);
 		startRender(1,1);
 
-		contextM.drawImage(folderXP, 100, 100);
+		contextM.drawImage(folderXPImg, 100, 100);
 
 		contextM.fillText("Ascension " + window.localStorage.ascension,20,120);
 		contextM.fillText("Upgrades Available " + (Number(window.localStorage.ascension) + Math.floor(xpToLevel(window.localStorage.xp)) - Number(window.localStorage.totalUpgrades)),20,160);
@@ -610,7 +617,7 @@ function gameloop() {
 		if (level == 8) {
 			if (winScreenRendered == 0) {
 				finalGameTime = Date.now()-startTime;
-				winScreenRendered = 1
+				winScreenRendered = 1;
 			}
 			contextM.fillText("You win",300,200);
 			contextM.fillText("final time: " + finalGameTime ,300,260);
@@ -629,7 +636,12 @@ function gameloop() {
 			currentPalette++;
 			changePalette();
 		} else {
-			contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ) - (20 + zoom/portalDepth*1000) / 2, (((portalY-ynorm) * zoom + 600) / 2 ) - (20 + zoom/portalDepth*1000) / 2, 20 + zoom/portalDepth*1000, 20 + zoom/portalDepth*1000 );
+			if (skins % 5 == 0) {
+				contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ) - (20 + zoom/portalDepth*1000) / 2, (((portalY-ynorm) * zoom + 600) / 2 ) - (20 + zoom/portalDepth*1000) / 2, 20 + zoom/portalDepth*1000, 20 + zoom/portalDepth*1000 );
+				contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ), (((portalY-ynorm) * zoom + 600) / 2 ) , 10, 10);
+			} else {
+				contextM.drawImage(skinsPortal, 100, 100);
+			}
 			xRate += (right * window.localStorage.control) * ( Date.now() - time ) / 100;
 			xRate /= window.localStorage.brakes
 			yRate += (up * window.localStorage.control) * ( Date.now() - time ) / 100;
@@ -810,7 +822,25 @@ function downgrade(x) {
 	localStorage.setItem("totalUpgrades", Number(window.localStorage.totalUpgrades) - 1)
 	menuConditionals()
 }
-
+skins = 0
 function cycleSkins() {
 	console.log("this function is under construction")
+	skins++;
+	if (skins % 5 == 1) {
+		skinsPortal = folderXPImg
+		skinsCursor = recycleXPImg
+	}
+	if (skins % 5 == 2) {
+		skinsPortal = text7Img
+		skinsCursor = recycle7Img
+	}
+	if (skins % 5 == 3) {
+		skinsPortal = portalImg
+		skinsCursor = mortyImg
+	}
+	if (skins % 5 == 4) {
+		skinsPortal = planetImg
+		skinsCursor = rocketImg
+	}
+	portal
 }
