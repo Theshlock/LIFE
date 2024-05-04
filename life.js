@@ -843,5 +843,4 @@ function cycleSkins() {
 		skinsPortal = planetImg
 		skinsCursor = rocketImg
 	}
-	portal
 }
