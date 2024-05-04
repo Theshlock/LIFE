@@ -566,7 +566,7 @@ function gameloop() {
 		screenY = Math.round(-ynorm * zoom + canvasHeight/2);
 		startRender(1,1);
 
-		mc.drawImage("folder xp.png", 100, 100);
+		mctx.drawImage("folder xp.png", 100, 100);
 
 		contextM.fillText("Ascension " + window.localStorage.ascension,20,120);
 		contextM.fillText("Upgrades Available " + (Number(window.localStorage.ascension) + Math.floor(xpToLevel(window.localStorage.xp)) - Number(window.localStorage.totalUpgrades)),20,160);
