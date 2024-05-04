@@ -13,6 +13,17 @@ if (typeof window.localStorage.xpGain == 'undefined') {localStorage.setItem("xpG
 if (typeof window.localStorage.totalUpgrades == 'undefined') {localStorage.setItem("totalUpgrades", 0);}
 if (typeof window.localStorage.ascension == 'undefined') {localStorage.setItem("ascension", 0);}
 
+const folderXP = Image();
+	folderXP.src = "folder xp.png";
+
+// const recycleXP = Image("")
+// const folderXp = Image("")
+// const folderXp = Image("")
+// const folderXp = Image("")
+// const folderXp = Image("")
+// const folderXp = Image("")
+// const folderXp = Image("")
+
 var level = 1;
 function xpToLevel (xp) {return xp**0.2}
 function levelToXp (level) {return level**5}
@@ -566,7 +577,7 @@ function gameloop() {
 		screenY = Math.round(-ynorm * zoom + canvasHeight/2);
 		startRender(1,1);
 
-		contextM.drawImage("folder xp.png", 100, 100);
+		contextM.drawImage(folderXP, 100, 100);
 
 		contextM.fillText("Ascension " + window.localStorage.ascension,20,120);
 		contextM.fillText("Upgrades Available " + (Number(window.localStorage.ascension) + Math.floor(xpToLevel(window.localStorage.xp)) - Number(window.localStorage.totalUpgrades)),20,160);
