@@ -638,7 +638,7 @@ function gameloop() {
 		} else {
 			if (skins % 5 == 0) {
 				contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ) - (20 + zoom/portalDepth*1000) / 2, (((portalY-ynorm) * zoom + 600) / 2 ) - (20 + zoom/portalDepth*1000) / 2, 20 + zoom/portalDepth*1000, 20 + zoom/portalDepth*1000 );
-				contextM.fillRect( (((portalX-xnorm) * zoom + 800) / 2 ), (((portalY-ynorm) * zoom + 600) / 2 ) , 10, 10);
+				contextM.fillRect( 400, 300 , 10, 10);
 			} else {
 				contextM.drawImage(skinsPortal, 100, 100);
 			}
