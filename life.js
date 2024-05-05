@@ -103,6 +103,7 @@ var mdCoarseSegment 	= new Array();
 var mandel = new Array();
 var smoothMandel = new Array();
 var percentDone = new Array();
+var skins = 0
 
 for( i=0; i < workers; i++ ) {
 	computeWorkerRunning[i] = 0;
@@ -824,7 +825,7 @@ function downgrade(x) {
 	localStorage.setItem("totalUpgrades", Number(window.localStorage.totalUpgrades) - 1)
 	menuConditionals()
 }
-skins = 0
+
 function cycleSkins() {
 	skins++;
 	if (skins % 5 == 1) {
