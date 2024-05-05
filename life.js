@@ -597,8 +597,12 @@ function gameloop() {
 		contextM.fillText("Xp Gain",20,420);
 		contextM.fillRect(20,420,window.localStorage.xpGain*100 - 100,10)
 
-		contextM.drawImage(skinsCursor, 750, 300, 40, 40);
-		contextM.drawImage(skinsPortal, 700, 300, 40, 40);
+		if (skins == 0) {
+			contextM.fillRect(750, 300, 40, 40)
+		} else {
+			contextM.drawImage(skinsCursor, 750, 300, 40, 40);
+			contextM.drawImage(skinsPortal, 700, 300, 40, 40);
+		}
 
 		contextM.fillText(Math.floor(xpToLevel(animationXp)),20,560);
 		contextM.fillText(Math.floor(xpToLevel(animationXp)+1),740,560);
@@ -705,8 +709,6 @@ function menu() {
 	document.getElementById("zen").style.display = "flex";
 	document.getElementById("cycle skins").style.display = "flex";
 	menuConditionals()
-
-
 	level = 1;
 	score = 0;
 	xRate = 0;
