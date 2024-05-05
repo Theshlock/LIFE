@@ -826,6 +826,9 @@ function downgrade(x) {
 	menuConditionals()
 }
 
+skinsPortal = planetImg
+skinsCursor = rocketImg
+
 function cycleSkins() {
 	skins++;
 	if (skins % 5 == 1) {
