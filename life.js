@@ -29,7 +29,8 @@ const planetImg = new Image();
 planetImg.src = "planet.png";
 const rocketImg = new Image();
 rocketImg.src = "rocket.png";
-
+skinsPortal = planetImg
+skinsCursor = rocketImg
 
 var level = 1;
 function xpToLevel (xp) {return xp**0.2}
@@ -825,9 +826,6 @@ function downgrade(x) {
 	localStorage.setItem("totalUpgrades", Number(window.localStorage.totalUpgrades) - 1)
 	menuConditionals()
 }
-
-skinsPortal = planetImg
-skinsCursor = rocketImg
 
 function cycleSkins() {
 	skins++;
