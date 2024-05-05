@@ -597,8 +597,8 @@ function gameloop() {
 		contextM.fillText("Xp Gain",20,420);
 		contextM.fillRect(20,420,window.localStorage.xpGain*100 - 100,10)
 
-		contextM.drawImage(skinsCursor, 400, 500, 40, 40);
-		contextM.drawImage(skinsPortal, 400, 450, 40, 40);
+		contextM.drawImage(skinsCursor, 750, 300, 40, 40);
+		contextM.drawImage(skinsPortal, 700, 300, 40, 40);
 
 		contextM.fillText(Math.floor(xpToLevel(animationXp)),20,560);
 		contextM.fillText(Math.floor(xpToLevel(animationXp)+1),740,560);
