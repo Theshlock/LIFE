@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 	<link rel="stylesheet" type="text/css" href="./life.css">
-
+	
 	<body>
 		<title>LIFE</title>
 		<style>	html, body {width:  100%; height: 100%;	margin: 0;}	</style>
+		<audio controls autoplay audio>
+			<source src="life.mp3" type="audio/mpeg"">
+		  Your browser does not support the audio element.
+		  </audio>
 		<button id="help" onclick="document.getElementById('help dialog').showModal()" style="right: 0%;">Help</button>
 			<dialog id="help dialog">
 				<button autofocus onclick="document.getElementById('help dialog').close()">Close</button>
@@ -42,10 +46,6 @@
 		<button id="cycle skins" onclick="cycleSkins()" style="top: 50%; right: 0%">skins</button>
 		<canvas id="mandelCanvas" width="800px" height="600px"></canvas>
 		
-		<audio controls>
-			<source src="life.mp3" type="audio/mpeg" style="position: absolute;">
-		  Your browser does not support the audio element.
-		  </audio>
 
 		<script src="life.js"></script>
 	</body>
