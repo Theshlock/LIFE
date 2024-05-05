@@ -600,8 +600,8 @@ function gameloop() {
 		if (skins == 0) {
 			contextM.fillRect(750, 300, 40, 40)
 		} else {
-			contextM.drawImage(skinsCursor, 750, 300, 40, 40);
-			contextM.drawImage(skinsPortal, 700, 300, 40, 40);
+			contextM.drawImage(skinsCursor, 650, 300, 40, 40);
+			contextM.drawImage(skinsPortal, 600, 300, 40, 40);
 		}
 
 		contextM.fillText(Math.floor(xpToLevel(animationXp)),20,560);
