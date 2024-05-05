@@ -597,7 +597,7 @@ function gameloop() {
 		contextM.fillText("Xp Gain",20,420);
 		contextM.fillRect(20,420,window.localStorage.xpGain*100 - 100,10)
 
-		if (skins == 0) {
+		if (skins % 5 == 0) {
 			contextM.fillRect(650, 300, 40, 40)
 			contextM.fillRect(600, 300, 40, 40)
 		} else {
