@@ -577,10 +577,6 @@ document.ontouchend = function(e) {
 //State
 function gameloop() {
 	if (gamestate == "menu") {
-		if (window.localStorage.xp == 0) {
-			contextM.fillText("Seek the portal",20,20);
-		}
-
 		zoom *= 1.02;
 		screenX = Math.round(-xnorm * zoom + canvasWidth/2);
 		screenY = Math.round(-ynorm * zoom + canvasHeight/2);
@@ -588,7 +584,6 @@ function gameloop() {
 
 		contextM.fillText("Ascension " + window.localStorage.ascension,20,120);
 		contextM.fillText("Upgrades Available " + (Number(window.localStorage.ascension) + Math.floor(xpToLevel(window.localStorage.xp)) - Number(window.localStorage.totalUpgrades)),20,160);
-
 
 		contextM.fillText("Speed",20,240);
 		contextM.fillRect(20,240,window.localStorage.speed*1000-1000,10)
@@ -601,6 +596,9 @@ function gameloop() {
 
 		contextM.fillText("Xp Gain",20,420);
 		contextM.fillRect(20,420,window.localStorage.xpGain*100 - 100,10)
+
+		contextM.drawImage(skinsCursor, 400, 500, 40, 40);
+		contextM.drawImage(skinsPortal, 400, 450, 40, 40);
 
 		contextM.fillText(Math.floor(xpToLevel(animationXp)),20,560);
 		contextM.fillText(Math.floor(xpToLevel(animationXp)+1),740,560);
@@ -707,8 +705,7 @@ function menu() {
 	document.getElementById("zen").style.display = "flex";
 	document.getElementById("cycle skins").style.display = "flex";
 	menuConditionals()
-	contextM.drawImage(skinsCursor, 400, 500, 40, 40);
-	contextM.drawImage(skinsPortal, 400, 450, 40, 40);
+
 
 	level = 1;
 	score = 0;
