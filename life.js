@@ -705,6 +705,9 @@ function menu() {
 	document.getElementById("zen").style.display = "flex";
 	document.getElementById("cycle skins").style.display = "flex";
 	menuConditionals()
+	contextM.drawImage(skinsCursor, 400, 500, 40, 40);
+	contextM.drawImage(skinsPortal, 400, 450, 40, 40);
+
 	level = 1;
 	score = 0;
 	xRate = 0;
