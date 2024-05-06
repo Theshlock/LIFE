@@ -104,7 +104,7 @@ var mdCoarseSegment 	= new Array();
 var mandel = new Array();
 var smoothMandel = new Array();
 var percentDone = new Array();
-var skins = 0
+var skins = 3
 
 for( i=0; i < workers; i++ ) {
 	computeWorkerRunning[i] = 0;
